@@ -22,7 +22,8 @@ const App = ({ children, sidebarOpened, onToggleSidebar }) => (
 )
 
 const mapStateToProps = state => ({
-  sidebarOpened: state.ui.sidebarOpened
+  sidebarOpened: state.ui.sidebarOpened,
+  val: state.user.val
 })
 const mapDispatchToProps = dispatch => ({
   onToggleSidebar: () => {

@@ -1,4 +1,5 @@
 {
   "presets": ["env", "react", "stage-0", "flow"],
-  "plugins": ["syntax-dynamic-import"]
+  "plugins": ["syntax-dynamic-import", "transform-regenerator"],
+  "retainLines": true
 }

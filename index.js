@@ -1,4 +1,8 @@
+// @flow
+
 import 'css-wipe'
+import 'babel-polyfill'
+import React from 'react'
 import { render } from 'react-dom'
 import { Route } from 'react-router-dom'
 
@@ -10,17 +14,28 @@ import history from 'utils/history'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+
 import thunk from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga'
 
 import reducers from 'store/reducers'
+import helloSaga from 'store/sagas'
 
-const routerMW = routerMiddleware(history)
-const mw = [routerMW, thunk]
+const sagaMiddleware = createSagaMiddleware()
+const routerMiddleWare = routerMiddleware(history)
+const middlewares = [routerMiddleWare, thunk, sagaMiddleware]
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(...mw)))
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(...middlewares))
+)
 
 const Hello = moduleUploader('Hello')
 const Index = moduleUploader('Index')
+
+sagaMiddleware.run(helloSaga)
+
+const rootEl: HTMLElement = (document.getElementById('pad'): any)
 
 render(
   <Provider store={store}>
@@ -31,5 +46,5 @@ render(
       </App>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('root')
+  rootEl
 )
