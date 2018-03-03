@@ -10,9 +10,11 @@ const titleStyle = {
 
 const Header = ({ logged, openSidebar, goHome }) => (
   <AppBar
-    title="Title"
+    title="Animation Catalog"
     onLeftIconButtonClick={openSidebar}
-    iconElementRight={logged ? <AuthControl label="LogOut" /> : <AuthControl label="LogIn" />}
+    iconElementRight={
+      logged ? <AuthControl label="LogOut" /> : <AuthControl label="LogIn" />
+    }
     onTitleClick={goHome}
     titleStyle={titleStyle}
   />

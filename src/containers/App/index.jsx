@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
 import toggleSidebar from 'store/actions/ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import muiTheme from 'config/muiTheme'
 import Header from 'components/Header'
 import Sidebar from 'components/Sidebar'
 import { withRouter } from 'react-router'
 import history from 'utils/history'
+import Container from 'components/common'
 
 const App = ({ children, sidebarOpened, onToggleSidebar }) => (
-  <MuiThemeProvider>
+  <MuiThemeProvider muiTheme={muiTheme()}>
     <div>
       <Sidebar opened={sidebarOpened} closeSidebar={onToggleSidebar} />
       <Header
@@ -16,7 +18,9 @@ const App = ({ children, sidebarOpened, onToggleSidebar }) => (
           history.push('/')
         }}
       />
-      {children}
+      <Container>
+        {children}
+      </Container>
     </div>
   </MuiThemeProvider>
 )

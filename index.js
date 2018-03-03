@@ -25,13 +25,10 @@ const sagaMiddleware = createSagaMiddleware()
 const routerMiddleWare = routerMiddleware(history)
 const middlewares = [routerMiddleWare, thunk, sagaMiddleware]
 
-const store = createStore(
-  reducers,
-  composeWithDevTools(applyMiddleware(...middlewares))
-)
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(...middlewares)))
 
-const Hello = moduleUploader('Hello')
 const Index = moduleUploader('Index')
+const Serials = moduleUploader('Serials')
 
 sagaMiddleware.run(helloSaga)
 
@@ -42,7 +39,7 @@ render(
     <ConnectedRouter history={history}>
       <App face="TRUE">
         <Route exact path="/" component={Index} />
-        <Route path="/hello" component={Hello} />
+        <Route path="/serials" component={Serials} />
       </App>
     </ConnectedRouter>
   </Provider>,

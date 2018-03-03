@@ -1,4 +1,4 @@
-import UserForm from 'forms/UserForm'
+// @flow
 
 class Index extends React.Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class Index extends React.Component {
   }
 
   render() {
-    return <UserForm />
+    return <div>Index</div>
   }
 }
 

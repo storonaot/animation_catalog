@@ -3,7 +3,10 @@ import MenuItem from 'material-ui/MenuItem'
 import { NavLink } from 'react-router-dom'
 import { uniqueId as _uniqueId } from 'lodash'
 
-const sidebarLinks = [{ label: 'Home', to: '/' }, { label: 'Hello', to: '/hello' }]
+const sidebarLinks = [
+  { label: 'Home', to: '/' },
+  { label: 'Serials', to: '/serials' }
+]
 
 const Sidebar = ({ opened, closeSidebar }) => (
   <Drawer open={opened} onRequestChange={closeSidebar} docked={false}>
