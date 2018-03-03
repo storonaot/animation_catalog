@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux'
-// import { routerReducer } from 'react-router-redux'
+import { routerReducer } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
 
 import ui from './ui'
 import user from './user'
+import serials from './serials'
 
 export default combineReducers({
-  // router: routerReducer,
+  router: routerReducer,
   form: formReducer,
   ui,
-  user
+  user,
+  serials
 })

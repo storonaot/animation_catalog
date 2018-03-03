@@ -1,14 +1,28 @@
 import { connect } from 'react-redux'
-import toggleSidebar from 'store/actions/ui'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import muiTheme from 'config/muiTheme'
-import Header from 'components/Header'
-import Sidebar from 'components/Sidebar'
 import { withRouter } from 'react-router'
 import history from 'utils/history'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+import muiTheme from 'config/muiTheme'
+
+import { toggleSidebar } from 'store/actions/ui'
+import Header from 'components/Header'
+import Sidebar from 'components/Sidebar'
 import Container from 'components/common'
 
-const App = ({ children, sidebarOpened, onToggleSidebar }) => (
+type Props = {
+  dataLoading: boolean,
+  children: Object,
+  sidebarOpened: boolean,
+  onToggleSidebar: Function,
+}
+
+const App = ({
+  dataLoading,
+  children,
+  sidebarOpened,
+  onToggleSidebar
+}: Props) => (
   <MuiThemeProvider muiTheme={muiTheme()}>
     <div>
       <Sidebar opened={sidebarOpened} closeSidebar={onToggleSidebar} />
@@ -18,6 +32,7 @@ const App = ({ children, sidebarOpened, onToggleSidebar }) => (
           history.push('/')
         }}
       />
+      {dataLoading && <div>Loading data...</div>}
       <Container>
         {children}
       </Container>
@@ -27,7 +42,7 @@ const App = ({ children, sidebarOpened, onToggleSidebar }) => (
 
 const mapStateToProps = state => ({
   sidebarOpened: state.ui.sidebarOpened,
-  val: state.user.val
+  dataLoading: state.ui.dataLoading
 })
 const mapDispatchToProps = dispatch => ({
   onToggleSidebar: () => {
@@ -36,13 +51,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
-
-App.defaultProps = {
-  children: null
-}
-
-App.propTypes = {
-  children: PropTypes.node,
-  sidebarOpened: PropTypes.bool.isRequired,
-  onToggleSidebar: PropTypes.func.isRequired
-}

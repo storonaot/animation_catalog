@@ -1,4 +1,4 @@
-import { TOGGLE_SIDEBAR } from 'constants/action'
+import { TOGGLE_SIDEBAR } from 'constants/actions'
 
 const toggleSidebar = () => (dispatch) => {
   dispatch({
@@ -6,4 +6,6 @@ const toggleSidebar = () => (dispatch) => {
   })
 }
 
-export default toggleSidebar
+const showPreloader = null
+
+export { toggleSidebar, showPreloader }

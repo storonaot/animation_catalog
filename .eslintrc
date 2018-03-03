@@ -12,6 +12,7 @@
     "plugin:flowtype/recommended"
   ],
   "rules": {
+    "flowtype/no-types-missing-file-annotation": 0,
     "no-underscore-dangle": [
       "error",
       {
