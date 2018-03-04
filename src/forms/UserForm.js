@@ -35,10 +35,12 @@ class UserForm extends React.Component {
 }
 
 const UserFormRedux = reduxForm({
-  form: 'UserForm'
+  form: 'UserForm',
+  enableReinitialize: true
+  // keepDirtyOnReinitialize: true
 })(UserForm)
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     initialValues: state.user,
     ownProps: state.user

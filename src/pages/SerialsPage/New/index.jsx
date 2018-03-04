@@ -1,17 +1,15 @@
 import { Component } from 'react'
 
-class SerialsNew extends Component<Props> {
+import SerialForm from 'forms/SerialForm'
+
+class SerialsNew extends Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
 
   render() {
-    return (
-      <div>
-        serials New
-      </div>
-    )
+    return <SerialForm formType="new" />
   }
 }
 

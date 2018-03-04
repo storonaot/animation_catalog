@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { fetchSerials } from 'store/actions/serials'
 
@@ -31,6 +32,7 @@ class SerialsPage extends Component<Props> {
 
     return (
       <div>
+        <Link to="/serials/new">ADD NEW</Link>
         {serials && <SerialsList serials={serials} />}
       </div>
     )

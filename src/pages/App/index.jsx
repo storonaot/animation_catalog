@@ -10,7 +10,7 @@ import muiTheme from 'config/muiTheme'
 import { toggleSidebar } from 'store/actions/ui'
 import Header from 'components/Header'
 import Sidebar from 'components/Sidebar'
-import Container from 'components/common'
+import { Container } from 'components/common'
 
 import './styles.sss'
 

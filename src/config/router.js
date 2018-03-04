@@ -6,16 +6,18 @@ import App from 'pages/App'
 
 const Index = moduleUploader('Index')
 const Serials = moduleUploader('SerialsPage')
-// const SerialsNew = moduleUploader('Serials/New')
+const SerialsNew = moduleUploader('SerialsPage/New')
 const Serial = moduleUploader('SerialPage')
-// const SerialEdit = moduleUploader('Serial/Edit')
+const SerialEdit = moduleUploader('SerialPage/Edit')
 
 const MyRouter = () => (
   <App face="TRUE">
     <Switch>
       <Route exact path="/" component={Index} />
       <Route exact path="/serials" component={Serials} />
+      <Route path="/serials/new" component={SerialsNew} />
       <Route path="/serials/:id/show" component={Serial} />
+      <Route path="/serials/:id/edit" component={SerialEdit} />
     </Switch>
   </App>
 )
