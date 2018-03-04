@@ -1,8 +1,9 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
-import fetchSerials from 'store/actions/serials'
+import { fetchSerials } from 'store/actions/serials'
+
+import SerialsList from 'components/SerialsList'
 
 type Props = {
   onFetchSerials: Function,
@@ -14,7 +15,7 @@ type Props = {
   }>,
 }
 
-class Serials extends Component<Props> {
+class SerialsPage extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {}
@@ -30,14 +31,7 @@ class Serials extends Component<Props> {
 
     return (
       <div>
-        {serials &&
-          <ul>
-            {serials.map(serial => (
-              <Link to={`/serials/${serial._id}`} key={serial._id}>
-                <li>{serial.name}</li>
-              </Link>
-            ))}
-          </ul>}
+        {serials && <SerialsList serials={serials} />}
       </div>
     )
   }
@@ -53,4 +47,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Serials)
+export default connect(mapStateToProps, mapDispatchToProps)(SerialsPage)

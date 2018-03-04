@@ -24,7 +24,7 @@ class DynamicImport extends Component<Props> {
 }
 
 const moduleUploader = moduleName => props => (
-  <DynamicImport load={() => import(`containers/${moduleName}`)}>
+  <DynamicImport load={() => import(`pages/${moduleName}`)}>
     {Comp => (Comp === null ? null : PageShell(Comp)(props))}
   </DynamicImport>
 )

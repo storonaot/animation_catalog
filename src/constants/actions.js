@@ -6,3 +6,5 @@ export const LOG_IN = Symbol('LOG_IN')
 
 export const FETCH_SERIALS = Symbol('FETCH_SERIALS')
 export const FETCH_SERIALS_DONE = Symbol('FETCH_SERIALS_DONE')
+export const FETCH_SERIAL = Symbol('FETCH_SERIAL')
+export const FETCH_SERIAL_DONE = Symbol('FETCH_SERIAL_DONE')

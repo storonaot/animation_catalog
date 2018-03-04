@@ -236,7 +236,7 @@ are-we-there-yet@~1.1.2:
     delegates "^1.0.0"
     readable-stream "^2.0.6"
 
-argparse@^1.0.7, argparse@~1.0.2:
+argparse@^1.0.7:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
   dependencies:
@@ -398,6 +398,17 @@ autoprefixer@^6.3.1:
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
     postcss "^5.2.16"
+    postcss-value-parser "^3.2.3"
+
+autoprefixer@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-8.1.0.tgz#374cf35be1c0e8fce97408d876f95f66f5cb4641"
+  dependencies:
+    browserslist "^3.1.1"
+    caniuse-lite "^1.0.30000810"
+    normalize-range "^0.1.2"
+    num2fraction "^1.2.2"
+    postcss "^6.0.19"
     postcss-value-parser "^3.2.3"
 
 aws-sign2@~0.6.0:
@@ -1631,10 +1642,6 @@ collection-visit@^1.0.0:
     map-visit "^1.0.0"
     object-visit "^1.0.0"
 
-color-convert@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-0.5.3.tgz#bdb6c69ce660fadffe0b0007cc447e1b9f7282bd"
-
 color-convert@^1.3.0, color-convert@^1.8.2, color-convert@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.1.tgz#c1261107aeb2f294ebffec9ed9ecad529a6097ed"
@@ -1657,13 +1664,6 @@ color-string@^1.4.0:
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
-
-color@0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/color/-/color-0.10.1.tgz#c04188df82a209ddebccecdacd3ec320f193739f"
-  dependencies:
-    color-convert "^0.5.3"
-    color-string "^0.3.0"
 
 color@^0.11.0:
   version "0.11.4"
@@ -1914,6 +1914,10 @@ css-loader@^0.28.10:
     postcss-modules-values "^1.3.0"
     postcss-value-parser "^3.3.0"
     source-list-map "^2.0.0"
+
+css-module-flow@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/css-module-flow/-/css-module-flow-1.0.0.tgz#b2b9be3566a8f5d2b9073f31fd7a35e27ab2131e"
 
 css-select@^1.1.0:
   version "1.2.0"
@@ -2248,10 +2252,6 @@ dot-prop@^4.1.1:
   dependencies:
     is-obj "^1.0.0"
 
-dot@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/dot/-/dot-1.0.3.tgz#f8750bfb6b03c7664eb0e6cb1eb4c66419af9427"
-
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -2556,10 +2556,6 @@ esprima@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
 
-esprima@~2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/esprima/-/esprima-2.2.0.tgz#4292c1d68e4173d815fa2290dc7afc96d81fcd83"
-
 esquery@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.0.0.tgz#cfba8b57d7fba93f17298a8a006a04cda13d80fa"
@@ -2604,10 +2600,6 @@ eventsource@0.1.6:
   resolved "https://registry.yarnpkg.com/eventsource/-/eventsource-0.1.6.tgz#0acede849ed7dd1ccc32c811bb11b944d4f29232"
   dependencies:
     original ">=0.0.5"
-
-evil-icons@1.7.8:
-  version "1.7.8"
-  resolved "https://registry.yarnpkg.com/evil-icons/-/evil-icons-1.7.8.tgz#29928f13d600139b99320c15db2bd757407dcf31"
 
 evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
   version "1.0.3"
@@ -3775,13 +3767,6 @@ js-yaml@^3.4.3, js-yaml@^3.5.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-js-yaml@~3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.3.1.tgz#ca1acd3423ec275d12140a7bab51db015ba0b3c0"
-  dependencies:
-    argparse "~1.0.2"
-    esprima "~2.2.0"
-
 js-yaml@~3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.7.0.tgz#5c967ddd837a9bfdca5f2de84253abe8a1c03b80"
@@ -4013,10 +3998,6 @@ lodash.throttle@^4.1.1:
 lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
-
-lodash@3.10.1:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
 lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.5"
@@ -5225,12 +5206,6 @@ postcss-replace-overflow-wrap@^2.0.0:
   dependencies:
     postcss "^6.0.1"
 
-postcss-responsive-type@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-responsive-type/-/postcss-responsive-type-1.0.0.tgz#bb2d57d830beb9586ec4fda7994f07e37953aad8"
-  dependencies:
-    postcss "^6.0.6"
-
 postcss-selector-matches@^3.0.0, postcss-selector-matches@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/postcss-selector-matches/-/postcss-selector-matches-3.0.1.tgz#e5634011e13950881861bbdd58c2d0111ffc96ab"
@@ -5260,30 +5235,6 @@ postcss-selector-parser@^3.1.1:
     dot-prop "^4.1.1"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
-
-postcss-simple-vars@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-simple-vars/-/postcss-simple-vars-4.1.0.tgz#043248cfef8d3f51b3486a28c09f8375dbf1b2f9"
-  dependencies:
-    postcss "^6.0.9"
-
-postcss-size@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-size/-/postcss-size-2.0.0.tgz#b9b35240c12e507c3b86c820852bee49f4f26655"
-  dependencies:
-    postcss "^6.0.1"
-
-postcss-svg@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/postcss-svg/-/postcss-svg-1.0.6.tgz#205e6dd20f5366fb999178eae184a5006500e890"
-  dependencies:
-    color "0.10.1"
-    dot "1.0.3"
-    evil-icons "1.7.8"
-    lodash "3.10.1"
-    postcss "5.0.10"
-    svgo "0.5.6"
-    xmldom "0.1.19"
 
 postcss-svgo@^2.1.1:
   version "2.1.6"
@@ -5321,14 +5272,6 @@ postcss-zindex@^2.0.1:
     has "^1.0.1"
     postcss "^5.0.4"
     uniqs "^2.0.0"
-
-postcss@5.0.10:
-  version "5.0.10"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-5.0.10.tgz#86eacc9036c5c063e27138bf9503e1de26ab69fe"
-  dependencies:
-    js-base64 "^2.1.9"
-    source-map "^0.5.1"
-    supports-color "^3.1.2"
 
 postcss@6.0.1:
   version "6.0.1"
@@ -6071,10 +6014,6 @@ safe-regex@^1.1.0:
   dependencies:
     ret "~0.1.10"
 
-sax@~1.1.1:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/sax/-/sax-1.1.6.tgz#5d616be8a5e607d54e114afae55b7eaf2fcc3240"
-
 sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -6323,7 +6262,7 @@ source-map@0.4.x:
   dependencies:
     amdefine ">=0.0.4"
 
-source-map@0.5.x, source-map@^0.5.0, source-map@^0.5.1, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.1:
+source-map@0.5.x, source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.1:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
@@ -6544,7 +6483,7 @@ supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
 
-supports-color@^3.1.2, supports-color@^3.2.3:
+supports-color@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-3.2.3.tgz#65ac0504b3954171d8a64946b2ae3cbb8a5f54f6"
   dependencies:
@@ -6561,17 +6500,6 @@ supports-color@^5.1.0, supports-color@^5.2.0, supports-color@^5.3.0:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.3.0.tgz#5b24ac15db80fa927cf5227a4a33fd3c4c7676c0"
   dependencies:
     has-flag "^3.0.0"
-
-svgo@0.5.6:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/svgo/-/svgo-0.5.6.tgz#9501c533cf84f74a79be1bb3f3494d912bbed119"
-  dependencies:
-    coa "~1.0.1"
-    colors "~1.1.2"
-    js-yaml "~3.3.1"
-    mkdirp "~0.5.1"
-    sax "~1.1.1"
-    whet.extend "~0.9.9"
 
 svgo@^0.7.0:
   version "0.7.2"
@@ -7145,10 +7073,6 @@ write@^0.2.1:
 xml-char-classes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/xml-char-classes/-/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
-
-xmldom@0.1.19:
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.19.tgz#631fc07776efd84118bf25171b37ed4d075a0abc"
 
 xtend@^4.0.0:
   version "4.0.1"

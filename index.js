@@ -1,5 +1,4 @@
 // @flow
-
 import 'css-wipe'
 import 'babel-polyfill'
 import React from 'react'

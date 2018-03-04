@@ -1,4 +1,4 @@
-import { FETCH_SERIALS, SHOW_PRELOADER } from 'constants/actions'
+import { FETCH_SERIALS, SHOW_PRELOADER, FETCH_SERIAL } from 'constants/actions'
 
 const fetchSerials = () => (dispatch) => {
   dispatch({
@@ -9,4 +9,14 @@ const fetchSerials = () => (dispatch) => {
   })
 }
 
-export default fetchSerials
+const fetchSerial = id => (dispatch) => {
+  dispatch({
+    type: SHOW_PRELOADER
+  })
+  dispatch({
+    type: FETCH_SERIAL,
+    id
+  })
+}
+
+export { fetchSerials, fetchSerial }

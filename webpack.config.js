@@ -16,12 +16,30 @@ module.exports = {
     rules: [
       {
         test: /\.jsx$|\.js$/,
-        exclude: [path.resolve(__dirname, 'public'), path.resolve(__dirname, 'node_modules')],
+        exclude: [
+          path.resolve(__dirname, 'public'),
+          path.resolve(__dirname, 'node_modules')
+        ],
         use: ['babel-loader']
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.sss/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './postcss.config.js'
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
@@ -38,7 +56,10 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, './src')],
+    modules: [
+      path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, './src')
+    ],
     extensions: ['.js', '.css', '.jsx', '.sss']
   },
   plugins: [
