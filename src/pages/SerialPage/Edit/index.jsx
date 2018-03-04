@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchSerial } from 'store/actions/serials'
+import { fetchSerial, updateSerial } from 'store/actions/serials'
 
 import SerialForm from 'forms/SerialForm'
 
@@ -9,6 +9,7 @@ type Props = {
   match: Object,
   onFetchSerial: Function,
   serial?: Object,
+  onSendFormData: Function,
 }
 
 class SerialEdit extends Component<Props> {
@@ -26,8 +27,8 @@ class SerialEdit extends Component<Props> {
   }
 
   render() {
-    const { serial } = this.props
-    if (serial) return <SerialForm formType="edit" />
+    const { serial, onSendFormData } = this.props
+    if (serial) return <SerialForm formType="edit" sendData={onSendFormData} />
     return null
   }
 }
@@ -39,6 +40,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onFetchSerial: (id) => {
     dispatch(fetchSerial(id))
+  },
+  onSendFormData: (data) => {
+    dispatch(updateSerial(data))
   }
 })
 

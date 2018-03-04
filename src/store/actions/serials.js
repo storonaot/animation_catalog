@@ -19,4 +19,12 @@ const fetchSerial = id => (dispatch) => {
   })
 }
 
-export { fetchSerials, fetchSerial }
+const updateSerial = data => () => {
+  console.log('updateSerial', data)
+}
+
+const createSerial = data => () => {
+  console.log('createSerial', data)
+}
+
+export { fetchSerials, fetchSerial, updateSerial, createSerial }

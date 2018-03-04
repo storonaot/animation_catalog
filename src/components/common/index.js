@@ -1,7 +1,6 @@
 import Container from './Container'
 import TextField from './TextField'
-import Validatable from './Validatable'
-import Label from './Label'
-import TextArea from './TextArea'
+import AutoComplete from './AutoComplete'
+import TagsList from './TagsList'
 
-export { Container, TextField, Validatable, Label, TextArea }
+export { Container, TextField, AutoComplete, TagsList }
