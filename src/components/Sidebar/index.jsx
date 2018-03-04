@@ -19,12 +19,3 @@ const Sidebar = ({ opened, closeSidebar }) => (
 )
 
 export default Sidebar
-
-Sidebar.defaultProps = {
-  opened: false
-}
-
-Sidebar.propTypes = {
-  opened: PropTypes.bool.isRequired,
-  closeSidebar: PropTypes.func.isRequired
-}

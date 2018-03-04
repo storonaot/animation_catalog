@@ -43,6 +43,7 @@
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "react/no-danger": "off",
+    "react/no-children-prop": "off",
     "react/jsx-filename-extension": [
       1,
       {

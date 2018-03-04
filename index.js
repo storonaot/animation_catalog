@@ -4,10 +4,7 @@ import 'css-wipe'
 import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
-import { Route } from 'react-router-dom'
-
-import moduleUploader from 'helpers/DynamicImport'
-import App from 'containers/App'
+import MyRouter from 'config/router'
 
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 import history from 'utils/history'
@@ -25,22 +22,19 @@ const sagaMiddleware = createSagaMiddleware()
 const routerMiddleWare = routerMiddleware(history)
 const middlewares = [routerMiddleWare, thunk, sagaMiddleware]
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(...middlewares)))
-
-const Index = moduleUploader('Index')
-const Serials = moduleUploader('Serials')
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(...middlewares))
+)
 
 sagaMiddleware.run(helloSaga)
 
-const rootEl: HTMLElement = (document.getElementById('pad'): any)
+const rootEl: HTMLElement = (document.getElementById('root'): any)
 
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App face="TRUE">
-        <Route exact path="/" component={Index} />
-        <Route path="/serials" component={Serials} />
-      </App>
+      <MyRouter />
     </ConnectedRouter>
   </Provider>,
   rootEl

@@ -10,6 +10,10 @@ import Header from 'components/Header'
 import Sidebar from 'components/Sidebar'
 import Container from 'components/common'
 
+import { Link } from 'react-router-dom'
+
+import './styles.css'
+
 type Props = {
   dataLoading: boolean,
   children: Object,
@@ -32,6 +36,8 @@ const App = ({
           history.push('/')
         }}
       />
+      <Link to="/">Home</Link>
+      <Link to="/serials">Serials</Link>
       {dataLoading && <div>Loading data...</div>}
       <Container>
         {children}

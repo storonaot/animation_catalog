@@ -1,16 +1,21 @@
 import { Component } from 'react'
+import PageShell from 'helpers/PageShell'
 
-class DynamicImport extends Component {
-  state = {
-    component: null
+type Props = {
+  load: Function,
+  children: Object,
+}
+
+class DynamicImport extends Component<Props> {
+  constructor(props) {
+    super(props)
+    this.state = {
+      component: null
+    }
   }
 
   componentWillMount() {
-    this.props.load().then(mod =>
-      this.setState(() => ({
-        component: mod.default
-      }))
-    )
+    this.props.load().then(mod => this.setState({ component: mod.default }))
   }
 
   render() {
@@ -20,7 +25,7 @@ class DynamicImport extends Component {
 
 const moduleUploader = moduleName => props => (
   <DynamicImport load={() => import(`containers/${moduleName}`)}>
-    {Component => (Component === null ? <h1>Loading!</h1> : <Component {...props} />)}
+    {Comp => (Comp === null ? null : PageShell(Comp)(props))}
   </DynamicImport>
 )
 

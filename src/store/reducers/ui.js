@@ -7,7 +7,7 @@ import {
 const defaultState = {
   sidebarOpened: false,
   loggedIn: false,
-  dataLoading: true
+  dataLoading: false
 }
 
 export default function user(state = defaultState, action) {

@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import fetchSerials from 'store/actions/serials'
 
@@ -20,7 +21,8 @@ class Serials extends Component<Props> {
   }
 
   componentDidMount() {
-    this.props.onFetchSerials()
+    const { serials, onFetchSerials } = this.props
+    if (!serials) onFetchSerials()
   }
 
   render() {
@@ -30,7 +32,11 @@ class Serials extends Component<Props> {
       <div>
         {serials &&
           <ul>
-            {serials.map(serial => <li key={serial._id}>{serial.name}</li>)}
+            {serials.map(serial => (
+              <Link to={`/serials/${serial._id}`} key={serial._id}>
+                <li>{serial.name}</li>
+              </Link>
+            ))}
           </ul>}
       </div>
     )
