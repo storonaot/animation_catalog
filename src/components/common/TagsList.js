@@ -1,18 +1,30 @@
+import styled from 'styled-components'
 import Chip from 'material-ui/Chip'
 
 type Props = {
-  tags: Array<{ _id: string, label: string }> | [],
-  handleRequestDelete: Function,
+  tags: Array<{ value: string, label: string }> | [],
+  deleteTag: Function,
 }
 
-const TagsList = ({ tags, handleRequestDelete }: Props) => (
-  <div>
+const TagsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -5px
+`
+const Tag = styled.div`
+  margin: 5px;
+`
+
+const TagsList = ({ tags, deleteTag }: Props) => (
+  <TagsWrapper>
     {tags.map(tag => (
-      <Chip key={tag._id} onRequestDelete={() => handleRequestDelete(tag._id)}>
-        {tag.label}
-      </Chip>
+      <Tag key={tag.value}>
+        <Chip onRequestDelete={() => deleteTag(tag.value)}>
+          {tag.label}
+        </Chip>
+      </Tag>
     ))}
-  </div>
+  </TagsWrapper>
 )
 
 export default TagsList

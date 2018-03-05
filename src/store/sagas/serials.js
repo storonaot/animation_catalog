@@ -1,4 +1,3 @@
-// @flow
 import {
   put,
   call,
@@ -13,10 +12,12 @@ import {
   FETCH_SERIALS_DONE,
   FETCH_SERIAL,
   FETCH_SERIAL_DONE,
-  HIDE_PRELOADER
+  HIDE_PRELOADER,
+  SHOW_PRELOADER
 } from 'constants/actions'
 
 function* callFetchSerials() {
+  yield put({ type: SHOW_PRELOADER })
   const result = yield call(Api.fetchSerials)
   if (result.status === 200) {
     yield put({ type: FETCH_SERIALS_DONE, result: result.data })
@@ -31,6 +32,7 @@ function* watchFetchSerials(): IterableIterator<ForkEffect> {
 function* callFetchSerial(
   action: Object
 ): IterableIterator<PutEffect<any> | CallEffect> {
+  yield put({ type: SHOW_PRELOADER })
   const result = yield call(() => Api.fetchSerial(action.id))
   if (result.status === 200) {
     yield put({ type: FETCH_SERIAL_DONE, result: result.data })

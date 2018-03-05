@@ -1,10 +1,12 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
-import styled, { css } from 'styled-components'
+import { Field, reduxForm, formValueSelector, reset } from 'redux-form'
+
+import { fetchCountries } from 'store/actions/countries'
 
 import RaisedButton from 'material-ui/RaisedButton'
-import { TextField, AutoComplete } from 'components/common'
+import { TextField, AutoCompleteWithTags } from 'components/common'
+import { Grid, Box } from 'components/grids/SerialFormGrid'
 
 type Props = {
   formType: string,
@@ -12,46 +14,10 @@ type Props = {
   initialValues?: Object,
   handleSubmit: Function,
   sendData: Function,
+  onFetchCountries: Function,
+  countries: Array,
+  selectedCountries: Array,
 }
-
-const Grid = styled.div`
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: repeat(3, [col] 1fr);
-  grid-template-rows: repeat(4, [row] auto);
-  margin-bottom: 30px;
-`
-
-const Box = styled.div`
-  ${props => props.cover && css`
-    grid-column: 1 / 2;
-    grid-row: 1 / 4;
-  `}
-  ${props => props.isName && css`
-    grid-column: 2 / 3;
-    grid-row: 1;
-  `}
-  ${props => props.originalName && css`
-    grid-column: 3 / 4;
-    grid-row: 1;
-  `}
-  ${props => props.countries && css`
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-  `}
-  ${props => props.directors && css`
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-  `}
-  ${props => props.studios && css`
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-  `}
-  ${props => props.description && css`
-    grid-column: 2 / 4;
-    grid-row: 4;
-  `}
-`
 
 class SerialForm extends Component<Props> {
   constructor(props) {
@@ -60,7 +26,8 @@ class SerialForm extends Component<Props> {
   }
 
   componentDidMount() {
-    const { formType, initialize, initialValues } = this.props
+    const { formType, initialize, initialValues, onFetchCountries } = this.props
+    onFetchCountries()
     if (formType === 'edit') {
       initialize(initialValues)
     } else if (formType === 'new') {
@@ -69,7 +36,8 @@ class SerialForm extends Component<Props> {
   }
 
   render() {
-    const { handleSubmit, sendData } = this.props
+    const { handleSubmit, sendData, countries, selectedCountries } = this.props
+
     return (
       <form onSubmit={handleSubmit(sendData)}>
         <Grid>
@@ -93,27 +61,36 @@ class SerialForm extends Component<Props> {
             />
           </Box>
           <Box countries>
-            <AutoComplete
-              dataSource={[]}
+            <Field
+              component={AutoCompleteWithTags}
+              fullWidth
+              dataSource={countries}
               name="countries"
               floatingLabelText="Страны"
-              fullWidth
+              tagsList={selectedCountries}
+              deleteTag={() => {}}
             />
           </Box>
           <Box directors>
-            <AutoComplete
+            <Field
+              component={AutoCompleteWithTags}
+              fullWidth
               dataSource={[]}
               name="directors"
               floatingLabelText="Режиссеры"
-              fullWidth
+              tagsList={[]}
+              deleteTag={() => {}}
             />
           </Box>
           <Box studios>
-            <AutoComplete
+            <Field
+              component={AutoCompleteWithTags}
+              fullWidth
               dataSource={[]}
               name="studios"
               floatingLabelText="Студии"
-              fullWidth
+              tagsList={[]}
+              deleteTag={() => {}}
             />
           </Box>
           <Box description>
@@ -134,14 +111,29 @@ class SerialForm extends Component<Props> {
     )
   }
 }
-
+const selector = formValueSelector('SerialForm')
 const SerialFormRedux = reduxForm({
   form: 'SerialForm',
   enableReinitialize: true
 })(SerialForm)
 
 const mapStateToProps = state => ({
-  initialValues: state.serial.data
+  initialValues: state.serial.data,
+  countries: state.countries.data.map(({ _id, name, ...res }) => ({
+    value: _id,
+    label: name,
+    ...res
+  })),
+  selectedCountries: selector(state, 'countries') || []
 })
 
-export default connect(mapStateToProps)(SerialFormRedux)
+const mapDispatchToProps = dispatch => ({
+  onFetchCountries: () => {
+    dispatch(fetchCountries())
+  },
+  onReset: () => {
+    dispatch(reset('SerialForm'))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SerialFormRedux)
