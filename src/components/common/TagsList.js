@@ -18,9 +18,9 @@ const Tag = styled.div`
 const TagsList = ({ tags, deleteTag }: Props) => (
   <TagsWrapper>
     {tags.map(tag => (
-      <Tag key={tag.value}>
-        <Chip onRequestDelete={() => deleteTag(tag.value)}>
-          {tag.label}
+      <Tag key={tag._id}>
+        <Chip onRequestDelete={() => deleteTag(tag._id)}>
+          {tag.name}
         </Chip>
       </Tag>
     ))}

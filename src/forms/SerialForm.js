@@ -2,6 +2,8 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector, reset } from 'redux-form'
 
+import { differenceBy as _differenceBy } from 'lodash'
+
 import { fetchCountries } from 'store/actions/countries'
 
 import RaisedButton from 'material-ui/RaisedButton'
@@ -26,8 +28,15 @@ class SerialForm extends Component<Props> {
   }
 
   componentDidMount() {
-    const { formType, initialize, initialValues, onFetchCountries } = this.props
-    onFetchCountries()
+    const {
+      formType,
+      initialize,
+      initialValues,
+      onFetchCountries,
+      countries
+    } = this.props
+
+    if (!countries.length) onFetchCountries()
     if (formType === 'edit') {
       initialize(initialValues)
     } else if (formType === 'new') {
@@ -37,6 +46,8 @@ class SerialForm extends Component<Props> {
 
   render() {
     const { handleSubmit, sendData, countries, selectedCountries } = this.props
+
+    const filteredCountries = _differenceBy(countries, selectedCountries, '_id')
 
     return (
       <form onSubmit={handleSubmit(sendData)}>
@@ -64,11 +75,10 @@ class SerialForm extends Component<Props> {
             <Field
               component={AutoCompleteWithTags}
               fullWidth
-              dataSource={countries}
+              dataSource={filteredCountries}
               name="countries"
               floatingLabelText="Страны"
               tagsList={selectedCountries}
-              deleteTag={() => {}}
             />
           </Box>
           <Box directors>
@@ -119,11 +129,7 @@ const SerialFormRedux = reduxForm({
 
 const mapStateToProps = state => ({
   initialValues: state.serial.data,
-  countries: state.countries.data.map(({ _id, name, ...res }) => ({
-    value: _id,
-    label: name,
-    ...res
-  })),
+  countries: state.countries.data,
   selectedCountries: selector(state, 'countries') || []
 })
 

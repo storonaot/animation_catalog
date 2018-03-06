@@ -47,8 +47,8 @@ export default AutoComplete
 
 AutoComplete.defaultProps = {
   dataSourceConfig: {
-    text: 'label',
-    value: 'value'
+    text: 'name',
+    value: '_id'
   },
   maxSearchResults: 7,
   openOnFocus: true

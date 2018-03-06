@@ -4,7 +4,6 @@ import TagsList from './TagsList'
 
 type Props = {
   tagsList: Array<{ _id: string, label: string }> | [],
-  deleteTag: Function,
   input: Object,
   searchText: string,
   onNewRequest: Function,
@@ -18,11 +17,15 @@ class AutoCompleteWithTags extends Component<Props> {
     }
     this.onNewRequest = this.onNewRequest.bind(this)
     this.onUpdateInput = this.onUpdateInput.bind(this)
+    this.onDeleteTag = this.onDeleteTag.bind(this)
   }
 
   onNewRequest(tag) {
-    const { input } = this.props
-    input.onChange([...input.value, tag])
+    console.log('tag', tag._id)
+    if (tag._id) {
+      const { input } = this.props
+      input.onChange([...input.value, tag])
+    }
     this.setState({ searchText: '' })
   }
 
@@ -30,8 +33,14 @@ class AutoCompleteWithTags extends Component<Props> {
     this.setState({ searchText: value })
   }
 
+  onDeleteTag(tagId) {
+    const { input } = this.props
+    const newTags = input.value.filter(val => val._id !== tagId)
+    input.onChange(newTags)
+  }
+
   render() {
-    const { tagsList, deleteTag, ...props } = this.props
+    const { tagsList, ...props } = this.props
     return (
       <div>
         <AutoComplete
@@ -40,7 +49,7 @@ class AutoCompleteWithTags extends Component<Props> {
           onUpdateInput={this.onUpdateInput}
           {...props}
         />
-        <TagsList tags={tagsList} deleteTag={deleteTag} />
+        <TagsList tags={tagsList} deleteTag={this.onDeleteTag} />
       </div>
     )
   }
