@@ -40,7 +40,7 @@ function* callFetchSerial(
   yield put({ type: HIDE_PRELOADER })
 }
 
-function* watchFetchSerial() {
+function* watchFetchSerial(): IterableIterator<ForkEffect> {
   yield takeEvery(FETCH_SERIAL, callFetchSerial)
 }
 

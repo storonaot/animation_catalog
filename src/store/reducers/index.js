@@ -6,6 +6,8 @@ import ui from './ui'
 import serials from './serials'
 import serial from './serial'
 import countries from './countries'
+import directors from './directors'
+import studios from './studios'
 
 export default combineReducers({
   router: routerReducer,
@@ -13,5 +15,7 @@ export default combineReducers({
   ui,
   serials,
   serial,
-  countries
+  countries,
+  directors,
+  studios
 })

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import Chip from 'material-ui/Chip'
 
 type Props = {
-  tags: Array<{ value: string, label: string }> | [],
+  tags: Array<{ _id: string, name: string }> | [],
   deleteTag: Function,
 }
 

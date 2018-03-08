@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { createSerial } from 'store/actions/serials'
 
-import SerialForm from 'forms/SerialForm'
+import SerialForm from 'components/forms/SerialForm'
 
 class SerialsNew extends Component<{ onCreateSerial: Function }> {
   constructor(props) {

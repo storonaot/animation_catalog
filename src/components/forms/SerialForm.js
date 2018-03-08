@@ -4,7 +4,7 @@ import { Field, reduxForm, formValueSelector, reset } from 'redux-form'
 
 import { differenceBy as _differenceBy } from 'lodash'
 
-import { fetchCountries } from 'store/actions/countries'
+import { fetchCountries, fetchDirectors, fetchStudios } from 'store/actions'
 
 import RaisedButton from 'material-ui/RaisedButton'
 import { TextField, AutoCompleteWithTags } from 'components/common'
@@ -19,6 +19,12 @@ type Props = {
   onFetchCountries: Function,
   countries: Array,
   selectedCountries: Array,
+  onFetchDirectors: Function,
+  directors: Array,
+  selectedDirectors: Array,
+  onFetchStudios: Function,
+  studios: Array,
+  selectedStudios: Array,
 }
 
 class SerialForm extends Component<Props> {
@@ -33,8 +39,13 @@ class SerialForm extends Component<Props> {
       initialize,
       initialValues,
       onFetchCountries,
-      countries
+      countries,
+      onFetchDirectors,
+      onFetchStudios
     } = this.props
+
+    onFetchDirectors()
+    onFetchStudios()
 
     if (!countries.length) onFetchCountries()
     if (formType === 'edit') {
@@ -45,9 +56,20 @@ class SerialForm extends Component<Props> {
   }
 
   render() {
-    const { handleSubmit, sendData, countries, selectedCountries } = this.props
+    const {
+      handleSubmit,
+      sendData,
+      countries,
+      selectedCountries,
+      directors,
+      selectedDirectors,
+      studios,
+      selectedStudios
+    } = this.props
 
     const filteredCountries = _differenceBy(countries, selectedCountries, '_id')
+    const filteredDirectors = _differenceBy(directors, selectedDirectors, '_id')
+    const filteredStudios = _differenceBy(studios, selectedStudios, '_id')
 
     return (
       <form onSubmit={handleSubmit(sendData)}>
@@ -85,22 +107,20 @@ class SerialForm extends Component<Props> {
             <Field
               component={AutoCompleteWithTags}
               fullWidth
-              dataSource={[]}
+              dataSource={filteredDirectors}
               name="directors"
               floatingLabelText="Режиссеры"
-              tagsList={[]}
-              deleteTag={() => {}}
+              tagsList={selectedDirectors}
             />
           </Box>
           <Box studios>
             <Field
               component={AutoCompleteWithTags}
               fullWidth
-              dataSource={[]}
+              dataSource={filteredStudios}
               name="studios"
               floatingLabelText="Студии"
-              tagsList={[]}
-              deleteTag={() => {}}
+              tagsList={selectedStudios}
             />
           </Box>
           <Box description>
@@ -130,12 +150,26 @@ const SerialFormRedux = reduxForm({
 const mapStateToProps = state => ({
   initialValues: state.serial.data,
   countries: state.countries.data,
-  selectedCountries: selector(state, 'countries') || []
+  selectedCountries: selector(state, 'countries') || [],
+  // directors: state.directors.data.map(({ name, ...res }) => ({
+  //   name: `${name.last} ${name.first}`,
+  //   ...res
+  // })),
+  directors: state.directors.data,
+  selectedDirectors: selector(state, 'directors') || [],
+  studios: state.studios.data,
+  selectedStudios: selector(state, 'studios') || []
 })
 
 const mapDispatchToProps = dispatch => ({
   onFetchCountries: () => {
     dispatch(fetchCountries())
+  },
+  onFetchDirectors: () => {
+    dispatch(fetchDirectors())
+  },
+  onFetchStudios: () => {
+    dispatch(fetchStudios())
   },
   onReset: () => {
     dispatch(reset('SerialForm'))

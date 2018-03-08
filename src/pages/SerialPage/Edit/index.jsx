@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { fetchSerial, updateSerial } from 'store/actions/serials'
 
-import SerialForm from 'forms/SerialForm'
+import SerialForm from 'components/forms/SerialForm'
 
 type Props = {
   match: Object,

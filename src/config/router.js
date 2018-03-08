@@ -10,6 +10,8 @@ const SerialsNew = moduleUploader('SerialsPage/New')
 const Serial = moduleUploader('SerialPage')
 const SerialEdit = moduleUploader('SerialPage/Edit')
 
+const Addition = moduleUploader('Addition')
+
 const MyRouter = () => (
   <App face="TRUE">
     <Switch>
@@ -18,6 +20,7 @@ const MyRouter = () => (
       <Route path="/serials/new" component={SerialsNew} />
       <Route path="/serials/:id/show" component={Serial} />
       <Route path="/serials/:id/edit" component={SerialEdit} />
+      <Route path="/addition" component={Addition} />
     </Switch>
   </App>
 )

@@ -5,10 +5,16 @@ import { uniqueId as _uniqueId } from 'lodash'
 
 const sidebarLinks = [
   { label: 'Home', to: '/' },
-  { label: 'Serials', to: '/serials' }
+  { label: 'Serials', to: '/serials' },
+  { label: 'Addition', to: '/addition' }
 ]
 
-const Sidebar = ({ opened, closeSidebar }) => (
+type Props = {
+  opened: boolean,
+  closeSidebar: Function,
+}
+
+const Sidebar = ({ opened, closeSidebar }: Props) => (
   <Drawer open={opened} onRequestChange={closeSidebar} docked={false}>
     {sidebarLinks.map(link => (
       <NavLink key={_uniqueId()} to={link.to}>
