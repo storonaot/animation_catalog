@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, reset } from 'redux-form'
 import { TextField, TagsList } from 'components/common'
 import RaisedButton from 'material-ui/RaisedButton'
+import IconButton from 'material-ui/IconButton'
+import HighlightOff from 'material-ui/svg-icons/action/highlight-off'
 import { fetchDirectors, createDirector, removeDirector } from 'store/actions'
-import { Grid, Box } from 'components/grids/DirectorsForm'
+import { Grid, Box } from 'components/grids/DirectorsFormGrid'
 import TextFieldMUI from 'material-ui/TextField'
 
 type Props = {
@@ -40,6 +42,7 @@ class DirectorsForm extends Component<Props> {
 
     this.updateSubstring = this.updateSubstring.bind(this)
     this.sendData = this.sendData.bind(this)
+    this.resetSubstring = this.resetSubstring.bind(this)
   }
 
   componentDidMount() {
@@ -48,7 +51,11 @@ class DirectorsForm extends Component<Props> {
   }
 
   updateSubstring(event, value) {
-    this.setState({ substring: value.toLowerCase() })
+    this.setState({ substring: value })
+  }
+
+  resetSubstring() {
+    this.setState({ substring: '' })
   }
 
   sendData(value) {
@@ -71,8 +78,8 @@ class DirectorsForm extends Component<Props> {
     const { directors, handleSubmit, onRemoveDirector } = this.props
     const filteredTags = directors.filter(
       ({ name, originalName }) =>
-        name.toLowerCase().match(substring) ||
-        originalName.toLowerCase().match(substring)
+        name.toLowerCase().match(substring.toLowerCase()) ||
+        originalName.toLowerCase().match(substring.toLowerCase())
     )
 
     return (
@@ -89,6 +96,7 @@ class DirectorsForm extends Component<Props> {
                 type="text"
               />
             ))}
+            <RaisedButton type="submit" label="Добавить" secondary />
           </Box>
           <Box right>
             <TextFieldMUI
@@ -97,9 +105,12 @@ class DirectorsForm extends Component<Props> {
               name="substring"
               floatingLabelText="Фильтр"
             />
+            <IconButton tooltip="Очистить" onClick={this.resetSubstring}>
+              <HighlightOff />
+            </IconButton>
+
             <TagsList tags={filteredTags} deleteTag={onRemoveDirector} />
           </Box>
-          <RaisedButton type="submit" label="Добавить" secondary />
         </Grid>
       </form>
     )

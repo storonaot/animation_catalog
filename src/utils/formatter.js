@@ -1,10 +1,9 @@
-const directorsFormatter = directors =>
-  directors.map(({ name, originalName, ...res }) => ({
-    name: `${name.first} ${name.last}`,
-    originalName: `${originalName.first} ${originalName.last}`,
-    ...res
-  }))
+const directorFormatter = ({ name, originalName, ...res }) => ({
+  name: `${name.first || ''} ${name.last}`,
+  originalName: `${originalName.first || ''} ${originalName.last}`,
+  ...res
+})
 
-const testFormatter = () => {}
+const directorsFormatter = directors => directors.map(directorFormatter)
 
-export { directorsFormatter, testFormatter }
+export { directorsFormatter, directorFormatter }
