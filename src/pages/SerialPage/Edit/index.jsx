@@ -34,7 +34,7 @@ class SerialEdit extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  serial: state.serial.data
+  serial: state.serial
 })
 
 const mapDispatchToProps = dispatch => ({

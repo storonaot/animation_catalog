@@ -1,4 +1,4 @@
-import { FETCH_STUDIOS, CREATE_STUDIO } from 'constants/actions'
+import { FETCH_STUDIOS, CREATE_STUDIO, REMOVE_STUDIO } from 'constants/actions'
 
 const fetchStudios = () => (dispatch) => {
   dispatch({
@@ -13,4 +13,11 @@ const createStudio = data => (dispatch) => {
   })
 }
 
-export { fetchStudios, createStudio }
+const removeStudio = id => (dispatch) => {
+  dispatch({
+    type: REMOVE_STUDIO,
+    payload: id
+  })
+}
+
+export { fetchStudios, createStudio, removeStudio }

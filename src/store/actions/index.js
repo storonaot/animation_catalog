@@ -6,7 +6,7 @@ import {
   updateSerial,
   createSerial
 } from './serials'
-import { fetchStudios, createStudio } from './studios'
+import { fetchStudios, createStudio, removeStudio } from './studios'
 import { toggleSidebar, showPreloader } from './ui'
 
 export {
@@ -22,5 +22,6 @@ export {
   fetchStudios,
   createStudio,
   toggleSidebar,
-  showPreloader
+  showPreloader,
+  removeStudio
 }

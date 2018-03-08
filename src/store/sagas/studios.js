@@ -5,7 +5,9 @@ import {
   FETCH_STUDIOS,
   FETCH_STUDIOS_DONE,
   CREATE_STUDIO,
-  CREATE_STUDIO_DONE
+  CREATE_STUDIO_DONE,
+  REMOVE_STUDIO,
+  REMOVE_STUDIO_DONE
 } from 'constants/actions'
 
 // **fetch all
@@ -37,4 +39,19 @@ function* watchCreateStudios(): IterableIterator<ForkEffect> {
 }
 // create**
 
-export { watchFetchStudios, watchCreateStudios }
+// **remove
+function* callRemoveStudio(action) {
+  const studioId = action.payload
+
+  const result = yield call(() => Api.removeStudio(studioId))
+  if (result.status === 200) {
+    yield put({ type: REMOVE_STUDIO_DONE, result: result.data })
+  }
+}
+
+function* watchRemoveStudio() {
+  yield takeEvery(REMOVE_STUDIO, callRemoveStudio)
+}
+// remove**
+
+export { watchFetchStudios, watchCreateStudios, watchRemoveStudio }

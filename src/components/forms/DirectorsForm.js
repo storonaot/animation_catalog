@@ -122,7 +122,7 @@ const DirectorFormRedux = reduxForm({
 })(DirectorsForm)
 
 const mapStateToProps = state => ({
-  directors: state.directors.data
+  directors: state.directors
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,9 +1,7 @@
 import { directorsFormatter } from 'utils/formatter'
 import { FETCH_SERIAL_DONE } from 'constants/actions'
 
-const defaultState = {
-  data: null
-}
+const defaultState = null
 
 export default function serial(state = defaultState, action) {
   switch (action.type) {

@@ -40,7 +40,7 @@ class SerialsPage extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  serials: state.serials.data
+  serials: state.serials
 })
 
 const mapDispatchToProps = dispatch => ({

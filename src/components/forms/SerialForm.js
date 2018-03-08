@@ -148,16 +148,12 @@ const SerialFormRedux = reduxForm({
 })(SerialForm)
 
 const mapStateToProps = state => ({
-  initialValues: state.serial.data,
-  countries: state.countries.data,
+  initialValues: state.serial,
+  countries: state.countries,
   selectedCountries: selector(state, 'countries') || [],
-  // directors: state.directors.data.map(({ name, ...res }) => ({
-  //   name: `${name.last} ${name.first}`,
-  //   ...res
-  // })),
-  directors: state.directors.data,
+  directors: state.directors,
   selectedDirectors: selector(state, 'directors') || [],
-  studios: state.studios.data,
+  studios: state.studios,
   selectedStudios: selector(state, 'studios') || []
 })
 

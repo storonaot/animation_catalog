@@ -1,4 +1,5 @@
 import { directorsFormatter, directorFormatter } from 'utils/formatter'
+import { removeObjById } from 'utils/newState'
 
 import {
   FETCH_DIRECTORS_DONE,
@@ -6,26 +7,19 @@ import {
   REMOVE_DIRECTOR_DONE
 } from 'constants/actions'
 
-const defaultState = {
-  data: []
-}
+const defaultState = []
 
 export default function directors(state = defaultState, action) {
   switch (action.type) {
     case FETCH_DIRECTORS_DONE:
-      return { data: directorsFormatter(action.result) }
+      return directorsFormatter(action.result)
     case CREATE_DIRECTOR_DONE: {
       const newDirector = directorFormatter(action.result)
-      const newState = state.data
-      return { data: [...newState, newDirector] }
+      return [...state, newDirector]
     }
     case REMOVE_DIRECTOR_DONE: {
       const directorId = action.result
-      const newState = state.data.filter(
-        director => director._id !== directorId
-      )
-      console.log('newState', newState)
-      return { data: newState }
+      return removeObjById(state, directorId)
     }
     default:
       return state

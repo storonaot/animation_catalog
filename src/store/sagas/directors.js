@@ -10,7 +10,7 @@ import {
   REMOVE_DIRECTOR_DONE
 } from 'constants/actions'
 
-// **fetch
+// **fetch all
 function* callFetchDirectors() {
   const result = yield call(Api.fetchDirectors)
 
@@ -22,7 +22,7 @@ function* callFetchDirectors() {
 function* watchFetchDirectors(): IterableIterator<ForkEffect> {
   yield takeEvery(FETCH_DIRECTORS, callFetchDirectors)
 }
-// fetch**
+// fetch all**
 
 // **create
 function* callCreateDirector(action) {
