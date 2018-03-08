@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import DirectorsForm from 'components/forms/DirectorsForm'
+import StudiosForm from 'components/forms/StudiosForm'
 import { Select } from 'components/common'
 
 const SELECT_OPTIONS = [
@@ -12,7 +13,7 @@ class Addition extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentValue: 1
+      currentValue: 3
     }
 
     this.changeForm = this.changeForm.bind(this)
@@ -34,7 +35,7 @@ class Addition extends Component {
         />
         {currentValue === 1 && <DirectorsForm />}
         {currentValue === 2 && <div>Страна</div>}
-        {currentValue === 3 && <div>Студия</div>}
+        {currentValue === 3 && <StudiosForm />}
       </div>
     )
   }

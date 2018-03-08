@@ -21,3 +21,5 @@ export const REMOVE_DIRECTOR_DONE = Symbol('REMOVE_DIRECTOR_DONE')
 
 export const FETCH_STUDIOS = Symbol('FETCH_STUDIOS')
 export const FETCH_STUDIOS_DONE = Symbol('FETCH_STUDIOS_DONE')
+export const CREATE_STUDIO = Symbol('CREATE_STUDIO')
+export const CREATE_STUDIO_DONE = Symbol('CREATE_STUDIO_DONE')

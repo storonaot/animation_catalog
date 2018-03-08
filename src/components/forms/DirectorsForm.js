@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import IconButton from 'material-ui/IconButton'
 import HighlightOff from 'material-ui/svg-icons/action/highlight-off'
 import { fetchDirectors, createDirector, removeDirector } from 'store/actions'
-import { Grid, Box } from 'components/grids/DirectorsFormGrid'
+import { Grid, Box } from 'components/grids/AdditionFormGrid'
 import TextFieldMUI from 'material-ui/TextField'
 
 type Props = {
@@ -118,7 +118,7 @@ class DirectorsForm extends Component<Props> {
 }
 
 const DirectorFormRedux = reduxForm({
-  form: 'DirectorForm'
+  form: 'DirectorsForm'
 })(DirectorsForm)
 
 const mapStateToProps = state => ({
@@ -136,7 +136,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(removeDirector(id))
   },
   onReset: () => {
-    dispatch(reset('DirectorForm'))
+    dispatch(reset('DirectorsForm'))
   }
 })
 

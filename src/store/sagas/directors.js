@@ -26,8 +26,8 @@ function* watchFetchDirectors(): IterableIterator<ForkEffect> {
 
 // **create
 function* callCreateDirector(action) {
-  const director = action.payload
-  const result = yield call(() => Api.createDirector(director))
+  const newDirector = action.payload
+  const result = yield call(() => Api.createDirector(newDirector))
   if (result.status === 200) {
     yield put({ type: CREATE_DIRECTOR_DONE, result: result.data })
   }

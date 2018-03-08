@@ -6,7 +6,7 @@ import {
   watchCreateDirector,
   watchRemoveDirector
 } from './directors'
-import watchFetchStudios from './studios'
+import { watchFetchStudios, watchCreateStudios } from './studios'
 
 export function* helloSaga() {
   yield console.log('Hello Sagas!')
@@ -23,6 +23,7 @@ export default function* rootSaga() {
     watchFetchDirectors(),
     watchFetchStudios(),
     watchCreateDirector(),
-    watchRemoveDirector()
+    watchRemoveDirector(),
+    watchCreateStudios()
   ])
 }

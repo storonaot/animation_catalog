@@ -11,3 +11,4 @@ export const CREATE_DIRECTOR = `${source}/${api}/directors/new`
 export const REMOVE_DIRECTOR = id => `${source}/${api}/directors/${id}`
 
 export const GET_STUDIOS = `${source}/${api}/studios`
+export const CREATE_STUDIO = `${source}/${api}/studios/new`
