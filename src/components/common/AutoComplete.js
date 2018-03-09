@@ -1,4 +1,5 @@
-import AutoCompleteMaterialUI from 'material-ui/AutoComplete'
+import { getErrorText } from 'utils/validator'
+import AutoCompleteMUI from 'material-ui/AutoComplete'
 
 type Props = {
   dataSource: Array,
@@ -12,6 +13,12 @@ type Props = {
   onNewRequest: Function,
   searchText: string,
   onUpdateInput: Function,
+  meta: Object<{
+    touched: Function,
+    submitFailed: boolean,
+    valid: boolean,
+    error: string,
+  }>,
 }
 
 const AutoComplete = ({
@@ -25,23 +32,28 @@ const AutoComplete = ({
   openOnFocus,
   onNewRequest,
   searchText,
-  onUpdateInput
-}: Props) => (
-  <AutoCompleteMaterialUI
-    dataSource={dataSource}
-    name={name}
-    floatingLabelText={floatingLabelText}
-    fullWidth={fullWidth}
-    value={input.value}
-    dataSourceConfig={dataSourceConfig}
-    filter={AutoCompleteMaterialUI.caseInsensitiveFilter}
-    onNewRequest={onNewRequest}
-    maxSearchResults={maxSearchResults}
-    openOnFocus={openOnFocus}
-    searchText={searchText}
-    onUpdateInput={onUpdateInput}
-  />
-)
+  onUpdateInput,
+  meta
+}: Props) => {
+  const errorText = getErrorText(meta)
+  return (
+    <AutoCompleteMUI
+      dataSource={dataSource}
+      name={name}
+      floatingLabelText={floatingLabelText}
+      fullWidth={fullWidth}
+      value={input.value}
+      dataSourceConfig={dataSourceConfig}
+      filter={AutoCompleteMUI.caseInsensitiveFilter}
+      onNewRequest={onNewRequest}
+      maxSearchResults={maxSearchResults}
+      openOnFocus={openOnFocus}
+      searchText={searchText}
+      onUpdateInput={onUpdateInput}
+      errorText={errorText}
+    />
+  )
+}
 
 export default AutoComplete
 

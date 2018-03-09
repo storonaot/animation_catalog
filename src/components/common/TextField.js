@@ -1,4 +1,5 @@
-import TextFieldMaterialUI from 'material-ui/TextField'
+import { getErrorText } from 'utils/validator'
+import TextFieldMUI from 'material-ui/TextField'
 
 type Props = {
   input: Object<{ value?: string, onChange: Function }>,
@@ -6,6 +7,12 @@ type Props = {
   multiLine?: boolean,
   rows?: number,
   fullWidth?: boolean,
+  meta: Object<{
+    touched: Function,
+    submitFailed: boolean,
+    valid: boolean,
+    error: string,
+  }>,
 }
 
 const TextField = ({
@@ -13,16 +20,22 @@ const TextField = ({
   floatingLabelText,
   multiLine,
   rows,
-  fullWidth
-}: Props) => (
-  <TextFieldMaterialUI
-    value={input.value}
-    floatingLabelText={floatingLabelText}
-    onChange={input.onChange}
-    multiLine={multiLine}
-    rows={rows}
-    fullWidth={fullWidth}
-  />
-)
+  fullWidth,
+  meta
+}: Props) => {
+  const errorText = getErrorText(meta)
+
+  return (
+    <TextFieldMUI
+      value={input.value}
+      floatingLabelText={floatingLabelText}
+      onChange={input.onChange}
+      multiLine={multiLine}
+      rows={rows}
+      fullWidth={fullWidth}
+      errorText={errorText}
+    />
+  )
+}
 
 export default TextField

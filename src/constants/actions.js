@@ -1,6 +1,9 @@
 export const TOGGLE_SIDEBAR = Symbol('TOGGLE_SIDEBAR')
 export const SHOW_PRELOADER = Symbol('SHOW_PRELOADER')
 export const HIDE_PRELOADER = Symbol('HIDE_PRELOADER')
+export const SHOW_DIALOG = Symbol('SHOW_DIALOG')
+export const CLOSE_DIALOG = Symbol('CLOSE_DIALOG')
+export const SHOW_SNACKBAR = Symbol('SHOW_SNACKBAR')
 
 export const LOG_IN = Symbol('LOG_IN')
 
@@ -8,6 +11,12 @@ export const FETCH_SERIALS = Symbol('FETCH_SERIALS')
 export const FETCH_SERIALS_DONE = Symbol('FETCH_SERIALS_DONE')
 export const FETCH_SERIAL = Symbol('FETCH_SERIAL')
 export const FETCH_SERIAL_DONE = Symbol('FETCH_SERIAL_DONE')
+export const CREATE_SERIAL = Symbol('CREATE_SERIAL')
+export const CREATE_SERIAL_DONE = Symbol('CREATE_SERIAL_DONE')
+export const UPDATE_SERIAL = Symbol('UPDATE_SERIAL')
+export const UPDATE_SERIAL_DONE = Symbol('UPDATE_SERIAL_DONE')
+export const REMOVE_SERIAL = Symbol('REMOVE_SERIAL')
+export const REMOVE_SERIAL_DONE = Symbol('REMOVE_SERIAL_DONE')
 
 export const FETCH_COUNTRIES = Symbol('FETCH_COUNTRIES')
 export const FETCH_COUNTRIES_DONE = Symbol('FETCH_COUNTRIES_DONE')

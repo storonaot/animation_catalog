@@ -4,6 +4,8 @@ import AutoComplete from './AutoComplete'
 import TagsList from './TagsList'
 import AutoCompleteWithTags from './AutoCompleteWithTags'
 import Select from './Select'
+import Dialog from './Dialog'
+import SnackBar from './SnackBar'
 
 export {
   Container,
@@ -11,5 +13,7 @@ export {
   AutoComplete,
   TagsList,
   AutoCompleteWithTags,
-  Select
+  Select,
+  Dialog,
+  SnackBar
 }

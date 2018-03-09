@@ -3,6 +3,9 @@ const api = 'api/v1'
 
 export const GET_SERIALS = `${source}/${api}/serials`
 export const GET_SERIAL = id => `${source}/${api}/serials/${id}`
+export const CREATE_SERIAL = `${source}/${api}/serials/new`
+export const UPDATE_SERIAL = id => `${source}/${api}/serials/${id}`
+export const DELETE_SERIAL = id => `${source}/${api}/serials/${id}`
 
 export const GET_COUNTRIES = `${source}/${api}/countries`
 

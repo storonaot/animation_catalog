@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { extractedIdsObj } from 'utils/formatter'
 
 import { fetchSerial, updateSerial } from 'store/actions/serials'
 
@@ -9,13 +10,14 @@ type Props = {
   match: Object,
   onFetchSerial: Function,
   serial?: Object,
-  onSendFormData: Function,
+  onUpdateSerial: Function,
 }
 
 class SerialEdit extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {}
+    this.send = this.send.bind(this)
   }
 
   componentDidMount() {
@@ -26,9 +28,14 @@ class SerialEdit extends Component<Props> {
     }
   }
 
+  send(data) {
+    const { onUpdateSerial, match: { params: { id } } } = this.props
+    onUpdateSerial(id, extractedIdsObj(data))
+  }
+
   render() {
-    const { serial, onSendFormData } = this.props
-    if (serial) return <SerialForm formType="edit" sendData={onSendFormData} />
+    const { serial } = this.props
+    if (serial) return <SerialForm formType="edit" sendData={this.send} />
     return null
   }
 }
@@ -41,8 +48,8 @@ const mapDispatchToProps = dispatch => ({
   onFetchSerial: (id) => {
     dispatch(fetchSerial(id))
   },
-  onSendFormData: (data) => {
-    dispatch(updateSerial(data))
+  onUpdateSerial: (id, data) => {
+    dispatch(updateSerial(id, data))
   }
 })
 

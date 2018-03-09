@@ -1,10 +1,14 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm, formValueSelector, reset } from 'redux-form'
+import { Field, reduxForm, formValueSelector, reset, isDirty } from 'redux-form'
+import createValidation from 'utils/validator'
+import { REQUIRED } from 'constants/validation'
 
 import { differenceBy as _differenceBy } from 'lodash'
 
-import { fetchCountries, fetchDirectors, fetchStudios } from 'store/actions'
+import { fetchDirectors } from 'store/actions/directors'
+import { fetchStudios } from 'store/actions/studios'
+import { fetchCountries } from 'store/actions/countries'
 
 import RaisedButton from 'material-ui/RaisedButton'
 import { TextField, AutoCompleteWithTags } from 'components/common'
@@ -40,13 +44,14 @@ class SerialForm extends Component<Props> {
       initialValues,
       onFetchCountries,
       countries,
+      directors,
+      studios,
       onFetchDirectors,
       onFetchStudios
     } = this.props
 
-    onFetchDirectors()
-    onFetchStudios()
-
+    if (!directors.length) onFetchDirectors()
+    if (!studios.length) onFetchStudios()
     if (!countries.length) onFetchCountries()
     if (formType === 'edit') {
       initialize(initialValues)
@@ -144,6 +149,12 @@ class SerialForm extends Component<Props> {
 const selector = formValueSelector('SerialForm')
 const SerialFormRedux = reduxForm({
   form: 'SerialForm',
+  validate: createValidation({
+    name: [REQUIRED],
+    originalName: [REQUIRED],
+    countries: [REQUIRED],
+    directors: [REQUIRED]
+  }),
   enableReinitialize: true
 })(SerialForm)
 
@@ -154,7 +165,8 @@ const mapStateToProps = state => ({
   directors: state.directors,
   selectedDirectors: selector(state, 'directors') || [],
   studios: state.studios,
-  selectedStudios: selector(state, 'studios') || []
+  selectedStudios: selector(state, 'studios') || [],
+  dirty: isDirty('SerialForm')(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -173,3 +185,44 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SerialFormRedux)
+
+// const MyInfoForm = reduxForm({
+//   form: 'MyInfo',
+//   validate: createValidation({
+//     contactName: [
+//       REQUIRED,
+//       ({ contactName }) =>
+//         STRING_MAX_LENGTH({ value: contactName, maxLength: CONTACT_NAME_MAX_LENGTH }),
+//     ],
+//     contactPosition: [
+//       ({ contactPosition }) =>
+//         STRING_MAX_LENGTH({ value: contactPosition, maxLength: CONTACT_POSITION_MAX_LENGTH }),
+//     ],
+//     contactPhone: [
+//       REQUIRED, PHONE,
+//     ],
+//     businessName: [
+//       REQUIRED,
+//       ({ businessName }) =>
+//         STRING_MAX_LENGTH({ value: businessName, maxLength: BUSINESS_NAME_MAX_LENGTH }),
+//     ],
+//     address: [
+//       REQUIRED, ADDRESS,
+//     ],
+//     businessEmail: [
+//       EMAIL,
+//       ({ businessEmail }) =>
+//         STRING_MAX_LENGTH({ value: businessEmail, maxLength: EMAIL_MAX_LENGTH }),
+//     ],
+//     siteUrl: [
+//       WEBSITE,
+//       ({ siteUrl }) =>
+//         STRING_MAX_LENGTH({ value: siteUrl, maxLength: SITE_MAX_LENGTH }),
+//     ],
+//     businessPhone: [
+//       PHONE,
+//     ],
+//   }),
+//   enableReinitialize: true,
+//   keepDirtyOnReinitialize: true,
+// })(MyInfo);

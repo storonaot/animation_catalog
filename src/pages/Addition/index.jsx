@@ -13,7 +13,7 @@ class Addition extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentValue: 3
+      currentValue: 1
     }
 
     this.changeForm = this.changeForm.bind(this)

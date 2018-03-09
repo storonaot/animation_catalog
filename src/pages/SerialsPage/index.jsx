@@ -24,7 +24,7 @@ class SerialsPage extends Component<Props> {
 
   componentDidMount() {
     const { serials, onFetchSerials } = this.props
-    if (!serials) onFetchSerials()
+    if (!serials.length) onFetchSerials()
   }
 
   render() {

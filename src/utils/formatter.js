@@ -1,9 +1,24 @@
+import { forIn as _forIn } from 'lodash'
+
 const directorFormatter = ({ name, originalName, ...res }) => ({
   name: `${name.first || ''} ${name.last}`,
   originalName: `${originalName.first || ''} ${originalName.last}`,
   ...res
 })
-
 const directorsFormatter = directors => directors.map(directorFormatter)
 
-export { directorsFormatter, directorFormatter }
+const extractIds = arr => arr.map(({ _id }) => _id)
+// перебираем объект, находим в нем массивы, мапим
+const extractedIdsObj = (obj) => {
+  const newObj = {}
+  _forIn(obj, (value, key) => {
+    if (Array.isArray(value)) {
+      newObj[key] = extractIds(value)
+    } else {
+      newObj[key] = value
+    }
+  })
+  return newObj
+}
+
+export { directorsFormatter, directorFormatter, extractIds, extractedIdsObj }

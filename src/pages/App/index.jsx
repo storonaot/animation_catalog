@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
@@ -10,7 +9,7 @@ import muiTheme from 'config/muiTheme'
 import { toggleSidebar } from 'store/actions/ui'
 import Header from 'components/Header'
 import Sidebar from 'components/Sidebar'
-import { Container } from 'components/common'
+import { Container, Dialog, SnackBar } from 'components/common'
 
 import './styles.sss'
 
@@ -40,6 +39,8 @@ const App = ({
       <Container>
         {children}
       </Container>
+      <Dialog />
+      <SnackBar />
     </div>
   </MuiThemeProvider>
 )

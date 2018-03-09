@@ -1,4 +1,4 @@
-import { FETCH_SERIALS, FETCH_SERIAL } from 'constants/actions'
+import { FETCH_SERIALS, FETCH_SERIAL, UPDATE_SERIAL } from 'constants/actions'
 
 const fetchSerials = () => (dispatch) => {
   dispatch({
@@ -13,8 +13,12 @@ const fetchSerial = id => (dispatch) => {
   })
 }
 
-const updateSerial = data => () => {
-  console.log('updateSerial', data)
+const updateSerial = (id, data) => (dispatch) => {
+  dispatch({
+    type: UPDATE_SERIAL,
+    id,
+    payload: data
+  })
 }
 
 const createSerial = data => () => {

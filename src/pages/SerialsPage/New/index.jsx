@@ -5,7 +5,11 @@ import { createSerial } from 'store/actions/serials'
 
 import SerialForm from 'components/forms/SerialForm'
 
-class SerialsNew extends Component<{ onCreateSerial: Function }> {
+type Props = {
+  onCreateSerial: Function,
+}
+
+class SerialsNew extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {}

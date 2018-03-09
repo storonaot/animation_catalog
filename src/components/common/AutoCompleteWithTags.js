@@ -21,7 +21,6 @@ class AutoCompleteWithTags extends Component<Props> {
   }
 
   onNewRequest(tag) {
-    console.log('tag', tag._id)
     if (tag._id) {
       const { input } = this.props
       input.onChange([...input.value, tag])
