@@ -1,13 +1,16 @@
 import { put, call, takeEvery, ForkEffect } from 'redux-saga/effects'
 import Api from 'api'
 
+import { directorFormatter } from 'utils/formatter'
+
 import {
   FETCH_DIRECTORS,
   FETCH_DIRECTORS_DONE,
   CREATE_DIRECTOR,
   CREATE_DIRECTOR_DONE,
   REMOVE_DIRECTOR,
-  REMOVE_DIRECTOR_DONE
+  REMOVE_DIRECTOR_DONE,
+  SHOW_SNACKBAR
 } from 'constants/actions'
 
 // **fetch all
@@ -30,6 +33,11 @@ function* callCreateDirector(action) {
   const result = yield call(() => Api.createDirector(newDirector))
   if (result.status === 200) {
     yield put({ type: CREATE_DIRECTOR_DONE, result: result.data })
+    const { name, originalName } = directorFormatter(result.data)
+    yield put({
+      type: SHOW_SNACKBAR,
+      message: `${name} (${originalName}) создан`
+    })
   }
 }
 
@@ -45,6 +53,10 @@ function* callRemoveDirector(action) {
   const result = yield call(() => Api.removeDirector(directorId))
   if (result.status === 200) {
     yield put({ type: REMOVE_DIRECTOR_DONE, result: result.data })
+    yield put({
+      type: SHOW_SNACKBAR,
+      message: 'Режиссер удален'
+    })
   }
 }
 

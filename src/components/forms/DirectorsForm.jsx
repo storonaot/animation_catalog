@@ -6,6 +6,9 @@ import {
   removeDirector
 } from 'store/actions/directors'
 
+import createValidation from 'utils/validator'
+import { REQUIRED } from 'constants/validation'
+
 import { TextField } from 'components/common'
 import AdditionForm from './AdditionForm'
 
@@ -66,6 +69,13 @@ class DirectorsForm extends Component<Props> {
       name.toLowerCase().match(substr.toLowerCase()) ||
       originalName.toLowerCase().match(substr.toLowerCase())
 
+    const validate = createValidation({
+      first: [REQUIRED],
+      last: [REQUIRED],
+      firstOriginal: [REQUIRED],
+      lastOriginal: [REQUIRED]
+    })
+
     return (
       <AdditionForm
         formFields={FORM_FIELDS}
@@ -74,6 +84,7 @@ class DirectorsForm extends Component<Props> {
         tags={directors}
         form="DirectorsForm"
         filterFunc={filterFunc}
+        validate={validate}
       />
     )
   }

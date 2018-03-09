@@ -2,6 +2,9 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchStudios, createStudio, removeStudio } from 'store/actions/studios'
 
+import createValidation from 'utils/validator'
+import { REQUIRED } from 'constants/validation'
+
 import { TextField } from 'components/common'
 import AdditionForm from './AdditionForm'
 
@@ -25,6 +28,10 @@ class StudiosForm extends Component<Props> {
   render() {
     const { studios, onRemoveStudio, onCreateStudio } = this.props
 
+    const validate = createValidation({
+      name: [REQUIRED]
+    })
+
     return (
       <AdditionForm
         formFields={FORM_FIELDS}
@@ -32,6 +39,7 @@ class StudiosForm extends Component<Props> {
         onRemoveTag={onRemoveStudio}
         tags={studios}
         form="StudiosForm"
+        validate={validate}
       />
     )
   }

@@ -25,11 +25,9 @@ const Dialog = ({
     onClose()
   }
   const actions = [
-    <FlatButton label="Cancel" primary onClick={onClose} />,
-    <FlatButton label="Submit" secondary onClick={successWithClose} />
+    <FlatButton label="Отмена" primary onClick={onClose} />,
+    <FlatButton label="Продолжить" secondary onClick={successWithClose} />
   ]
-
-  console.log('onSuccess', onSuccess)
 
   return (
     <DialogMUI

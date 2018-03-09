@@ -7,7 +7,8 @@ import {
   CREATE_STUDIO,
   CREATE_STUDIO_DONE,
   REMOVE_STUDIO,
-  REMOVE_STUDIO_DONE
+  REMOVE_STUDIO_DONE,
+  SHOW_SNACKBAR
 } from 'constants/actions'
 
 // **fetch all
@@ -31,6 +32,10 @@ function* callCreateStudios(action) {
 
   if (result.status === 200) {
     yield put({ type: CREATE_STUDIO_DONE, result: result.data })
+    yield put({
+      type: SHOW_SNACKBAR,
+      message: `${result.data.name} создана`
+    })
   }
 }
 
@@ -46,6 +51,10 @@ function* callRemoveStudio(action) {
   const result = yield call(() => Api.removeStudio(studioId))
   if (result.status === 200) {
     yield put({ type: REMOVE_STUDIO_DONE, result: result.data })
+    yield put({
+      type: SHOW_SNACKBAR,
+      message: 'Студия удалена'
+    })
   }
 }
 
