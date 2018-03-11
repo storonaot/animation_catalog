@@ -1,4 +1,4 @@
-import { forIn as _forIn } from 'lodash'
+import { forIn as _forIn, unset as _unset } from 'lodash'
 
 const directorFormatter = ({ name, originalName, ...res }) => ({
   name: `${name.first || ''} ${name.last}`,
@@ -23,4 +23,25 @@ const extractedIdsObj = (obj) => {
   return newObj
 }
 
-export { directorsFormatter, directorFormatter, extractIds, extractedIdsObj }
+const serialDataFormatter = (data) => {
+  if (data.cover instanceof File) {
+    const cover = data.cover
+    _unset(data, 'cover')
+    const stringData = JSON.stringify(extractedIdsObj(data))
+    const form = new FormData()
+    form.append('cover', cover)
+    form.append('data', stringData)
+    return form
+  } else {
+    const sendData = extractedIdsObj(data)
+    return { data: JSON.stringify(sendData) }
+  }
+}
+
+export {
+  directorsFormatter,
+  directorFormatter,
+  extractIds,
+  extractedIdsObj,
+  serialDataFormatter
+}

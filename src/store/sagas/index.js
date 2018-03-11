@@ -2,9 +2,10 @@ import { all } from 'redux-saga/effects'
 import {
   watchFetchSerials,
   watchFetchSerial,
-  watchUpdateSerial
+  watchUpdateSerial,
+  watchCreateSerial
 } from './serials'
-import watchFetchCountries from './countries'
+import { watchFetchCountries, watchCreateCountry } from './countries'
 import {
   watchFetchDirectors,
   watchCreateDirector,
@@ -25,11 +26,14 @@ export function* helloSaga() {
 export default function* rootSaga() {
   yield all([
     helloSaga(),
+
     watchFetchSerials(),
     watchFetchSerial(),
     watchUpdateSerial(),
+    watchCreateSerial(),
 
     watchFetchCountries(),
+    watchCreateCountry(),
 
     watchFetchDirectors(),
     watchCreateDirector(),

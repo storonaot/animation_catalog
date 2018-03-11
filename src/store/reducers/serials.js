@@ -1,4 +1,8 @@
-import { FETCH_SERIALS_DONE, UPDATE_SERIAL_DONE } from 'constants/actions'
+import {
+  FETCH_SERIALS_DONE,
+  UPDATE_SERIAL_DONE,
+  CREATE_SERIAL_DONE
+} from 'constants/actions'
 
 const defaultState = []
 
@@ -14,6 +18,10 @@ export default function serials(state = defaultState, action) {
         return serial
       })
       return newState
+    }
+    case CREATE_SERIAL_DONE: {
+      console.log('CREATE_SERIAL_DONE', action)
+      return state
     }
     default:
       return state

@@ -1,4 +1,4 @@
-import { FETCH_COUNTRIES } from 'constants/actions'
+import { FETCH_COUNTRIES, CREATE_COUNTRY } from 'constants/actions'
 
 const fetchCountries = () => (dispatch) => {
   dispatch({
@@ -6,37 +6,15 @@ const fetchCountries = () => (dispatch) => {
   })
 }
 
-const createCountry = () => {}
+const createCountry = data => (dispatch) => {
+  dispatch({
+    type: CREATE_COUNTRY,
+    payload: data
+  })
+}
 
-export { fetchCountries, createCountry }
+const removeCountry = () => () => {
+  console.log('removeCountry')
+}
 
-// import { FETCH_SERIALS, SHOW_PRELOADER, FETCH_SERIAL } from 'constants/actions'
-
-// const fetchSerials = () => (dispatch) => {
-//   dispatch({
-//     type: SHOW_PRELOADER
-//   })
-//   dispatch({
-//     type: FETCH_SERIALS
-//   })
-// }
-
-// const fetchSerial = id => (dispatch) => {
-//   dispatch({
-//     type: SHOW_PRELOADER
-//   })
-//   dispatch({
-//     type: FETCH_SERIAL,
-//     id
-//   })
-// }
-
-// const updateSerial = data => () => {
-//   console.log('updateSerial', data)
-// }
-
-// const createSerial = data => () => {
-//   console.log('createSerial', data)
-// }
-
-// export { fetchSerials, fetchSerial, updateSerial, createSerial }
+export { fetchCountries, createCountry, removeCountry }

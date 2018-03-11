@@ -1,6 +1,8 @@
 import { Component } from 'react'
 import DirectorsForm from 'components/forms/DirectorsForm'
 import StudiosForm from 'components/forms/StudiosForm'
+import CountriesForm from 'components/forms/CountriesForm'
+
 import { Select } from 'components/common'
 
 const SELECT_OPTIONS = [
@@ -13,7 +15,7 @@ class Addition extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentValue: 1
+      currentValue: 2
     }
 
     this.changeForm = this.changeForm.bind(this)
@@ -34,7 +36,7 @@ class Addition extends Component {
           floatingLabelText="Выбрать форму"
         />
         {currentValue === 1 && <DirectorsForm />}
-        {currentValue === 2 && <div>Страна</div>}
+        {currentValue === 2 && <CountriesForm />}
         {currentValue === 3 && <StudiosForm />}
       </div>
     )

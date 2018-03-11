@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { serialDataFormatter } from 'utils/formatter'
 
 import { createSerial } from 'store/actions/serials'
 
@@ -13,10 +14,16 @@ class SerialsNew extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {}
+    this.send = this.send.bind(this)
+  }
+
+  send(data) {
+    const { onCreateSerial } = this.props
+    onCreateSerial(serialDataFormatter(data))
   }
 
   render() {
-    return <SerialForm formType="new" sendData={this.props.onCreateSerial} />
+    return <SerialForm formType="new" sendData={this.send} />
   }
 }
 

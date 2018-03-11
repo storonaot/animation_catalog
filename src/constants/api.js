@@ -10,6 +10,7 @@ export const UPDATE_SERIAL = id => `${source}/${api}/serials/${id}`
 export const DELETE_SERIAL = id => `${source}/${api}/serials/${id}`
 
 export const GET_COUNTRIES = `${source}/${api}/countries`
+export const CREATE_COUNTRY = `${source}/${api}/countries/new`
 
 export const GET_DIRECTORS = `${source}/${api}/directors`
 export const CREATE_DIRECTOR = `${source}/${api}/directors/new`

@@ -16,7 +16,9 @@ import {
   UPDATE_SERIAL_DONE,
   HIDE_PRELOADER,
   SHOW_PRELOADER,
-  SHOW_SNACKBAR
+  SHOW_SNACKBAR,
+  CREATE_SERIAL_DONE,
+  CREATE_SERIAL
 } from 'constants/actions'
 
 // **fetch all
@@ -51,6 +53,7 @@ function* watchFetchSerial(): IterableIterator<ForkEffect> {
 }
 // **fetch one
 
+// **update
 function* callUpdateSerial(
   action: Object
 ): IterableIterator<PutEffect<any> | CallEffect> {
@@ -68,5 +71,29 @@ function* callUpdateSerial(
 function* watchUpdateSerial(): IterableIterator<ForkEffect> {
   yield takeEvery(UPDATE_SERIAL, callUpdateSerial)
 }
+// update**
 
-export { watchFetchSerials, watchFetchSerial, watchUpdateSerial }
+// ** create
+function* callCreateSerial(action) {
+  const newSerial = action.payload
+  const result = yield call(() => Api.createSerial(newSerial))
+  if (result.status === 200) {
+    yield put({ type: CREATE_SERIAL_DONE, result: result.data })
+    yield put({
+      type: SHOW_SNACKBAR,
+      message: `${result.data.name} создан`
+    })
+  }
+}
+
+function* watchCreateSerial() {
+  yield takeEvery(CREATE_SERIAL, callCreateSerial)
+}
+// create**
+
+export {
+  watchFetchSerials,
+  watchFetchSerial,
+  watchUpdateSerial,
+  watchCreateSerial
+}

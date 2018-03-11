@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { extractedIdsObj } from 'utils/formatter'
-import { unset as _unset } from 'lodash'
+import { serialDataFormatter } from 'utils/formatter'
 import { GoBack } from 'components/common'
 
 import { fetchSerial, updateSerial } from 'store/actions/serials'
@@ -32,20 +31,7 @@ class SerialEdit extends Component<Props> {
 
   send(data) {
     const { onUpdateSerial, match: { params: { id } } } = this.props
-
-    if (data.cover instanceof File) {
-      const cover = data.cover
-      _unset(data, 'cover')
-      const stringData = JSON.stringify(extractedIdsObj(data))
-      const form = new FormData()
-      form.append('cover', cover)
-      form.append('data', stringData)
-      onUpdateSerial(id, form)
-    } else {
-      const sendData = extractedIdsObj(data)
-
-      onUpdateSerial(id, { data: JSON.stringify(sendData) })
-    }
+    onUpdateSerial(id, serialDataFormatter(data))
   }
 
   render() {
