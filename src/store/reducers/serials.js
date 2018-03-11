@@ -7,8 +7,13 @@ export default function serials(state = defaultState, action) {
     case FETCH_SERIALS_DONE:
       return action.result
     case UPDATE_SERIAL_DONE: {
-      console.log('UPDATE_SERIAL_DONE ALL', action)
-      return state
+      // TODO: подумать как объединить с serial
+      const serialId = action.result._id
+      const newState = state.map((serial) => {
+        if (serial._id === serialId) return action.result
+        return serial
+      })
+      return newState
     }
     default:
       return state

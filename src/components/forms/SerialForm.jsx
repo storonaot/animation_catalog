@@ -11,7 +11,7 @@ import { fetchStudios } from 'store/actions/studios'
 import { fetchCountries } from 'store/actions/countries'
 
 import RaisedButton from 'material-ui/RaisedButton'
-import { TextField, AutoCompleteWithTags } from 'components/common'
+import { TextField, AutoCompleteWithTags, ImageUpload } from 'components/common'
 import { Grid, Box } from 'components/grids/SerialFormGrid'
 
 type Props = {
@@ -69,7 +69,8 @@ class SerialForm extends Component<Props> {
       directors,
       selectedDirectors,
       studios,
-      selectedStudios
+      selectedStudios,
+      dirty
     } = this.props
 
     const filteredCountries = _differenceBy(countries, selectedCountries, '_id')
@@ -79,7 +80,7 @@ class SerialForm extends Component<Props> {
     return (
       <form onSubmit={handleSubmit(sendData)}>
         <Grid>
-          <Box cover><div>Cover</div></Box>
+          <Box cover><Field name="cover" component={ImageUpload} /></Box>
           <Box isName>
             <Field
               name="name"
@@ -140,7 +141,12 @@ class SerialForm extends Component<Props> {
           </Box>
         </Grid>
         <div>
-          <RaisedButton type="submit" label="Сохранить" secondary />
+          <RaisedButton
+            disabled={!dirty}
+            type="submit"
+            label="Сохранить"
+            secondary
+          />
         </div>
       </form>
     )

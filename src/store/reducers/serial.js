@@ -3,17 +3,19 @@ import { FETCH_SERIAL_DONE, UPDATE_SERIAL_DONE } from 'constants/actions'
 
 const defaultState = null
 
+const formattedResult = (result) => {
+  const { directors } = result
+  const formattedDirectors = directorsFormatter(directors)
+  return { ...result, directors: formattedDirectors }
+}
+
 export default function serial(state = defaultState, action) {
   switch (action.type) {
-    case FETCH_SERIAL_DONE: {
-      const { directors } = action.result
-      const formattedDirectors = directorsFormatter(directors)
-      return { ...action.result, directors: formattedDirectors }
-    }
-    case UPDATE_SERIAL_DONE: {
-      console.log('UPDATE_SERIAL_DONE ONE', action)
-      return state
-    }
+    case FETCH_SERIAL_DONE:
+      return formattedResult(action.result)
+    case UPDATE_SERIAL_DONE:
+      // TODO: подумать как объединить с serials
+      return formattedResult(action.result)
     default:
       return state
   }

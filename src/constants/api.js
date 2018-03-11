@@ -1,6 +1,8 @@
 const source = 'http://localhost:3000'
 const api = 'api/v1'
 
+export const UPLOADS = `${source}/uploads`
+
 export const GET_SERIALS = `${source}/${api}/serials`
 export const GET_SERIAL = id => `${source}/${api}/serials/${id}`
 export const CREATE_SERIAL = `${source}/${api}/serials/new`

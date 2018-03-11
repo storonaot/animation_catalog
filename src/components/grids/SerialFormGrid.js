@@ -11,7 +11,7 @@ const Grid = styled.div`
 const Box = styled.div`
   ${props => props.cover && css`
     grid-column: 1 / 2;
-    grid-row: 1 / 4;
+    grid-row: 1 / 5;
   `}
   ${props => props.isName && css`
     grid-column: 2 / 3;

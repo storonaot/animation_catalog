@@ -14,6 +14,8 @@ const extractedIdsObj = (obj) => {
   _forIn(obj, (value, key) => {
     if (Array.isArray(value)) {
       newObj[key] = extractIds(value)
+    } else if (typeof value === 'object') {
+      newObj[key] = obj[key] && obj[key]._id ? obj[key]._id : obj[key]
     } else {
       newObj[key] = value
     }

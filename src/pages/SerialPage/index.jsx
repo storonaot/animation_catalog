@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { GoBack } from 'components/common'
 
 import { fetchSerial } from 'store/actions/serials'
 
@@ -27,7 +28,14 @@ class SerialPage extends Component<Props> {
 
   render() {
     const { serial } = this.props
-    if (serial) return <Serial serial={serial} />
+    if (serial) {
+      return (
+        <div>
+          <GoBack to="/serials" label="Вернуться к списку сериалов" />
+          <Serial serial={serial} />
+        </div>
+      )
+    }
     return null
   }
 }

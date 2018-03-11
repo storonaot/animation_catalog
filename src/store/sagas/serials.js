@@ -15,7 +15,8 @@ import {
   UPDATE_SERIAL,
   UPDATE_SERIAL_DONE,
   HIDE_PRELOADER,
-  SHOW_PRELOADER
+  SHOW_PRELOADER,
+  SHOW_SNACKBAR
 } from 'constants/actions'
 
 // **fetch all
@@ -57,6 +58,10 @@ function* callUpdateSerial(
   const result = yield call(() => Api.updateSerial(id, payload))
   if (result.status === 200) {
     yield put({ type: UPDATE_SERIAL_DONE, result: result.data })
+    yield put({
+      type: SHOW_SNACKBAR,
+      message: 'Данные обновлены'
+    })
   }
 }
 

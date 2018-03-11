@@ -110,7 +110,7 @@ AdditionForm.defaultProps = {
     name.toLowerCase().match(substring.toLowerCase())
 }
 
-const AdditionFormRedux = reduxForm({})(AdditionForm)
+const AdditionFormRedux = reduxForm()(AdditionForm)
 
 const mapDispatchToProps = dispatch => ({
   onReset: (formName) => {

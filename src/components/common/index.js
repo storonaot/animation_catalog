@@ -6,6 +6,8 @@ import AutoCompleteWithTags from './AutoCompleteWithTags'
 import Select from './Select'
 import Dialog from './Dialog'
 import SnackBar from './SnackBar'
+import ImageUpload from './ImageUpload'
+import GoBack from './GoBack'
 
 export {
   Container,
@@ -15,5 +17,7 @@ export {
   AutoCompleteWithTags,
   Select,
   Dialog,
-  SnackBar
+  SnackBar,
+  ImageUpload,
+  GoBack
 }
