@@ -5,6 +5,7 @@ import { serialDataFormatter } from 'utils/formatter'
 import { createSerial } from 'store/actions/serials'
 
 import SerialForm from 'components/forms/SerialForm'
+import { GoBack } from 'components/common'
 
 type Props = {
   onCreateSerial: Function,
@@ -23,7 +24,12 @@ class SerialsNew extends Component<Props> {
   }
 
   render() {
-    return <SerialForm formType="new" sendData={this.send} />
+    return (
+      <div>
+        <GoBack to="/serials" label="Вернуться к списку сериалов" />
+        <SerialForm formType="new" sendData={this.send} />
+      </div>
+    )
   }
 }
 

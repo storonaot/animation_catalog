@@ -6,15 +6,21 @@ import {
   FETCH_COUNTRIES_DONE,
   CREATE_COUNTRY,
   CREATE_COUNTRY_DONE,
+  SHOW_HTTP_ERROR_DIALOG,
   SHOW_SNACKBAR
 } from 'constants/actions'
 
+// import handler from './helpers'
+
 // **fetch all
 function* callFetchCountries() {
-  const result = yield call(Api.fetchCountries)
-
-  if (result.status === 200) {
-    yield put({ type: FETCH_COUNTRIES_DONE, result: result.data })
+  // const result = yield call(Api.fetchCountries)
+  // yield handler(result, FETCH_COUNTRIES_DONE)
+  const { response, error } = yield call(Api.fetchCountries)
+  if (response) {
+    yield put({ type: FETCH_COUNTRIES_DONE, result: response.data })
+  } else {
+    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
   }
 }
 
@@ -24,17 +30,23 @@ function* watchFetchCountries(): IterableIterator<ForkEffect> {
 // fetch all**
 
 // **create
-
 function* callCreateCountry(action) {
-  const newCountry = action.payload
-  const result = yield call(() => Api.createCountry(newCountry))
+  // const newCountry = action.payload
+  // const result = yield call(() => Api.createCountry(newCountry))
+  // yield handler(result, CREATE_COUNTRY_DONE, 'Страна создана')
 
-  if (result.status === 200) {
-    yield put({ type: CREATE_COUNTRY_DONE, result: result.data })
+  const newCountry = action.payload
+
+  const { response, error } = yield call(() => Api.createCountry(newCountry))
+
+  if (response) {
+    yield put({ type: CREATE_COUNTRY_DONE, result: response.data })
     yield put({
       type: SHOW_SNACKBAR,
-      message: `${result.data.name} создана`
+      message: 'Страна создана'
     })
+  } else {
+    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
   }
 }
 

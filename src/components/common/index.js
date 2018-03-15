@@ -8,6 +8,7 @@ import Dialog from './Dialog'
 import SnackBar from './SnackBar'
 import ImageUpload from './ImageUpload'
 import GoBack from './GoBack'
+import HTTPErrorDialog from './HTTPErrorDialog'
 
 export {
   Container,
@@ -19,5 +20,6 @@ export {
   Dialog,
   SnackBar,
   ImageUpload,
-  GoBack
+  GoBack,
+  HTTPErrorDialog
 }

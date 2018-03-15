@@ -29,6 +29,7 @@ type Props = {
   onFetchStudios: Function,
   studios: Array,
   selectedStudios: Array,
+  dirty: boolean,
 }
 
 class SerialForm extends Component<Props> {
@@ -191,44 +192,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SerialFormRedux)
-
-// const MyInfoForm = reduxForm({
-//   form: 'MyInfo',
-//   validate: createValidation({
-//     contactName: [
-//       REQUIRED,
-//       ({ contactName }) =>
-//         STRING_MAX_LENGTH({ value: contactName, maxLength: CONTACT_NAME_MAX_LENGTH }),
-//     ],
-//     contactPosition: [
-//       ({ contactPosition }) =>
-//         STRING_MAX_LENGTH({ value: contactPosition, maxLength: CONTACT_POSITION_MAX_LENGTH }),
-//     ],
-//     contactPhone: [
-//       REQUIRED, PHONE,
-//     ],
-//     businessName: [
-//       REQUIRED,
-//       ({ businessName }) =>
-//         STRING_MAX_LENGTH({ value: businessName, maxLength: BUSINESS_NAME_MAX_LENGTH }),
-//     ],
-//     address: [
-//       REQUIRED, ADDRESS,
-//     ],
-//     businessEmail: [
-//       EMAIL,
-//       ({ businessEmail }) =>
-//         STRING_MAX_LENGTH({ value: businessEmail, maxLength: EMAIL_MAX_LENGTH }),
-//     ],
-//     siteUrl: [
-//       WEBSITE,
-//       ({ siteUrl }) =>
-//         STRING_MAX_LENGTH({ value: siteUrl, maxLength: SITE_MAX_LENGTH }),
-//     ],
-//     businessPhone: [
-//       PHONE,
-//     ],
-//   }),
-//   enableReinitialize: true,
-//   keepDirtyOnReinitialize: true,
-// })(MyInfo);

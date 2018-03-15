@@ -16,6 +16,7 @@ import {
   watchCreateStudios,
   watchRemoveStudio
 } from './studios'
+import watchRemoveImage from './images'
 
 export function* helloSaga() {
   yield console.log('Hello Sagas!')
@@ -41,6 +42,8 @@ export default function* rootSaga() {
 
     watchFetchStudios(),
     watchCreateStudios(),
-    watchRemoveStudio()
+    watchRemoveStudio(),
+
+    watchRemoveImage()
   ])
 }

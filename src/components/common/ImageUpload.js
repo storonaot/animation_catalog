@@ -1,11 +1,16 @@
 import { Component } from 'react'
-import { UPLOADS } from 'constants/api'
+import { SOURCE } from 'constants/api'
 import Dropzone from 'react-dropzone'
 import IconButton from 'material-ui/IconButton'
 import ContentClear from 'material-ui/svg-icons/content/clear'
 
+import { removeImage } from 'store/actions/images'
+
+import { connect } from 'react-redux'
+
 type Props = {
   input: Object<{ onChange: Function }>,
+  onRemoveImage: Function,
 }
 
 class ImageUpload extends Component<Props> {
@@ -24,7 +29,7 @@ class ImageUpload extends Component<Props> {
     const { input: { value } } = this.props
 
     return value && value.filename
-      ? `${UPLOADS}/${value.filename}`
+      ? `${SOURCE}/${value.path}`
       : this.state.imagePreviewUrl
   }
 
@@ -47,8 +52,10 @@ class ImageUpload extends Component<Props> {
   }
 
   removeImage() {
-    const { onChange } = this.props.input
+    const { onRemoveImage, input: { onChange, value: { _id } } } = this.props
+
     this.setState({ file: null, imagePreviewUrl: null }, () => {
+      if (_id) onRemoveImage(_id)
       onChange(null)
     })
   }
@@ -70,7 +77,10 @@ class ImageUpload extends Component<Props> {
       width: '100%',
       height: '100%',
       border: '2px dashed #000',
-      borderRadius: 10
+      borderRadius: 10,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     }
 
     const dropzoneActiveStyle = {
@@ -93,7 +103,9 @@ class ImageUpload extends Component<Props> {
             style={dropzoneStyle}
             activeStyle={dropzoneActiveStyle}
             rejectStyle={dropzoneRejectStyle}
-          />}
+          >
+            Перетащите изображение
+          </Dropzone>}
         {imageUrl &&
           <div style={previewStyle}>
             <IconButton
@@ -115,4 +127,10 @@ class ImageUpload extends Component<Props> {
   }
 }
 
-export default ImageUpload
+const mapDispatchToProps = dispatch => ({
+  onRemoveImage: (id) => {
+    dispatch(removeImage(id))
+  }
+})
+
+export default connect(null, mapDispatchToProps)(ImageUpload)

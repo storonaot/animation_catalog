@@ -4,7 +4,9 @@ import {
   HIDE_PRELOADER,
   SHOW_DIALOG,
   CLOSE_DIALOG,
-  SHOW_SNACKBAR
+  SHOW_SNACKBAR,
+  SHOW_HTTP_ERROR_DIALOG,
+  CLOSE_HTTP_ERROR_DIALOG
 } from 'constants/actions'
 
 const defaultState = {
@@ -20,10 +22,15 @@ const defaultState = {
   snackbar: {
     showed: false,
     message: 'Я снээээээк'
+  },
+  HTTPErrorDialog: {
+    showed: false,
+    code: null,
+    title: 'HTTPErrorPopup'
   }
 }
 
-export default function user(state = defaultState, action) {
+export default function ui(state = defaultState, action) {
   switch (action.type) {
     case TOGGLE_SIDEBAR:
       return { ...state, sidebarOpened: !state.sidebarOpened }
@@ -42,6 +49,16 @@ export default function user(state = defaultState, action) {
       return { ...state, dialog: { showed: false } }
     case SHOW_SNACKBAR:
       return { ...state, snackbar: { showed: true, message: action.message } }
+    case SHOW_HTTP_ERROR_DIALOG: {
+      console.log('SHOW_HTTP_ERROR_DIALOG', action)
+      return {
+        ...state,
+        HTTPErrorDialog: { showed: true, code: 'Hi', title: 'HTTPErrorPopup' }
+      }
+    }
+
+    case CLOSE_HTTP_ERROR_DIALOG:
+      return { ...state, HTTPErrorDialog: defaultState.HTTPErrorDialog }
     default:
       return state
   }

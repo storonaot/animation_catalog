@@ -1,20 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Grid } from 'components/grids/SerialsGrid'
+import SerialItem from './SerialItem'
 
 type Props = {
   serials: Array,
 }
 
 const SerialsList = ({ serials }: Props) => (
-  <ul>
-    {serials.map(serial => (
-      <div key={serial._id}>
-        <Link to={`/serials/${serial._id}/show`}>
-          <li>{serial.name}</li>
-        </Link>
-        <Link to={`/serials/${serial._id}/edit`}>Edit</Link>
-      </div>
-    ))}
-  </ul>
+  <Grid>
+    {serials.map(serial => <SerialItem key={serial._id} serial={serial} />)}
+  </Grid>
 )
 
 export default SerialsList
