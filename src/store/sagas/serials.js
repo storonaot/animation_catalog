@@ -19,29 +19,18 @@ import {
   HIDE_PRELOADER,
   SHOW_PRELOADER,
   CREATE_SERIAL_DONE,
-  CREATE_SERIAL,
-  SHOW_HTTP_ERROR_DIALOG,
-  SHOW_SNACKBAR
+  CREATE_SERIAL
 } from 'constants/actions'
 
-// import handler from './helpers'
+import handler from './helpers'
 
 // **fetch all
 function* callFetchSerials() {
-  // yield put({ type: SHOW_PRELOADER })
-  // const result = yield call(Api.fetchSerials)
-  // yield handler(result, FETCH_SERIALS_DONE)
-  // yield put({ type: HIDE_PRELOADER })
-
   yield put({ type: SHOW_PRELOADER })
 
   const { response, error } = yield call(Api.fetchSerials)
 
-  if (response) {
-    yield put({ type: FETCH_SERIALS_DONE, result: response.data })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, FETCH_SERIALS_DONE)
   yield put({ type: HIDE_PRELOADER })
 }
 
@@ -54,21 +43,12 @@ function* watchFetchSerials(): IterableIterator<ForkEffect> {
 function* callFetchSerial(
   action: Object
 ): IterableIterator<PutEffect<any> | CallEffect> {
-  // yield put({ type: SHOW_PRELOADER })
-  // const result = yield call(() => Api.fetchSerial(action.id))
-  // yield handler(result, FETCH_SERIAL_DONE)
-  // yield put({ type: HIDE_PRELOADER })
   yield put({ type: SHOW_PRELOADER })
 
   const serialId = action.id
 
   const { response, error } = yield call(() => Api.fetchSerial(serialId))
-
-  if (response) {
-    yield put({ type: FETCH_SERIAL_DONE, result: response.data })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, FETCH_SERIAL_DONE)
   yield put({ type: HIDE_PRELOADER })
 }
 
@@ -81,22 +61,10 @@ function* watchFetchSerial(): IterableIterator<ForkEffect> {
 function* callUpdateSerial(
   action: Object
 ): IterableIterator<PutEffect<any> | CallEffect> {
-  // const { payload, id } = action
-  // const result = yield call(() => Api.updateSerial(id, payload))
-  // yield handler(result, UPDATE_SERIAL_DONE, 'Данные обновлены')
   const { payload, id } = action
-
   const { response, error } = yield call(() => Api.updateSerial(id, payload))
 
-  if (response) {
-    yield put({ type: UPDATE_SERIAL_DONE, result: response.data })
-    yield put({
-      type: SHOW_SNACKBAR,
-      message: 'Данные обновлены'
-    })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, UPDATE_SERIAL_DONE, 'Данные обновлены')
 }
 
 function* watchUpdateSerial(): IterableIterator<ForkEffect> {
@@ -106,22 +74,10 @@ function* watchUpdateSerial(): IterableIterator<ForkEffect> {
 
 // ** create
 function* callCreateSerial(action) {
-  // const newSerial = action.payload
-  // const result = yield call(() => Api.createSerial(newSerial))
-  // yield handler(result, CREATE_SERIAL_DONE, `${result.data.name} создан`)
   const newSerial = action.payload
 
   const { response, error } = yield call(() => Api.createSerial(newSerial))
-
-  if (response) {
-    yield put({ type: CREATE_SERIAL_DONE, result: response.data })
-    yield put({
-      type: SHOW_SNACKBAR,
-      message: `${response.data.name} создан`
-    })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, CREATE_SERIAL_DONE, 'Сериал создан')
 }
 
 function* watchCreateSerial() {

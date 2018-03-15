@@ -20,4 +20,4 @@ export const GET_STUDIOS = `${SOURCE}/${api}/studios`
 export const CREATE_STUDIO = `${SOURCE}/${api}/studios/new`
 export const REMOVE_STUDIO = id => `${SOURCE}/${api}/studios/${id}`
 
-export const REMOVE_IMAGE = id => `${SOURCE}/${api}/image/${id}`
+export const REMOVE_IMAGE = id => `${SOURCE}/${api}/images/${id}`

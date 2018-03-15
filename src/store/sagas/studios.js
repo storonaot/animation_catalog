@@ -1,4 +1,4 @@
-import { put, call, takeEvery, ForkEffect } from 'redux-saga/effects'
+import { call, takeEvery, ForkEffect } from 'redux-saga/effects'
 import Api from 'api'
 
 import {
@@ -7,25 +7,16 @@ import {
   CREATE_STUDIO,
   CREATE_STUDIO_DONE,
   REMOVE_STUDIO,
-  REMOVE_STUDIO_DONE,
-  SHOW_HTTP_ERROR_DIALOG,
-  SHOW_SNACKBAR
+  REMOVE_STUDIO_DONE
 } from 'constants/actions'
 
-// import handler from './helpers'
+import handler from './helpers'
 
 // **fetch all
 function* callFetchStudios() {
-  // const result = yield call(Api.fetchStudios)
-  // yield handler(result, FETCH_STUDIOS_DONE)
-
   const { response, error } = yield call(Api.fetchStudios)
 
-  if (response) {
-    yield put({ type: FETCH_STUDIOS_DONE, result: response.data })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, FETCH_STUDIOS_DONE)
 }
 
 function* watchFetchStudios(): IterableIterator<ForkEffect> {
@@ -35,22 +26,10 @@ function* watchFetchStudios(): IterableIterator<ForkEffect> {
 
 // **create
 function* callCreateStudios(action) {
-  // const newStudio = action.payload
-  // const result = yield call(() => Api.createStudio(newStudio))
-  // yield handler(result, CREATE_STUDIO_DONE, 'Студия создана')
   const newStudio = action.payload
 
   const { response, error } = yield call(() => Api.createStudio(newStudio))
-
-  if (response) {
-    yield put({ type: CREATE_STUDIO_DONE, result: response.data })
-    yield put({
-      type: SHOW_SNACKBAR,
-      message: 'Студия создана'
-    })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, CREATE_STUDIO_DONE, 'Студия создана')
 }
 
 function* watchCreateStudios(): IterableIterator<ForkEffect> {
@@ -60,23 +39,10 @@ function* watchCreateStudios(): IterableIterator<ForkEffect> {
 
 // **remove
 function* callRemoveStudio(action) {
-  // const studioId = action.payload
-
-  // const result = yield call(() => Api.removeStudio(studioId))
-  // yield handler(result, REMOVE_STUDIO_DONE, 'Студия удалена')
   const studioId = action.payload
 
   const { response, error } = yield call(() => Api.removeStudio(studioId))
-
-  if (response) {
-    yield put({ type: REMOVE_STUDIO_DONE, result: response.data })
-    yield put({
-      type: SHOW_SNACKBAR,
-      message: 'Студия удалена'
-    })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, REMOVE_STUDIO_DONE, 'Студия удалена')
 }
 
 function* watchRemoveStudio() {

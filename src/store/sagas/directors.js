@@ -1,4 +1,4 @@
-import { put, call, takeEvery, ForkEffect } from 'redux-saga/effects'
+import { call, takeEvery, ForkEffect } from 'redux-saga/effects'
 import Api from 'api'
 
 import {
@@ -7,24 +7,15 @@ import {
   CREATE_DIRECTOR,
   CREATE_DIRECTOR_DONE,
   REMOVE_DIRECTOR,
-  REMOVE_DIRECTOR_DONE,
-  SHOW_HTTP_ERROR_DIALOG,
-  SHOW_SNACKBAR
+  REMOVE_DIRECTOR_DONE
 } from 'constants/actions'
 
-// import handler from './helpers'
+import handler from './helpers'
 
 // **fetch all
 function* callFetchDirectors() {
-  // const result = yield call(Api.fetchDirectors)
-  // yield handler(result, FETCH_DIRECTORS_DONE)
   const { response, error } = yield call(Api.fetchDirectors)
-
-  if (response) {
-    yield put({ type: FETCH_DIRECTORS_DONE, result: response.data })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, FETCH_DIRECTORS_DONE)
 }
 
 function* watchFetchDirectors(): IterableIterator<ForkEffect> {
@@ -34,23 +25,10 @@ function* watchFetchDirectors(): IterableIterator<ForkEffect> {
 
 // **create
 function* callCreateDirector(action) {
-  // const newDirector = action.payload
-  // const result = yield call(() => Api.createDirector(newDirector))
-
-  // yield handler(result, CREATE_DIRECTOR_DONE, 'Режиссер создан')
   const newDirector = action.payload
 
   const { response, error } = yield call(() => Api.createDirector(newDirector))
-
-  if (response) {
-    yield put({ type: CREATE_DIRECTOR_DONE, result: response.data })
-    yield put({
-      type: SHOW_SNACKBAR,
-      message: 'Режиссер создан'
-    })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, CREATE_DIRECTOR_DONE, 'Режиссер создан')
 }
 
 function* watchCreateDirector(): IterableIterator<ForkEffect> {
@@ -60,22 +38,10 @@ function* watchCreateDirector(): IterableIterator<ForkEffect> {
 
 // **remove
 function* callRemoveDirector(action) {
-  // const directorId = action.payload
-  // const result = yield call(() => Api.removeDirector(directorId))
-  // yield handler(result, REMOVE_DIRECTOR_DONE, 'Режиссер удален')
   const directorId = action.payload
 
   const { response, error } = yield call(() => Api.removeDirector(directorId))
-
-  if (response) {
-    yield put({ type: REMOVE_DIRECTOR_DONE, result: response.data })
-    yield put({
-      type: SHOW_SNACKBAR,
-      message: 'Режиссер удален'
-    })
-  } else {
-    yield put({ type: SHOW_HTTP_ERROR_DIALOG, error: error.response.data })
-  }
+  yield handler(response, error, REMOVE_DIRECTOR_DONE, 'Режиссер удален')
 }
 
 function* watchRemoveDirector() {
