@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import history from 'utils/history'
+import history from 'libs/history'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import muiTheme from 'config/muiTheme'

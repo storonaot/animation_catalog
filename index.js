@@ -6,7 +6,7 @@ import { render } from 'react-dom'
 import MyRouter from 'config/router'
 
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
-import history from 'utils/history'
+import history from 'libs/history'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'

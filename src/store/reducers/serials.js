@@ -1,8 +1,11 @@
 import {
   FETCH_SERIALS_DONE,
   UPDATE_SERIAL_DONE,
-  CREATE_SERIAL_DONE
+  CREATE_SERIAL_DONE,
+  REMOVE_SERIAL_DONE
 } from 'constants/actions'
+
+import { removeObjById } from 'utils/newState'
 
 const defaultState = []
 
@@ -11,7 +14,6 @@ export default function serials(state = defaultState, action) {
     case FETCH_SERIALS_DONE:
       return action.result
     case UPDATE_SERIAL_DONE: {
-      // TODO: подумать как объединить с serial
       const serialId = action.result._id
       const newState = state.map((serial) => {
         if (serial._id === serialId) return action.result
@@ -20,8 +22,14 @@ export default function serials(state = defaultState, action) {
       return newState
     }
     case CREATE_SERIAL_DONE: {
-      console.log('CREATE_SERIAL_DONE', action)
+      if (state.length) {
+        return [...state, action.result]
+      }
       return state
+    }
+    case REMOVE_SERIAL_DONE: {
+      const serialId = action.result._id
+      return removeObjById(state, serialId)
     }
     default:
       return state

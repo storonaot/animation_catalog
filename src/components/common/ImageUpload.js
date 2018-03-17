@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { SOURCE } from 'constants/api'
+import { BASE_URL } from 'constants/api'
 import Dropzone from 'react-dropzone'
 import IconButton from 'material-ui/IconButton'
 import ContentClear from 'material-ui/svg-icons/content/clear'
@@ -29,7 +29,7 @@ class ImageUpload extends Component<Props> {
     const { input: { value } } = this.props
 
     return value && value.filename
-      ? `${SOURCE}/${value.path}`
+      ? `${BASE_URL}/${value.path}`
       : this.state.imagePreviewUrl
   }
 
@@ -55,8 +55,12 @@ class ImageUpload extends Component<Props> {
     const { onRemoveImage, input: { onChange, value: { _id } } } = this.props
 
     this.setState({ file: null, imagePreviewUrl: null }, () => {
-      if (_id) onRemoveImage(_id)
-      onChange(null)
+      const successCallback = () => {
+        onChange(null)
+      }
+      if (_id) {
+        onRemoveImage(_id, successCallback)
+      }
     })
   }
 
@@ -128,8 +132,8 @@ class ImageUpload extends Component<Props> {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onRemoveImage: (id) => {
-    dispatch(removeImage(id))
+  onRemoveImage: (id, successCallback) => {
+    dispatch(removeImage(id, successCallback))
   }
 })
 

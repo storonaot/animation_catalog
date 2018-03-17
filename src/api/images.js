@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'libs/axios'
 import { REMOVE_IMAGE } from 'constants/api'
 import { onSuccess, onError } from './helpers'
 

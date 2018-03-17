@@ -3,11 +3,18 @@ import SerialItem from './SerialItem'
 
 type Props = {
   serials: Array,
+  removeSerial: Function,
 }
 
-const SerialsList = ({ serials }: Props) => (
+const SerialsList = ({ serials, removeSerial }: Props) => (
   <Grid>
-    {serials.map(serial => <SerialItem key={serial._id} serial={serial} />)}
+    {serials.map(serial => (
+      <SerialItem
+        key={serial._id}
+        serial={serial}
+        removeSerial={removeSerial}
+      />
+    ))}
   </Grid>
 )
 

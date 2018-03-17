@@ -1,21 +1,30 @@
 import { Link } from 'react-router-dom'
 import { Box } from 'components/grids/SerialsGrid'
-import { SOURCE } from 'constants/api'
-import Edit from 'material-ui/svg-icons/image/edit'
-import IconButton from 'material-ui/IconButton'
+import { BASE_URL } from 'constants/api'
+
+import Controls from './Controls'
+
+const noImage = require('images/no-image.jpg')
 
 const getCover = (cover) => {
-  if (cover) {
-    return {
-      backgroundImage: `url(${SOURCE}/${cover.path})`,
-      backgroundPosition: 'center',
-      backgroundSize: 'cover'
-    }
+  const image = cover ? `${BASE_URL}/${cover.path}` : noImage
+
+  return {
+    backgroundImage: `url(${image})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover'
   }
-  return null
 }
 
 const nameLinkStyle = {
+  width: '100%',
+  height: '100%',
+  position: 'absolute',
+  left: 0,
+  top: 0
+}
+
+const nameStyle = {
   color: '#fff',
   padding: '0 20px',
   textDecoration: 'none',
@@ -25,30 +34,26 @@ const nameLinkStyle = {
   lineHeight: '1.2em',
   height: 80,
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  position: 'absolute',
+  bottom: 0
 }
 
 type Props = {
   serial: Object,
+  removeSerial: Function,
 }
 
-const Serial = ({ serial }: Props) => (
+const Serial = ({ serial, removeSerial }: Props) => (
   <Box key={serial._id} style={getCover(serial.cover)}>
-    <Link to={`/serials/${serial._id}/edit`}>
-      <IconButton
-        style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          top: 0,
-          right: 0,
-          position: 'absolute'
-        }}
-        hoveredStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
-      >
-        <Edit color="#fff" />
-      </IconButton>
-    </Link>
+    <Controls
+      editPath={`/serials/${serial._id}/edit`}
+      onRemove={() => {
+        removeSerial(serial._id)
+      }}
+    />
     <Link to={`/serials/${serial._id}/show`} style={nameLinkStyle}>
-      <span>{serial.name}</span>
+      <span style={nameStyle}>{serial.name}</span>
     </Link>
   </Box>
 )

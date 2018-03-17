@@ -25,7 +25,7 @@ const defaultState = {
   },
   HTTPErrorDialog: {
     showed: false,
-    code: null,
+    code: 'Что-то пошло не так',
     title: 'HTTPErrorPopup'
   }
 }
@@ -53,7 +53,7 @@ export default function ui(state = defaultState, action) {
       console.log('SHOW_HTTP_ERROR_DIALOG', action)
       return {
         ...state,
-        HTTPErrorDialog: { showed: true, code: 'Hi', title: 'HTTPErrorPopup' }
+        HTTPErrorDialog: { ...defaultState.HTTPErrorDialog, showed: true }
       }
     }
 

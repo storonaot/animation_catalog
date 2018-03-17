@@ -10,6 +10,10 @@ function* callRemoveImage(action) {
   const imageId = action.payload
   const { response, error } = yield call(() => Api.removeImage(imageId))
 
+  if (response && action.successCallback) {
+    yield action.successCallback()
+  }
+
   yield handler(response, error, REMOVE_IMAGE_DONE, 'Изображение удалено')
 }
 

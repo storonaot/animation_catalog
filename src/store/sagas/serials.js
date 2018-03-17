@@ -19,7 +19,9 @@ import {
   HIDE_PRELOADER,
   SHOW_PRELOADER,
   CREATE_SERIAL_DONE,
-  CREATE_SERIAL
+  CREATE_SERIAL,
+  REMOVE_SERIAL,
+  REMOVE_SERIAL_DONE
 } from 'constants/actions'
 
 import handler from './helpers'
@@ -85,9 +87,22 @@ function* watchCreateSerial() {
 }
 // create**
 
+// **delete
+function* callRemoveSerial(action) {
+  const serialId = action.id
+  const { response, error } = yield call(() => Api.removeSerial(serialId))
+  yield handler(response, error, REMOVE_SERIAL_DONE, 'Сериал удален')
+}
+
+function* watchRemoveSerial() {
+  yield takeEvery(REMOVE_SERIAL, callRemoveSerial)
+}
+// delete**
+
 export {
   watchFetchSerials,
   watchFetchSerial,
   watchUpdateSerial,
-  watchCreateSerial
+  watchCreateSerial,
+  watchRemoveSerial
 }

@@ -3,7 +3,8 @@ import {
   watchFetchSerials,
   watchFetchSerial,
   watchUpdateSerial,
-  watchCreateSerial
+  watchCreateSerial,
+  watchRemoveSerial
 } from './serials'
 import { watchFetchCountries, watchCreateCountry } from './countries'
 import {
@@ -32,6 +33,7 @@ export default function* rootSaga() {
     watchFetchSerial(),
     watchUpdateSerial(),
     watchCreateSerial(),
+    watchRemoveSerial(),
 
     watchFetchCountries(),
     watchCreateCountry(),

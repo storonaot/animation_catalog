@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'libs/axios'
 import { GET_STUDIOS, CREATE_STUDIO, REMOVE_STUDIO } from 'constants/api'
 import { onSuccess, onError } from './helpers'
 

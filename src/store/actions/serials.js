@@ -2,7 +2,8 @@ import {
   FETCH_SERIALS,
   FETCH_SERIAL,
   UPDATE_SERIAL,
-  CREATE_SERIAL
+  CREATE_SERIAL,
+  REMOVE_SERIAL
 } from 'constants/actions'
 
 const fetchSerials = () => (dispatch) => {
@@ -33,4 +34,11 @@ const createSerial = data => (dispatch) => {
   })
 }
 
-export { fetchSerials, fetchSerial, updateSerial, createSerial }
+const removeSerial = id => (dispatch) => {
+  dispatch({
+    type: REMOVE_SERIAL,
+    id
+  })
+}
+
+export { fetchSerials, fetchSerial, updateSerial, createSerial, removeSerial }

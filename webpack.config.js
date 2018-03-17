@@ -3,6 +3,11 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FlowWebpackPlugin = require('flow-webpack-plugin')
 
+const NODE_ENV = process.env.NODE_ENV || 'development'
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
+
+console.log('BASE_URL', BASE_URL)
+
 module.exports = {
   // context: path.join(__dirname, '/'),
   entry: { modules: './index.js' },
@@ -63,6 +68,12 @@ module.exports = {
     extensions: ['.js', '.css', '.jsx', '.sss']
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(NODE_ENV),
+        BASE_URL: JSON.stringify(BASE_URL)
+      }
+    }),
     new webpack.ProvidePlugin({
       React: 'react',
       _: 'lodash',

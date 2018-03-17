@@ -14,7 +14,6 @@ export default function serial(state = defaultState, action) {
     case FETCH_SERIAL_DONE:
       return formattedResult(action.result)
     case UPDATE_SERIAL_DONE:
-      // TODO: подумать как объединить с serials
       return formattedResult(action.result)
     default:
       return state

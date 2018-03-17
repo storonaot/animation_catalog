@@ -69,6 +69,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --inline --hot",
+    "heroku-api": "BASE_URL=https://lit-tundra-86662.herokuapp.com  webpack-dev-server --inline --hot",
     "format": "prettier --write '**/*.{js,jsx}'",
     "lint": "eslint '**/*.{js,jsx}' --quiet",
     "flow": "flow",

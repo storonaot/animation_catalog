@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from 'libs/axios'
 import {
   GET_SERIALS,
   GET_SERIAL,
   CREATE_SERIAL,
   UPDATE_SERIAL,
-  DELETE_SERIAL
+  REMOVE_SERIAL
 } from 'constants/api'
 import { onSuccess, onError } from './helpers'
 
@@ -15,13 +15,13 @@ const createSerial = data =>
 const updateSerial = (id, data) =>
   axios.put(UPDATE_SERIAL(id), data).then(onSuccess, onError)
 
-const deleteSerial = id =>
-  axios.delete(DELETE_SERIAL(id)).then(onSuccess, onError)
+const removeSerial = id =>
+  axios.delete(REMOVE_SERIAL(id)).then(onSuccess, onError)
 
 export default {
   fetchSerials,
   fetchSerial,
   createSerial,
   updateSerial,
-  deleteSerial
+  removeSerial
 }

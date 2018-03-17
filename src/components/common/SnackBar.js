@@ -14,6 +14,7 @@ const SnackBar = ({
     open={showed}
     message={message}
     autoHideDuration={autoHideDuration}
+    style={{ textAlign: 'center' }}
   />
 )
 

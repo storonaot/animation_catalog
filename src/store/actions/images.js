@@ -1,9 +1,10 @@
 import { REMOVE_IMAGE } from 'constants/actions'
 
-const removeImage = id => (dispatch) => {
+const removeImage = (id, successCallback) => (dispatch) => {
   dispatch({
     type: REMOVE_IMAGE,
-    payload: id
+    payload: id,
+    successCallback
   })
 }
 

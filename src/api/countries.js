@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'libs/axios'
 import { GET_COUNTRIES, CREATE_COUNTRY } from 'constants/api'
 import { onSuccess, onError } from './helpers'
 
