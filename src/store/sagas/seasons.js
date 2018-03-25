@@ -7,7 +7,9 @@ import {
   FETCH_SEASONS,
   FETCH_SEASONS_DONE,
   UPDATE_SEASON,
-  UPDATE_SEASON_DONE
+  UPDATE_SEASON_DONE,
+  REMOVE_SEASON,
+  REMOVE_SEASON_DONE
 } from 'constants/actions'
 
 import handler from './helpers'
@@ -50,6 +52,21 @@ function* watchUpdateSeason() {
 }
 // update**
 
-export { watchCreateSeason, watchFetchSeasons, watchUpdateSeason }
+// **delete
+function* callRemoveSeason(action) {
+  const seasonId = action.id
+  const { response, error } = yield call(() => Api.removeSeason(seasonId))
+  yield handler(response, error, REMOVE_SEASON_DONE, 'Cезон удален')
+}
 
-// export { watchFetchDirectors, watchCreateDirector, watchRemoveDirector }
+function* watchRemoveSeason() {
+  yield takeEvery(REMOVE_SEASON, callRemoveSeason)
+}
+// delete**
+
+export {
+  watchCreateSeason,
+  watchFetchSeasons,
+  watchUpdateSeason,
+  watchRemoveSeason
+}

@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm, reset } from 'redux-form'
+import { Field, reduxForm, reset, isDirty } from 'redux-form'
 import { TextField, ImageUpload, Dialog } from 'components/common'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Grid, Box } from 'components/grids/SeasonFormGrid'
@@ -14,6 +14,7 @@ type Props = {
   sendData: Function,
   showed: boolean,
   onClose: Function,
+  dirty: boolean,
 }
 
 class SeasonForm extends Component<Props> {
@@ -29,7 +30,7 @@ class SeasonForm extends Component<Props> {
   }
 
   render() {
-    const { handleSubmit, sendData, showed, onClose } = this.props
+    const { handleSubmit, sendData, showed, onClose, dirty } = this.props
     return (
       <Dialog showed={showed} onClose={onClose}>
         <form onSubmit={handleSubmit(sendData)}>
@@ -59,6 +60,7 @@ class SeasonForm extends Component<Props> {
                 primary
               />
               <RaisedButton
+                disabled={!dirty}
                 type="submit"
                 label="Сохранить"
                 secondary
@@ -81,7 +83,7 @@ const SeasonFormRedux = reduxForm({
 })(SeasonForm)
 
 const mapStateToProps = state => ({
-  initialValues: state.season
+  dirty: isDirty('SeasonForm')(state)
 })
 
 const mapDispatchToProps = dispatch => ({

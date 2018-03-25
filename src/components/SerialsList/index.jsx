@@ -19,8 +19,8 @@ const SerialsList = ({ serials, removeSerial, editSerial }: Props) => {
             id={serial._id}
             name={serial.name}
             showPath={`/serials/${serial._id}/show`}
-            removeSerial={removeSerial}
-            editSerial={editSerial}
+            remove={removeSerial}
+            edit={editSerial}
           />
         ))}
       </Grid>

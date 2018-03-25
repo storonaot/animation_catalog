@@ -20,7 +20,8 @@ import {
 import {
   watchCreateSeason,
   watchFetchSeasons,
-  watchUpdateSeason
+  watchUpdateSeason,
+  watchRemoveSeason
 } from './seasons'
 
 export function* helloSaga() {
@@ -52,6 +53,7 @@ export default function* rootSaga() {
 
     watchFetchSeasons(),
     watchCreateSeason(),
-    watchUpdateSeason()
+    watchUpdateSeason(),
+    watchRemoveSeason()
   ])
 }

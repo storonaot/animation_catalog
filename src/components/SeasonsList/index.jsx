@@ -3,9 +3,11 @@ import Cover from 'components/common/Cover'
 
 type Props = {
   seasons: Array,
+  removeSeason: Function,
+  editSeason: Function,
 }
 
-const SeasonsList = ({ seasons }: Props) => (
+const SeasonsList = ({ seasons, removeSeason, editSeason }: Props) => (
   <Grid>
     {seasons.map(season => (
       <Cover
@@ -15,6 +17,8 @@ const SeasonsList = ({ seasons }: Props) => (
         name={`Сезон ${season.number}. ${season.name || ''}`}
         showPath={`/seasons/${season._id}/show`}
         small
+        remove={removeSeason}
+        edit={editSeason}
       />
     ))}
   </Grid>

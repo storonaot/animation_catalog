@@ -41,27 +41,19 @@ type Props = {
   id: string,
   name: string,
   showPath: string,
-  removeSerial?: Function,
-  editSerial?: Function,
+  remove?: Function,
+  edit?: Function,
   small?: boolean,
 }
 
-const Cover = ({
-  cover,
-  id,
-  name,
-  showPath,
-  removeSerial,
-  editSerial,
-  small
-}: Props) => (
+const Cover = ({ cover, id, name, showPath, remove, edit, small }: Props) => (
   <Box style={coverStyles(cover)} small={small}>
     <Controls
       onRemove={() => {
-        removeSerial(id)
+        remove(id)
       }}
       onEdit={() => {
-        editSerial(id)
+        edit(id)
       }}
     />
     <Link to={showPath} style={nameLinkStyle}>

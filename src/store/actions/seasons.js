@@ -1,4 +1,9 @@
-import { CREATE_SEASON, FETCH_SEASONS } from 'constants/actions'
+import {
+  CREATE_SEASON,
+  FETCH_SEASONS,
+  UPDATE_SEASON,
+  REMOVE_SEASON
+} from 'constants/actions'
 
 const createSeason = data => (dispatch) => {
   dispatch({
@@ -14,4 +19,19 @@ const fetchSeasons = serialId => (dispatch) => {
   })
 }
 
-export { createSeason, fetchSeasons }
+const updateSeason = (id, data) => (dispatch) => {
+  dispatch({
+    type: UPDATE_SEASON,
+    id,
+    payload: data
+  })
+}
+
+const removeSeason = id => (dispatch) => {
+  dispatch({
+    type: REMOVE_SEASON,
+    id
+  })
+}
+
+export { createSeason, fetchSeasons, updateSeason, removeSeason }

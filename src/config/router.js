@@ -7,6 +7,7 @@ import App from 'pages/App'
 const Index = moduleUploader('Index')
 const Serials = moduleUploader('SerialsPage')
 const Serial = moduleUploader('SerialPage')
+const Season = moduleUploader('SeasonPage')
 
 const Addition = moduleUploader('Addition')
 
@@ -16,6 +17,7 @@ const MyRouter = () => (
       <Route exact path="/" component={Index} />
       <Route exact path="/serials" component={Serials} />
       <Route path="/serials/:id/show" component={Serial} />
+      <Route path="/seasons/:id/show" component={Season} />
       <Route path="/addition" component={Addition} />
     </Switch>
   </App>
