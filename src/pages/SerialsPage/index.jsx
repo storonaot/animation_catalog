@@ -2,8 +2,16 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { AddBtn } from 'components/common'
 
-import { fetchSerials, removeSerial } from 'store/actions/serials'
-import { showDialog } from 'store/actions/ui'
+import {
+  fetchSerials,
+  removeSerial,
+  createSerial,
+  updateSerial
+} from 'store/actions/serials'
+import { showConfirmDialog } from 'store/actions/ui'
+import { formDataFormatter } from 'utils/formatter'
+
+import SerialForm from 'components/forms/SerialForm'
 
 import SerialsList from 'components/SerialsList'
 
@@ -16,13 +24,22 @@ type Props = {
     originalName: string,
   }>,
   onRemoveSerial: Function,
-  onShowDialog: Function,
+  onShowConfirmDialog: Function,
+  onCreateSerial: Function,
+  onUpdateSerial: Function,
 }
 
 class SerialsPage extends Component<Props> {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      formOpened: false,
+      currentSerial: null
+    }
+
+    this.showForm = this.showForm.bind(this)
+    this.closeForm = this.closeForm.bind(this)
+    this.send = this.send.bind(this)
   }
 
   componentDidMount() {
@@ -30,31 +47,67 @@ class SerialsPage extends Component<Props> {
     if (!serials.length) onFetchSerials()
   }
 
-  showDialog(id) {
-    const { onShowDialog, onRemoveSerial, serials } = this.props
+  setCurrentSerial(serialId) {
+    const { serials } = this.props
+    const currentSerial = serials.find(serial => serial._id === serialId)
+    this.setState({ currentSerial })
+  }
+
+  showForm(serialId) {
+    if (serialId) this.setCurrentSerial(serialId)
+    this.setState({ formOpened: true })
+  }
+
+  closeForm() {
+    this.setState({ formOpened: false, currentSerial: null })
+  }
+
+  showConfirmDialog(id) {
+    const { onShowConfirmDialog, onRemoveSerial, serials } = this.props
 
     const name = serials.find(serial => serial._id === id).name
 
-    onShowDialog({
+    onShowConfirmDialog({
       title: 'Удаление',
       message: `Вы уверены что хотите удалить ${name}?`,
       onSuccess: () => onRemoveSerial(id)
     })
   }
 
+  send(data) {
+    const { onUpdateSerial, onCreateSerial } = this.props
+    if (data._id) {
+      const { _id } = data
+      onUpdateSerial(_id, formDataFormatter(data))
+    } else {
+      onCreateSerial(formDataFormatter(data))
+    }
+    this.closeForm()
+  }
+
   render() {
     const { serials } = this.props
+    const { formOpened, currentSerial } = this.state
 
     return (
       <div style={{ textAlign: 'right' }}>
-        <button>OpenModal</button>
-        <AddBtn to="/serials/new" />
+        <AddBtn handleClick={this.showForm} />
         <SerialsList
           serials={serials}
           removeSerial={(id) => {
-            this.showDialog(id)
+            this.showConfirmDialog(id)
+          }}
+          editSerial={(id) => {
+            this.showForm(id)
           }}
         />
+        {formOpened &&
+          <SerialForm
+            showed={formOpened}
+            sendData={this.send}
+            onClose={this.closeForm}
+            initialValues={currentSerial}
+          />}
       </div>
     )
   }
@@ -71,8 +124,14 @@ const mapDispatchToProps = dispatch => ({
   onRemoveSerial: (id) => {
     dispatch(removeSerial(id))
   },
-  onShowDialog: (data) => {
-    dispatch(showDialog(data))
+  onShowConfirmDialog: (data) => {
+    dispatch(showConfirmDialog(data))
+  },
+  onCreateSerial: (data) => {
+    dispatch(createSerial(data))
+  },
+  onUpdateSerial: (id, data) => {
+    dispatch(updateSerial(id, data))
   }
 })
 

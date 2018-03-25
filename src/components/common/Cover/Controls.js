@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom'
 import Edit from 'material-ui/svg-icons/image/edit'
 import ContentClear from 'material-ui/svg-icons/content/clear'
 import IconButton from 'material-ui/IconButton'
 
 type Props = {
-  editPath: string,
   onRemove: Function,
+  onEdit: Function,
 }
 
 const wrapperStyles = {
@@ -23,19 +22,17 @@ const IconStyles = {
   backgroundColor: 'rgba(0, 0, 0, 0.3)'
 }
 
-const Controls = ({ editPath, onRemove }: Props) => (
+const Controls = ({ onEdit, onRemove }: Props) => (
   <div style={wrapperStyles}>
-    <Link to={editPath}>
-      <IconButton style={IconStyles} hoveredStyle={hoveredStyle}>
-        <Edit color="#fff" />
-      </IconButton>
-    </Link>
+    <IconButton style={IconStyles} hoveredStyle={hoveredStyle} onClick={onEdit}>
+      <Edit color='#fff' />
+    </IconButton>
     <IconButton
       style={IconStyles}
       hoveredStyle={hoveredStyle}
       onClick={onRemove}
     >
-      <ContentClear color="#fff" />
+      <ContentClear color='#fff' />
     </IconButton>
   </div>
 )

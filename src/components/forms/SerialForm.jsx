@@ -11,11 +11,15 @@ import { fetchStudios } from 'store/actions/studios'
 import { fetchCountries } from 'store/actions/countries'
 
 import RaisedButton from 'material-ui/RaisedButton'
-import { TextField, AutoCompleteWithTags, ImageUpload } from 'components/common'
+import {
+  TextField,
+  AutoCompleteWithTags,
+  ImageUpload,
+  Dialog
+} from 'components/common'
 import { Grid, Box } from 'components/grids/SerialFormGrid'
 
 type Props = {
-  formType: string,
   initialize: Function,
   initialValues?: Object,
   handleSubmit: Function,
@@ -30,6 +34,8 @@ type Props = {
   studios: Array,
   selectedStudios: Array,
   dirty: boolean,
+  showed: boolean,
+  onClose: Function,
 }
 
 class SerialForm extends Component<Props> {
@@ -40,7 +46,6 @@ class SerialForm extends Component<Props> {
 
   componentDidMount() {
     const {
-      formType,
       initialize,
       initialValues,
       onFetchCountries,
@@ -54,11 +59,9 @@ class SerialForm extends Component<Props> {
     if (!directors.length) onFetchDirectors()
     if (!studios.length) onFetchStudios()
     if (!countries.length) onFetchCountries()
-    if (formType === 'edit') {
-      initialize(initialValues)
-    } else if (formType === 'new') {
-      initialize()
-    }
+
+    if (initialValues) initialize(initialValues)
+    else initialize()
   }
 
   render() {
@@ -71,7 +74,9 @@ class SerialForm extends Component<Props> {
       selectedDirectors,
       studios,
       selectedStudios,
-      dirty
+      dirty,
+      showed,
+      onClose
     } = this.props
 
     const filteredCountries = _differenceBy(countries, selectedCountries, '_id')
@@ -79,77 +84,86 @@ class SerialForm extends Component<Props> {
     const filteredStudios = _differenceBy(studios, selectedStudios, '_id')
 
     return (
-      <form onSubmit={handleSubmit(sendData)}>
-        <Grid>
-          <Box cover><Field name="cover" component={ImageUpload} /></Box>
-          <Box isName>
-            <Field
-              name="name"
-              component={TextField}
-              type="text"
-              floatingLabelText="Название сериала"
-              fullWidth
-            />
-          </Box>
-          <Box originalName>
-            <Field
-              name="originalName"
-              component={TextField}
-              type="text"
-              floatingLabelText="Оригинальное название сериала"
-              fullWidth
-            />
-          </Box>
-          <Box countries>
-            <Field
-              component={AutoCompleteWithTags}
-              fullWidth
-              dataSource={filteredCountries}
-              name="countries"
-              floatingLabelText="Страны"
-              tagsList={selectedCountries}
-            />
-          </Box>
-          <Box directors>
-            <Field
-              component={AutoCompleteWithTags}
-              fullWidth
-              dataSource={filteredDirectors}
-              name="directors"
-              floatingLabelText="Режиссеры"
-              tagsList={selectedDirectors}
-            />
-          </Box>
-          <Box studios>
-            <Field
-              component={AutoCompleteWithTags}
-              fullWidth
-              dataSource={filteredStudios}
-              name="studios"
-              floatingLabelText="Студии"
-              tagsList={selectedStudios}
-            />
-          </Box>
-          <Box description>
-            <Field
-              name="description"
-              component={TextField}
-              type="text"
-              floatingLabelText="Описание сериала"
-              multiLine
-              fullWidth
-            />
-          </Box>
-        </Grid>
-        <div>
-          <RaisedButton
-            disabled={!dirty}
-            type="submit"
-            label="Сохранить"
-            secondary
-          />
-        </div>
-      </form>
+      <Dialog showed={showed} onClose={onClose}>
+        <form onSubmit={handleSubmit(sendData)}>
+          <Grid>
+            <Box cover><Field name="cover" component={ImageUpload} /></Box>
+            <Box isName>
+              <Field
+                name="name"
+                component={TextField}
+                type="text"
+                floatingLabelText="Название сериала"
+                fullWidth
+              />
+            </Box>
+            <Box originalName>
+              <Field
+                name="originalName"
+                component={TextField}
+                type="text"
+                floatingLabelText="Оригинальное название сериала"
+                fullWidth
+              />
+            </Box>
+            <Box description>
+              <Field
+                name="description"
+                component={TextField}
+                type="text"
+                floatingLabelText="Описание сериала"
+                multiLine
+                fullWidth
+              />
+            </Box>
+            <Box countries>
+              <Field
+                component={AutoCompleteWithTags}
+                fullWidth
+                dataSource={filteredCountries}
+                name="countries"
+                floatingLabelText="Страны"
+                tagsList={selectedCountries}
+              />
+            </Box>
+            <Box directors>
+              <Field
+                component={AutoCompleteWithTags}
+                fullWidth
+                dataSource={filteredDirectors}
+                name="directors"
+                floatingLabelText="Режиссеры"
+                tagsList={selectedDirectors}
+              />
+            </Box>
+            <Box studios>
+              <Field
+                component={AutoCompleteWithTags}
+                fullWidth
+                dataSource={filteredStudios}
+                name="studios"
+                floatingLabelText="Студии"
+                tagsList={selectedStudios}
+              />
+            </Box>
+            <Box actions>
+              <RaisedButton
+                type="button"
+                label="Отмениь"
+                primary
+                onClick={onClose}
+                style={{ marginRight: 10 }}
+              />
+              <RaisedButton
+                disabled={!dirty}
+                type="submit"
+                label="Сохранить"
+                secondary
+              />
+            </Box>
+          </Grid>
+        </form>
+      </Dialog>
     )
   }
 }
@@ -166,7 +180,6 @@ const SerialFormRedux = reduxForm({
 })(SerialForm)
 
 const mapStateToProps = state => ({
-  initialValues: state.serial,
   countries: state.countries,
   selectedCountries: selector(state, 'countries') || [],
   directors: state.directors,

@@ -1,17 +1,18 @@
-import { Link } from 'react-router-dom'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 
 type Props = {
-  to: string,
+  handleClick: Function,
 }
 
-const AddBtn = ({ to }: Props) => (
-  <Link to={to} style={{ marginBottom: 20, display: 'inline-block' }}>
-    <FloatingActionButton secondary>
-      <ContentAdd />
-    </FloatingActionButton>
-  </Link>
+const AddBtn = ({ handleClick }: Props) => (
+  <FloatingActionButton
+    secondary
+    style={{ marginBottom: 20, display: 'inline-block' }}
+    onClick={handleClick}
+  >
+    <ContentAdd />
+  </FloatingActionButton>
 )
 
 export default AddBtn

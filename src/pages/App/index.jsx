@@ -9,12 +9,9 @@ import muiTheme from 'config/muiTheme'
 import { toggleSidebar } from 'store/actions/ui'
 import Header from 'components/Header'
 import Sidebar from 'components/Sidebar'
-import {
-  Container,
-  ConfirmDialog,
-  SnackBar,
-  HTTPErrorDialog
-} from 'components/common'
+import HTTPErrorDialog from 'components/HTTPErrorDialog'
+import ConfirmDialog from 'components/ConfirmDialog'
+import { Container, SnackBar } from 'components/common'
 
 import './styles.sss'
 

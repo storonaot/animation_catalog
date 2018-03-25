@@ -4,9 +4,10 @@ import Cover from 'components/common/Cover'
 type Props = {
   serials: Array,
   removeSerial: Function,
+  editSerial: Function,
 }
 
-const SerialsList = ({ serials, removeSerial }: Props) => {
+const SerialsList = ({ serials, removeSerial, editSerial }: Props) => {
   if (serials) {
     return (
       <Grid>
@@ -19,6 +20,7 @@ const SerialsList = ({ serials, removeSerial }: Props) => {
             name={serial.name}
             showPath={`/serials/${serial._id}/show`}
             removeSerial={removeSerial}
+            editSerial={editSerial}
           />
         ))}
       </Grid>

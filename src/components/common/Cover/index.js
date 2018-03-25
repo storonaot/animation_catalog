@@ -40,6 +40,7 @@ type Props = {
   name: string,
   showPath: string,
   removeSerial?: Function,
+  editSerial?: Function,
 }
 
 const Cover = ({
@@ -48,7 +49,8 @@ const Cover = ({
   id,
   name,
   showPath,
-  removeSerial
+  removeSerial,
+  editSerial
 }: Props) => (
   <Box style={coverStyles(cover)}>
     {editPath &&
@@ -57,6 +59,9 @@ const Cover = ({
         editPath={editPath}
         onRemove={() => {
           removeSerial(id)
+        }}
+        onEdit={() => {
+          editSerial(id)
         }}
       />}
     <Link to={showPath} style={nameLinkStyle}>

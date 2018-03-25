@@ -1,12 +1,10 @@
 import DialogMUI from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
 
 type Props = {
-  children: Object,
-  title: string,
+  children: Object | string,
+  title?: string,
   showed: boolean,
   onClose: Function,
-  onSuccess?: Function,
   modal?: boolean,
   actions?: Array,
 }
@@ -16,29 +14,22 @@ const Dialog = ({
   title,
   showed,
   onClose,
-  onSuccess,
   modal,
   actions
-}: Props) => {
-  const Actions = actions || [
-    <FlatButton label="Сохранить" secondary onClick={onSuccess} />
-  ]
-  return (
-    <DialogMUI
-      title={title}
-      actions={Actions}
-      modal={modal}
-      open={showed}
-      onRequestClose={onClose}
-    >
-      {children}
-    </DialogMUI>
-  )
-}
+}: Props) => (
+  <DialogMUI
+    title={title}
+    actions={actions}
+    modal={modal}
+    open={showed}
+    onRequestClose={onClose}
+  >
+    {children}
+  </DialogMUI>
+)
 
 Dialog.defaultProps = {
-  modal: true,
-  onSuccess: () => {}
+  modal: false
 }
 
 export default Dialog

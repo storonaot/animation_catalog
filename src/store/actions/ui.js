@@ -13,14 +13,14 @@ const toggleSidebar = () => (dispatch) => {
   })
 }
 
-const showDialog = data => (dispatch) => {
+const showConfirmDialog = data => (dispatch) => {
   dispatch({
     type: SHOW_DIALOG,
     data
   })
 }
 
-const closeDialog = () => (dispatch) => {
+const closeConfirmDialog = () => (dispatch) => {
   dispatch({
     type: CLOSE_DIALOG
   })
@@ -48,8 +48,8 @@ const closeHTTPErrorDialog = () => (dispatch) => {
 
 export {
   toggleSidebar,
-  showDialog,
-  closeDialog,
+  showConfirmDialog,
+  closeConfirmDialog,
   showSnackbar,
   showHTTPErrorDialog,
   closeHTTPErrorDialog

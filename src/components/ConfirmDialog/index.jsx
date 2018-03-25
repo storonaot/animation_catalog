@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { closeDialog } from 'store/actions/ui'
+import { closeConfirmDialog } from 'store/actions/ui'
 
 import DialogMUI from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
@@ -46,7 +46,7 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => ({
   onClose: () => {
-    dispatch(closeDialog())
+    dispatch(closeConfirmDialog())
   }
 })
 

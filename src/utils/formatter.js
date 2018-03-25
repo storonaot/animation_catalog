@@ -7,6 +7,15 @@ const directorFormatter = ({ name, originalName, ...res }) => ({
 })
 const directorsFormatter = directors => directors.map(directorFormatter)
 
+const formatDirectorsInObj = (data) => {
+  const { directors } = data
+  const formattedDirectors = directorsFormatter(directors)
+  return { ...data, directors: formattedDirectors }
+}
+
+const formatDirestorsInCollection = collection =>
+  collection.map(formatDirectorsInObj)
+
 const extractIds = arr => arr.map(({ _id }) => _id)
 // перебираем объект, находим в нем массивы, мапим
 const extractedIdsObj = (obj) => {
@@ -42,5 +51,7 @@ export {
   directorFormatter,
   extractIds,
   extractedIdsObj,
-  formDataFormatter
+  formDataFormatter,
+  formatDirectorsInObj,
+  formatDirestorsInCollection
 }
