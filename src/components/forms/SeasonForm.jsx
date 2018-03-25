@@ -1,19 +1,19 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, reset } from 'redux-form'
-import { TextField, ImageUpload } from 'components/common'
+import { TextField, ImageUpload, Dialog } from 'components/common'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Grid, Box } from 'components/grids/SeasonFormGrid'
 import createValidation from 'utils/validator'
 import { REQUIRED, INTEGER } from 'constants/validation'
 
 type Props = {
-  hideForm: Function,
-  formType: string,
   initialize: Function,
   initialValues?: Object,
   handleSubmit: Function,
   sendData: Function,
+  showed: boolean,
+  onClose: Function,
 }
 
 class SeasonForm extends Component<Props> {
@@ -23,49 +23,47 @@ class SeasonForm extends Component<Props> {
   }
 
   componentDidMount() {
-    const { initialize, formType, initialValues } = this.props
-
-    if (formType === 'edit') {
-      initialize(initialValues)
-    } else if (formType === 'new') {
-      initialize()
-    }
+    const { initialize, initialValues } = this.props
+    if (initialValues) initialize(initialValues)
+    else initialize()
   }
 
   render() {
-    const { hideForm, handleSubmit, sendData } = this.props
+    const { handleSubmit, sendData, showed, onClose } = this.props
     return (
-      <form onSubmit={handleSubmit(sendData)}>
-        <Grid>
-          <Box cover>
-            <Field name="cover" component={ImageUpload} />
-          </Box>
-          <Box number>
-            <Field
-              name="number"
-              component={TextField}
-              floatingLabelText="Номер сезона"
-            />
-          </Box>
-          <Box isName>
-            <Field
-              name="name"
-              component={TextField}
-              floatingLabelText="Название сезона"
-            />
-          </Box>
-          <Box controls>
-            <RaisedButton type="submit" label="Сохранить" secondary />
-            <RaisedButton
-              type="button"
-              onClick={hideForm}
-              label="Отменить"
-              primary
-              style={{ marginLeft: 15 }}
-            />
-          </Box>
-        </Grid>
-      </form>
+      <Dialog showed={showed} onClose={onClose}>
+        <form onSubmit={handleSubmit(sendData)}>
+          <Grid>
+            <Box cover>
+              <Field name="cover" component={ImageUpload} />
+            </Box>
+            <Box number>
+              <Field
+                name="number"
+                component={TextField}
+                floatingLabelText="Номер сезона"
+              />
+            </Box>
+            <Box isName>
+              <Field
+                name="name"
+                component={TextField}
+                floatingLabelText="Название сезона"
+              />
+            </Box>
+            <Box controls>
+              <RaisedButton type="submit" label="Сохранить" secondary />
+              <RaisedButton
+                type="button"
+                onClick={onClose}
+                label="Отменить"
+                primary
+                style={{ marginLeft: 15 }}
+              />
+            </Box>
+          </Grid>
+        </form>
+      </Dialog>
     )
   }
 }

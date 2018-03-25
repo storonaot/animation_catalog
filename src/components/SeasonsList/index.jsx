@@ -14,6 +14,7 @@ const SeasonsList = ({ seasons }: Props) => (
         id={season._id}
         name={`Сезон ${season.number}. ${season.name || ''}`}
         showPath={`/seasons/${season._id}/show`}
+        small
       />
     ))}
   </Grid>

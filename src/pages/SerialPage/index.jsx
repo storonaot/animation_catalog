@@ -23,12 +23,12 @@ class SerialPage extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {
-      formShowed: false
+      formOpened: false
     }
 
     this.showForm = this.showForm.bind(this)
-    this.hideForm = this.hideForm.bind(this)
-    this.sendData = this.sendData.bind(this)
+    this.closeForm = this.closeForm.bind(this)
+    this.send = this.send.bind(this)
   }
 
   componentDidMount() {
@@ -41,14 +41,14 @@ class SerialPage extends Component<Props> {
   }
 
   showForm() {
-    this.setState({ formShowed: true })
+    this.setState({ formOpened: true })
   }
 
-  hideForm() {
-    this.setState({ formShowed: false })
+  closeForm() {
+    this.setState({ formOpened: false, currentSerial: null })
   }
 
-  sendData(data) {
+  send(data) {
     const { onCreateSeason, serial: { _id } } = this.props
     const serial = _id
     const newData = Object.assign(data, { serial })
@@ -57,22 +57,20 @@ class SerialPage extends Component<Props> {
 
   render() {
     const { serial, seasons } = this.props
-    const { formShowed } = this.state
+    const { formOpened } = this.state
     if (serial) {
       return (
         <div>
           <GoBack to="/serials" label="Вернуться к списку сериалов" />
           <Serial serial={serial} />
-          <AddBtn to="ff" />
-          <button onClick={this.showForm}>Добавить сезон</button>
-          {formShowed &&
-            <SeasonForm
-              hideForm={this.hideForm}
-              formType="new"
-              sendData={this.sendData}
-              showForm={this.showForm}
-            />}
+          <AddBtn handleClick={this.showForm} />
           <SeasonsList seasons={seasons} />
+          {formOpened &&
+            <SeasonForm
+              sendData={() => {}}
+              showed={formOpened}
+              onClose={this.closeForm}
+            />}
         </div>
       )
     }

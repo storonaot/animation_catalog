@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Box } from 'components/grids/CoversGrid'
 import getCover from 'utils/cover'
+import cropper from 'utils/cropper'
 
 import Controls from './Controls'
 
@@ -35,37 +36,34 @@ const nameStyle = {
 
 type Props = {
   cover?: Object,
-  editPath?: string,
   id: string,
   name: string,
   showPath: string,
   removeSerial?: Function,
   editSerial?: Function,
+  small?: boolean,
 }
 
 const Cover = ({
   cover,
-  editPath,
   id,
   name,
   showPath,
   removeSerial,
-  editSerial
+  editSerial,
+  small
 }: Props) => (
-  <Box style={coverStyles(cover)}>
-    {editPath &&
-      removeSerial &&
-      <Controls
-        editPath={editPath}
-        onRemove={() => {
-          removeSerial(id)
-        }}
-        onEdit={() => {
-          editSerial(id)
-        }}
-      />}
+  <Box style={coverStyles(cover)} small={small}>
+    <Controls
+      onRemove={() => {
+        removeSerial(id)
+      }}
+      onEdit={() => {
+        editSerial(id)
+      }}
+    />
     <Link to={showPath} style={nameLinkStyle}>
-      <span style={nameStyle}>{name}</span>
+      <span style={nameStyle}>{cropper(name, 25)}</span>
     </Link>
   </Box>
 )
