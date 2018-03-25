@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { serialDataFormatter } from 'utils/formatter'
+import { formDataFormatter } from 'utils/formatter'
 import { GoBack } from 'components/common'
 
 import { fetchSerial, updateSerial } from 'store/actions/serials'
@@ -31,7 +31,7 @@ class SerialEdit extends Component<Props> {
 
   send(data) {
     const { onUpdateSerial, match: { params: { id } } } = this.props
-    onUpdateSerial(id, serialDataFormatter(data))
+    onUpdateSerial(id, formDataFormatter(data))
   }
 
   render() {

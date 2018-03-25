@@ -1,5 +1,5 @@
-import { Grid } from 'components/grids/SerialsGrid'
-import SerialItem from './SerialItem'
+import { Grid } from 'components/grids/CoversGrid'
+import Cover from 'components/common/Cover'
 
 type Props = {
   serials: Array,
@@ -9,9 +9,13 @@ type Props = {
 const SerialsList = ({ serials, removeSerial }: Props) => (
   <Grid>
     {serials.map(serial => (
-      <SerialItem
+      <Cover
         key={serial._id}
-        serial={serial}
+        cover={serial.cover}
+        editPath={`/serials/${serial._id}/edit`}
+        id={serial._id}
+        name={serial.name}
+        showPath={`/serials/${serial._id}/show`}
         removeSerial={removeSerial}
       />
     ))}

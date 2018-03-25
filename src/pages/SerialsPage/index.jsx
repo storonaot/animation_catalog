@@ -1,8 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-import ContentAdd from 'material-ui/svg-icons/content/add'
+import { AddBtn } from 'components/common'
 
 import { fetchSerials, removeSerial } from 'store/actions/serials'
 import { showDialog } from 'store/actions/ui'
@@ -49,15 +47,7 @@ class SerialsPage extends Component<Props> {
 
     return (
       <div style={{ textAlign: 'right' }}>
-        <Link
-          to="/serials/new"
-          style={{ marginBottom: 20, display: 'inline-block' }}
-        >
-          <FloatingActionButton secondary>
-            <ContentAdd />
-          </FloatingActionButton>
-        </Link>
-
+        <AddBtn to="/serials/new" />
         {serials &&
           <SerialsList
             serials={serials}

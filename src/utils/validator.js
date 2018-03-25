@@ -1,4 +1,4 @@
-import { REQUIRED } from 'constants/validation'
+import { REQUIRED, INTEGER } from 'constants/validation'
 
 const isPresented = (value) => {
   if (typeof value === 'number') {
@@ -22,10 +22,22 @@ const isPresented = (value) => {
   return !!value
 }
 
+const isInteger = (value) => {
+  const val = Number(value)
+  if (isNaN(val)) return false
+  if (val < 0) return false
+  if ((val ^ 0) !== val) return false
+  return true
+}
+
 const rules = {
   [REQUIRED]: {
     rule: value => isPresented(value),
     hint: () => 'Поле не должно быть пустым'
+  },
+  [INTEGER]: {
+    rule: value => isInteger(value),
+    hint: () => 'Только целое положительное число'
   }
 }
 

@@ -1,2 +1,2 @@
 export const REQUIRED = Symbol('REQUIRED')
-export const TEST = Symbol('TEST')
+export const INTEGER = Symbol('INTEGER')

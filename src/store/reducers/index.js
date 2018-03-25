@@ -8,6 +8,8 @@ import serial from './serial'
 import countries from './countries'
 import directors from './directors'
 import studios from './studios'
+import seasons from './seasons'
+import season from './season'
 
 export default combineReducers({
   router: routerReducer,
@@ -17,5 +19,7 @@ export default combineReducers({
   serial,
   countries,
   directors,
-  studios
+  studios,
+  seasons,
+  season
 })

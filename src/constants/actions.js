@@ -41,3 +41,12 @@ export const REMOVE_STUDIO_DONE = Symbol('REMOVE_STUDIO_DONE')
 
 export const REMOVE_IMAGE = Symbol('REMOVE_IMAGE')
 export const REMOVE_IMAGE_DONE = Symbol('REMOVE_IMAGE_DONE')
+
+export const FETCH_SEASONS = Symbol('FETCH_SEASONS')
+export const FETCH_SEASONS_DONE = Symbol('FETCH_SEASONS_DONE')
+export const FETCH_SEASON = Symbol('FETCH_SEASON')
+export const FETCH_SEASON_DONE = Symbol('FETCH_SEASON_DONE')
+export const CREATE_SEASON = Symbol('CREATE_SEASON')
+export const CREATE_SEASON_DONE = Symbol('CREATE_SEASON_DONE')
+export const UPDATE_SEASON = Symbol('UPDATE_SEASON')
+export const UPDATE_SEASON_DONE = Symbol('UPDATE_SEASON_DONE')

@@ -19,3 +19,7 @@ export const CREATE_STUDIO = '/studios/new'
 export const REMOVE_STUDIO = id => `/studios/${id}`
 
 export const REMOVE_IMAGE = id => `/images/${id}`
+
+export const GET_SEASONS = serialId => `/seasons/${serialId}`
+export const CREATE_SEASON = '/seasons/new'
+export const UPDATE_SEASON = seasonId => `/seasons/${seasonId}`

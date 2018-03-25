@@ -23,7 +23,7 @@ const extractedIdsObj = (obj) => {
   return newObj
 }
 
-const serialDataFormatter = (data) => {
+const formDataFormatter = (data) => {
   if (data.cover instanceof File) {
     const cover = data.cover
     _unset(data, 'cover')
@@ -32,10 +32,9 @@ const serialDataFormatter = (data) => {
     form.append('cover', cover)
     form.append('data', stringData)
     return form
-  } else {
-    const sendData = extractedIdsObj(data)
-    return { data: JSON.stringify(sendData) }
   }
+  const sendData = extractedIdsObj(data)
+  return { data: JSON.stringify(sendData) }
 }
 
 export {
@@ -43,5 +42,5 @@ export {
   directorFormatter,
   extractIds,
   extractedIdsObj,
-  serialDataFormatter
+  formDataFormatter
 }
