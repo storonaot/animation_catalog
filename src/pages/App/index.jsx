@@ -9,7 +9,12 @@ import muiTheme from 'config/muiTheme'
 import { toggleSidebar } from 'store/actions/ui'
 import Header from 'components/Header'
 import Sidebar from 'components/Sidebar'
-import { Container, Dialog, SnackBar, HTTPErrorDialog } from 'components/common'
+import {
+  Container,
+  ConfirmDialog,
+  SnackBar,
+  HTTPErrorDialog
+} from 'components/common'
 
 import './styles.sss'
 
@@ -40,7 +45,7 @@ const App = ({
         <Container>
           {children}
         </Container>}
-      <Dialog />
+      <ConfirmDialog />
       <HTTPErrorDialog />
       <SnackBar />
     </div>

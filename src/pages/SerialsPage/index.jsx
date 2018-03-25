@@ -47,14 +47,14 @@ class SerialsPage extends Component<Props> {
 
     return (
       <div style={{ textAlign: 'right' }}>
+        <button>OpenModal</button>
         <AddBtn to="/serials/new" />
-        {serials &&
-          <SerialsList
-            serials={serials}
-            removeSerial={(id) => {
-              this.showDialog(id)
-            }}
-          />}
+        <SerialsList
+          serials={serials}
+          removeSerial={(id) => {
+            this.showDialog(id)
+          }}
+        />
       </div>
     )
   }

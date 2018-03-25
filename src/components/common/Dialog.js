@@ -1,54 +1,44 @@
-import { connect } from 'react-redux'
-
-import { closeDialog } from 'store/actions/ui'
-
 import DialogMUI from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
 type Props = {
-  dialog: Object<{
-    onClose: Function,
-    showed: boolean,
-    message?: string,
-    title?: string,
-    onSuccess: Function,
-  }>,
+  children: Object,
+  title: string,
+  showed: boolean,
   onClose: Function,
+  onSuccess?: Function,
+  modal?: boolean,
+  actions?: Array,
 }
 
 const Dialog = ({
+  children,
+  title,
+  showed,
   onClose,
-  dialog: { showed, message, title, onSuccess }
+  onSuccess,
+  modal,
+  actions
 }: Props) => {
-  const successWithClose = () => {
-    onSuccess()
-    onClose()
-  }
-  const actions = [
-    <FlatButton label="Отмена" primary onClick={onClose} />,
-    <FlatButton label="Продолжить" secondary onClick={successWithClose} />
+  const Actions = actions || [
+    <FlatButton label="Сохранить" secondary onClick={onSuccess} />
   ]
-
   return (
     <DialogMUI
       title={title}
-      actions={actions}
-      modal={false}
+      actions={Actions}
+      modal={modal}
       open={showed}
       onRequestClose={onClose}
     >
-      {message}
+      {children}
     </DialogMUI>
   )
 }
 
-const mapStateToProps = state => ({
-  dialog: state.ui.dialog
-})
-const mapDispatchToProps = dispatch => ({
-  onClose: () => {
-    dispatch(closeDialog())
-  }
-})
+Dialog.defaultProps = {
+  modal: true,
+  onSuccess: () => {}
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dialog)
+export default Dialog

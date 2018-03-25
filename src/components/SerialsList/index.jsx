@@ -6,20 +6,25 @@ type Props = {
   removeSerial: Function,
 }
 
-const SerialsList = ({ serials, removeSerial }: Props) => (
-  <Grid>
-    {serials.map(serial => (
-      <Cover
-        key={serial._id}
-        cover={serial.cover}
-        editPath={`/serials/${serial._id}/edit`}
-        id={serial._id}
-        name={serial.name}
-        showPath={`/serials/${serial._id}/show`}
-        removeSerial={removeSerial}
-      />
-    ))}
-  </Grid>
-)
+const SerialsList = ({ serials, removeSerial }: Props) => {
+  if (serials) {
+    return (
+      <Grid>
+        {serials.map(serial => (
+          <Cover
+            key={serial._id}
+            cover={serial.cover}
+            editPath={`/serials/${serial._id}/edit`}
+            id={serial._id}
+            name={serial.name}
+            showPath={`/serials/${serial._id}/show`}
+            removeSerial={removeSerial}
+          />
+        ))}
+      </Grid>
+    )
+  }
+  return null
+}
 
 export default SerialsList
