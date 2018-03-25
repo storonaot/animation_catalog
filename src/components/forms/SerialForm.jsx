@@ -102,7 +102,6 @@ class SerialForm extends Component<Props> {
                 component={TextField}
                 type="text"
                 floatingLabelText="Название сериала"
-                fullWidth
               />
             </Box>
             <Box originalName>
@@ -111,7 +110,6 @@ class SerialForm extends Component<Props> {
                 component={TextField}
                 type="text"
                 floatingLabelText="Оригинальное название сериала"
-                fullWidth
               />
             </Box>
             <Box description>
@@ -121,13 +119,11 @@ class SerialForm extends Component<Props> {
                 type="text"
                 floatingLabelText="Описание сериала"
                 multiLine
-                fullWidth
               />
             </Box>
             <Box countries>
               <Field
                 component={AutoCompleteWithTags}
-                fullWidth
                 dataSource={filteredCountries}
                 name="countries"
                 floatingLabelText="Страны"
@@ -137,7 +133,6 @@ class SerialForm extends Component<Props> {
             <Box directors>
               <Field
                 component={AutoCompleteWithTags}
-                fullWidth
                 dataSource={filteredDirectors}
                 name="directors"
                 floatingLabelText="Режиссеры"
@@ -147,7 +142,6 @@ class SerialForm extends Component<Props> {
             <Box studios>
               <Field
                 component={AutoCompleteWithTags}
-                fullWidth
                 dataSource={filteredStudios}
                 name="studios"
                 floatingLabelText="Студии"

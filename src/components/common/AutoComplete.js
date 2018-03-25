@@ -55,13 +55,14 @@ const AutoComplete = ({
   )
 }
 
-export default AutoComplete
-
 AutoComplete.defaultProps = {
   dataSourceConfig: {
     text: 'name',
     value: '_id'
   },
   maxSearchResults: 7,
-  openOnFocus: true
+  openOnFocus: true,
+  fullWidth: true
 }
+
+export default AutoComplete

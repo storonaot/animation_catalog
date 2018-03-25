@@ -38,4 +38,8 @@ const TextField = ({
   )
 }
 
+TextField.defaultProps = {
+  fullWidth: true
+}
+
 export default TextField

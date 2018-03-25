@@ -4,7 +4,7 @@ const Grid = styled.div`
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(2, [col] 1fr);
-  grid-template-rows: repeat(8, [row] auto);
+  grid-template-rows: repeat(7, [row] auto);
 `
 
 const Box = styled.div`

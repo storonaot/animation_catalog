@@ -51,13 +51,17 @@ class SeasonForm extends Component<Props> {
                 floatingLabelText="Название сезона"
               />
             </Box>
-            <Box controls>
-              <RaisedButton type="submit" label="Сохранить" secondary />
+            <Box actions>
               <RaisedButton
                 type="button"
                 onClick={onClose}
                 label="Отменить"
                 primary
+              />
+              <RaisedButton
+                type="submit"
+                label="Сохранить"
+                secondary
                 style={{ marginLeft: 15 }}
               />
             </Box>
