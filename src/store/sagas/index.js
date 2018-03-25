@@ -17,7 +17,6 @@ import {
   watchCreateStudios,
   watchRemoveStudio
 } from './studios'
-import watchRemoveImage from './images'
 import {
   watchCreateSeason,
   watchFetchSeasons,
@@ -50,8 +49,6 @@ export default function* rootSaga() {
     watchFetchStudios(),
     watchCreateStudios(),
     watchRemoveStudio(),
-
-    watchRemoveImage(),
 
     watchFetchSeasons(),
     watchCreateSeason(),

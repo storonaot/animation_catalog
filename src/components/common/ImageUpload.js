@@ -4,13 +4,8 @@ import Dropzone from 'react-dropzone'
 import IconButton from 'material-ui/IconButton'
 import ContentClear from 'material-ui/svg-icons/content/clear'
 
-import { removeImage } from 'store/actions/images'
-
-import { connect } from 'react-redux'
-
 type Props = {
   input: Object<{ onChange: Function }>,
-  onRemoveImage: Function,
 }
 
 class ImageUpload extends Component<Props> {
@@ -52,15 +47,10 @@ class ImageUpload extends Component<Props> {
   }
 
   removeImage() {
-    const { onRemoveImage, input: { onChange, value: { _id } } } = this.props
+    const { input: { onChange } } = this.props
 
     this.setState({ file: null, imagePreviewUrl: null }, () => {
-      const successCallback = () => {
-        onChange(null)
-      }
-      if (_id) {
-        onRemoveImage(_id, successCallback)
-      }
+      onChange(null)
     })
   }
 
@@ -131,10 +121,4 @@ class ImageUpload extends Component<Props> {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onRemoveImage: (id, successCallback) => {
-    dispatch(removeImage(id, successCallback))
-  }
-})
-
-export default connect(null, mapDispatchToProps)(ImageUpload)
+export default ImageUpload

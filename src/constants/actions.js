@@ -39,9 +39,6 @@ export const CREATE_STUDIO_DONE = Symbol('CREATE_STUDIO_DONE')
 export const REMOVE_STUDIO = Symbol('REMOVE_STUDIO')
 export const REMOVE_STUDIO_DONE = Symbol('REMOVE_STUDIO_DONE')
 
-export const REMOVE_IMAGE = Symbol('REMOVE_IMAGE')
-export const REMOVE_IMAGE_DONE = Symbol('REMOVE_IMAGE_DONE')
-
 export const FETCH_SEASONS = Symbol('FETCH_SEASONS')
 export const FETCH_SEASONS_DONE = Symbol('FETCH_SEASONS_DONE')
 export const FETCH_SEASON = Symbol('FETCH_SEASON')

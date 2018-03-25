@@ -2,7 +2,15 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector, reset, isDirty } from 'redux-form'
 import createValidation from 'utils/validator'
-import { REQUIRED } from 'constants/validation'
+import {
+  REQUIRED,
+  STRING_MAX_LENGTH,
+  STRING_MIN_LENGTH
+} from 'constants/validation'
+import {
+  SERIAL_DESCRIPTION_MIN_LENGTH,
+  SERIAL_DESCRIPTION_MAX_LENGTH
+} from 'constants/index'
 
 import { differenceBy as _differenceBy } from 'lodash'
 
@@ -174,7 +182,19 @@ const SerialFormRedux = reduxForm({
     name: [REQUIRED],
     originalName: [REQUIRED],
     countries: [REQUIRED],
-    directors: [REQUIRED]
+    directors: [REQUIRED],
+    description: [
+      ({ description }) =>
+        STRING_MAX_LENGTH({
+          value: description,
+          maxLength: SERIAL_DESCRIPTION_MAX_LENGTH
+        }),
+      ({ description }) =>
+        STRING_MIN_LENGTH({
+          value: description,
+          minLength: SERIAL_DESCRIPTION_MIN_LENGTH
+        })
+    ]
   }),
   enableReinitialize: true
 })(SerialForm)

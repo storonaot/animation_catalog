@@ -23,6 +23,8 @@ const Dialog = ({
     modal={modal}
     open={showed}
     onRequestClose={onClose}
+    autoDetectWindowHeight={false}
+    style={{ overflowY: 'auto' }}
   >
     {children}
   </DialogMUI>
