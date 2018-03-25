@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { Tooltip } from 'react-tippy'
+
 import { Box } from 'components/grids/CoversGrid'
 import getCover from 'utils/cover'
 import cropper from 'utils/cropper'
@@ -63,8 +65,11 @@ const Cover = ({
       }}
     />
     <Link to={showPath} style={nameLinkStyle}>
-      <span style={nameStyle}>{cropper(name, 25)}</span>
+      <Tooltip title={name} style={nameStyle}>
+        <span>{cropper(name, 25)}</span>
+      </Tooltip>
     </Link>
+
   </Box>
 )
 

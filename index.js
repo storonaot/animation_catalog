@@ -1,5 +1,6 @@
 // @flow
 import 'css-wipe'
+import 'react-tippy/dist/tippy.css'
 import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
