@@ -30,8 +30,8 @@ class SeasonPage extends Component<Props> {
     onFetchSeason(id)
   }
 
-  showForm(episodeId) {
-    if (episodeId) console.log('showForm', episodeId)
+  showForm() {
+    // if (episodeId) console.log('showForm', episodeId)
     this.setState({ formOpened: true })
   }
 
