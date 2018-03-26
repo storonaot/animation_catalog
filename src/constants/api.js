@@ -22,3 +22,4 @@ export const GET_SEASONS = serialId => `/seasons/${serialId}`
 export const CREATE_SEASON = '/seasons/new'
 export const UPDATE_SEASON = seasonId => `/seasons/${seasonId}`
 export const REMOVE_SEASON = seasonId => `/seasons/${seasonId}`
+export const GET_SEASON = seasonId => `/seasons/${seasonId}/show`

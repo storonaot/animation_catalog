@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector, reset, isDirty } from 'redux-form'
-import createValidation from 'utils/validator'
+
+// constants
 import {
   REQUIRED,
   STRING_MAX_LENGTH,
@@ -12,12 +13,12 @@ import {
   SERIAL_DESCRIPTION_MAX_LENGTH
 } from 'constants/index'
 
-import { differenceBy as _differenceBy } from 'lodash'
-
+// actions
 import { fetchDirectors } from 'store/actions/directors'
 import { fetchStudios } from 'store/actions/studios'
 import { fetchCountries } from 'store/actions/countries'
 
+// components
 import RaisedButton from 'material-ui/RaisedButton'
 import {
   TextField,
@@ -27,23 +28,31 @@ import {
 } from 'components/common'
 import { Grid, Box } from 'components/grids/SerialFormGrid'
 
+import { differenceBy as _differenceBy } from 'lodash'
+import createValidation from 'utils/validator'
+
 type Props = {
   initialize: Function,
-  initialValues?: Object,
   handleSubmit: Function,
+  onClose: Function,
+
   sendData: Function,
   onFetchCountries: Function,
-  countries: Array,
-  selectedCountries: Array,
   onFetchDirectors: Function,
-  directors: Array,
-  selectedDirectors: Array,
   onFetchStudios: Function,
+
+  countries: Array,
+  directors: Array,
   studios: Array,
+
+  selectedCountries: Array,
+  selectedDirectors: Array,
   selectedStudios: Array,
+
   dirty: boolean,
+
   showed: boolean,
-  onClose: Function,
+  initialValues?: Object,
 }
 
 class SerialForm extends Component<Props> {

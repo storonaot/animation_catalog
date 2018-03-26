@@ -6,6 +6,8 @@ import {
   CREATE_SEASON_DONE,
   FETCH_SEASONS,
   FETCH_SEASONS_DONE,
+  FETCH_SEASON,
+  FETCH_SEASON_DONE,
   UPDATE_SEASON,
   UPDATE_SEASON_DONE,
   REMOVE_SEASON,
@@ -24,8 +26,19 @@ function* callFetchSeasons(action) {
 function* watchFetchSeasons() {
   yield takeEvery(FETCH_SEASONS, callFetchSeasons)
 }
-
 // fetch all by serial**
+
+// **fetch one
+function* callFetchSeason(action) {
+  const seasonId = action.id
+  const { response, error } = yield call(() => Api.fetchSeason(seasonId))
+  yield handler(response, error, FETCH_SEASON_DONE)
+}
+
+function* watchFetchSeason() {
+  yield takeEvery(FETCH_SEASON, callFetchSeason)
+}
+// **fetch one
 
 // **create
 function* callCreateSeason(action) {
@@ -68,5 +81,6 @@ export {
   watchCreateSeason,
   watchFetchSeasons,
   watchUpdateSeason,
-  watchRemoveSeason
+  watchRemoveSeason,
+  watchFetchSeason
 }

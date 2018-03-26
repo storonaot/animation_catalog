@@ -82,7 +82,7 @@ function* callCreateSerial(action) {
   yield handler(response, error, CREATE_SERIAL_DONE, 'Сериал создан')
 }
 
-function* watchCreateSerial() {
+function* watchCreateSerial(): IterableIterator<ForkEffect> {
   yield takeEvery(CREATE_SERIAL, callCreateSerial)
 }
 // create**
@@ -94,7 +94,7 @@ function* callRemoveSerial(action) {
   yield handler(response, error, REMOVE_SERIAL_DONE, 'Сериал удален')
 }
 
-function* watchRemoveSerial() {
+function* watchRemoveSerial(): IterableIterator<ForkEffect> {
   yield takeEvery(REMOVE_SERIAL, callRemoveSerial)
 }
 // delete**
