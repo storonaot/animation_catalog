@@ -24,6 +24,13 @@ import {
   watchRemoveSeason,
   watchFetchSeason
 } from './seasons'
+import {
+  watchFetchEpisodes,
+  watchFetchEpisode,
+  watchCreateEpisode,
+  watchUpdateEpisode,
+  watchRemoveEpisode
+} from './episodes'
 
 export function* helloSaga() {
   yield console.log('Hello Sagas!')
@@ -56,6 +63,12 @@ export default function* rootSaga() {
     watchFetchSeason(),
     watchCreateSeason(),
     watchUpdateSeason(),
-    watchRemoveSeason()
+    watchRemoveSeason(),
+
+    watchFetchEpisodes(),
+    watchFetchEpisode(),
+    watchCreateEpisode(),
+    watchUpdateEpisode(),
+    watchRemoveEpisode()
   ])
 }

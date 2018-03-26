@@ -6,14 +6,21 @@ import {
   Dialog,
   ImageUpload,
   TextField,
-  AutoCompleteWithTags
+  AutoCompleteWithTags,
+  AutoComplete,
+  DatePicker,
+  TimePicker,
+  Select,
+  ImagesUpload
 } from 'components/common'
+import RaisedButton from 'material-ui/RaisedButton'
 
 type Props = {
   sendData: Function,
   onClose: Function,
   handleSubmit: Function,
   showed: boolean,
+  dirty: boolean,
 }
 
 class EpisodeForm extends Component<Props> {
@@ -23,7 +30,7 @@ class EpisodeForm extends Component<Props> {
   }
 
   render() {
-    const { sendData, showed, onClose, handleSubmit } = this.props
+    const { sendData, showed, onClose, handleSubmit, dirty } = this.props
     return (
       <Dialog showed={showed} onClose={onClose}>
         <form onSubmit={handleSubmit(sendData)}>
@@ -70,6 +77,46 @@ class EpisodeForm extends Component<Props> {
             floatingLabelText="Переводы"
             tagsList={[]}
           />
+          <Field
+            name="releaseDate"
+            component={DatePicker}
+            floatingLabelText="Дата выхода"
+          />
+          <Field
+            name="lengthMs"
+            component={TimePicker}
+            floatingLabelText="Длительность"
+          />
+          <Field
+            name="langOriginal"
+            component={AutoComplete}
+            floatingLabelText="Язык оригинала"
+            dataSource={[]}
+          />
+          <Field
+            name="videoformat"
+            component={Select}
+            floatingLabelText="Формат видео"
+            options={[]}
+            currentValue={null}
+            onChange={() => {}}
+          />
+          <Field name="screens" component={ImagesUpload} />
+          <div>
+            <RaisedButton
+              type="button"
+              label="Отмениь"
+              primary
+              onClick={onClose}
+              style={{ marginRight: 10 }}
+            />
+            <RaisedButton
+              disabled={!dirty}
+              type="submit"
+              label="Сохранить"
+              secondary
+            />
+          </div>
         </form>
       </Dialog>
     )
@@ -95,31 +142,10 @@ export default connect(mapStateToProps)(EpisodeFormRedux)
 // sizeMb -> integer
 // season
 // serial
-// subtitles -> массив
-// translations -> массив
-
-// const EpisodeShema = new Schema(
-//   {
-//     releaseDate: {
-//       type: Date,
-//       required: true
-//     },
-//     lengthMs: {
-//       type: Number,
-//       required: true,
-//       min: 0
-//     },
-//     screens: [{ type: Schema.ObjectId, ref: 'Image' }], // скриншоты
-//     langOriginal: { type: Schema.ObjectId, ref: 'Language' }, // язык оригинала
-//     translations: [{ type: Schema.ObjectId, ref: 'Translation' }], // авторские переводы
-//     directors: [{ type: Schema.ObjectId, ref: 'Director' }], // режиссеры для к/м и полного метра
-//     countries: [{ type: Schema.ObjectId, ref: 'Country' }], // страны для к/м и полного метра
-//     studios: [{ type: Schema.ObjectId, ref: 'Studio' }], // студии для к/м и полного метра
-//     videoformat: {
-//       type: Schema.ObjectId,
-//       ref: 'Videoformat',
-//       required: true
-//     }
-//   },
-//   { collection: 'episode' }
-// )
+// subtitles -> array
+// translations -> array
+// releaseDate -> date required
+// lengthMs -> format to ms required
+// langOriginal -> required
+// videoformat
+// screens -> array

@@ -4,6 +4,7 @@ import { fetchSeason } from 'store/actions/seasons'
 import { GoBack, AddBtn } from 'components/common'
 import Season from 'components/Season'
 import EpisodesList from 'components/EpisodesList'
+import EpisodeForm from 'components/forms/EpisodeForm'
 
 type Props = {
   match: Object,
@@ -21,6 +22,7 @@ class SeasonPage extends Component<Props> {
     }
 
     this.showForm = this.showForm.bind(this)
+    this.closeForm = this.closeForm.bind(this)
   }
 
   componentDidMount() {
@@ -33,7 +35,16 @@ class SeasonPage extends Component<Props> {
     this.setState({ formOpened: true })
   }
 
+  closeForm() {
+    this.setState({ formOpened: false, currentSeason: null })
+  }
+
+  send(data) {
+    console.log('send', data)
+  }
+
   render() {
+    const { formOpened, currentEpisode } = this.state
     const { season, episodes } = this.props
     const serialId = season ? season.serial._id : null
     if (season) {
@@ -48,7 +59,18 @@ class SeasonPage extends Component<Props> {
           <br />
           <h1>Сезоны: </h1>
           <AddBtn handleClick={this.showForm} />
-          <EpisodesList episodes={episodes} />
+          <EpisodesList
+            episodes={episodes}
+            removeEpisode={() => {}}
+            editEpisode={() => {}}
+          />
+          {formOpened &&
+            <EpisodeForm
+              sendData={this.send}
+              showed={formOpened}
+              onClose={this.closeForm}
+              initialValues={currentEpisode}
+            />}
         </div>
       )
     }

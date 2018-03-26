@@ -10,6 +10,8 @@ import directors from './directors'
 import studios from './studios'
 import seasons from './seasons'
 import season from './season'
+import episode from './episode'
+import episodes from './episodes'
 
 export default combineReducers({
   router: routerReducer,
@@ -21,5 +23,7 @@ export default combineReducers({
   directors,
   studios,
   seasons,
-  season
+  season,
+  episode,
+  episodes
 })
