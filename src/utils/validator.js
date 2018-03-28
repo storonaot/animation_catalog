@@ -22,7 +22,7 @@ const isPresented = (value) => {
   return !!value
 }
 
-const isInteger = (value) => {
+export const isInteger = (value) => {
   const val = Number(value)
   if (isNaN(val)) return false
   if (val < 0) return false

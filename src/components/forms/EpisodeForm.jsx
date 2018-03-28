@@ -83,7 +83,7 @@ class EpisodeForm extends Component<Props> {
             floatingLabelText="Дата выхода"
           />
           <Field
-            name="lengthMs"
+            name="timeTrack"
             component={TimePicker}
             floatingLabelText="Длительность"
           />

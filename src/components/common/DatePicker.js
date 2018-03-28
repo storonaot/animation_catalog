@@ -13,6 +13,8 @@ type Props = {
     valid: boolean,
     error: string,
   }>,
+  mode: string,
+  cancelLabel: string,
 }
 
 const DatePicker = ({
@@ -21,7 +23,9 @@ const DatePicker = ({
   minDate,
   fullWidth,
   input,
-  meta
+  meta,
+  mode,
+  cancelLabel
 }: Props) => {
   const errorText = getErrorText(meta)
 
@@ -37,6 +41,8 @@ const DatePicker = ({
       minDate={minDate}
       fullWidth={fullWidth}
       errorText={errorText}
+      mode={mode}
+      cancelLabel={cancelLabel}
     />
   )
 }
@@ -44,7 +50,9 @@ const DatePicker = ({
 DatePicker.defaultProps = {
   autoOk: true,
   minDate: new Date(),
-  fullWidth: true
+  fullWidth: true,
+  mode: 'landscape',
+  cancelLabel: 'Отменить'
 }
 
 export default DatePicker

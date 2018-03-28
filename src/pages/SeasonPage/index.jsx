@@ -17,7 +17,7 @@ class SeasonPage extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {
-      formOpened: false,
+      formOpened: true,
       currentEpisode: null
     }
 
