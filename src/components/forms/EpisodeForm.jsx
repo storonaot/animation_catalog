@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, isDirty } from 'redux-form'
+import { Grid, Box } from 'components/grids/EpisodeGrid'
 
 import {
   Dialog,
@@ -34,89 +35,121 @@ class EpisodeForm extends Component<Props> {
     return (
       <Dialog showed={showed} onClose={onClose}>
         <form onSubmit={handleSubmit(sendData)}>
-          <Field name="cover" component={ImageUpload} />
-          <Field
-            name="number"
-            component={TextField}
-            floatingLabelText="Номер эпизода"
-          />
-          <Field
-            name="name"
-            component={TextField}
-            floatingLabelText="Название эпизода"
-          />
-          <Field
-            name="originalName"
-            component={TextField}
-            type="text"
-            floatingLabelText="Оригинальное название эпизода"
-          />
-          <Field
-            name="description"
-            component={TextField}
-            type="text"
-            floatingLabelText="Описание эпизода"
-            multiLine
-          />
-          <Field
-            name="number"
-            component={TextField}
-            floatingLabelText="Размер в мегабайтах"
-          />
-          <Field
-            component={AutoCompleteWithTags}
-            dataSource={[]}
-            name="subtitles"
-            floatingLabelText="Субтитры"
-            tagsList={[]}
-          />
-          <Field
-            component={AutoCompleteWithTags}
-            dataSource={[]}
-            name="translations"
-            floatingLabelText="Переводы"
-            tagsList={[]}
-          />
-          <Field
-            name="releaseDate"
-            component={DatePicker}
-            floatingLabelText="Дата выхода"
-          />
-          <Field
-            name="timeTrack"
-            component={TimePicker}
-            floatingLabelText="Длительность"
-          />
-          <Field
-            name="langOriginal"
-            component={AutoComplete}
-            floatingLabelText="Язык оригинала"
-            dataSource={[]}
-          />
-          <Field
-            name="videoformat"
-            component={Select}
-            floatingLabelText="Формат видео"
-            options={[]}
-            currentValue={null}
-            onChange={() => {}}
-          />
-          <Field name="screens" component={ImagesUpload} />
-          <div>
-            <RaisedButton
-              type="button"
-              label="Отмениь"
-              primary
-              onClick={onClose}
-              style={{ marginRight: 10 }}
-            />
-            <RaisedButton
-              disabled={!dirty}
-              type="submit"
-              label="Сохранить"
-              secondary
-            />
-          </div>
+          <Grid>
+            <Box cover>
+              <Field name="cover" component={ImageUpload} />
+            </Box>
+            <Box number>
+              <Field
+                name="number"
+                component={TextField}
+                floatingLabelText="Номер эпизода"
+              />
+            </Box>
+            <Box isName>
+              <Field
+                name="name"
+                component={TextField}
+                floatingLabelText="Название эпизода"
+              />
+            </Box>
+            <Box originalName>
+              <Field
+                name="originalName"
+                component={TextField}
+                type="text"
+                floatingLabelText="Оригинальное название эпизода"
+              />
+            </Box>
+            <Box description>
+              <Field
+                name="description"
+                component={TextField}
+                type="text"
+                floatingLabelText="Описание эпизода"
+                multiLine
+              />
+            </Box>
+            <Box langOriginal>
+              <Field
+                name="langOriginal"
+                component={AutoComplete}
+                floatingLabelText="Язык оригинала"
+                dataSource={[]}
+              />
+            </Box>
+            <Box translations>
+
+              <Field
+                component={AutoCompleteWithTags}
+                dataSource={[]}
+                name="translations"
+                floatingLabelText="Переводы"
+                tagsList={[]}
+              />
+            </Box>
+            <Box subtitles>
+              <Field
+                component={AutoCompleteWithTags}
+                dataSource={[]}
+                name="subtitles"
+                floatingLabelText="Субтитры"
+                tagsList={[]}
+              />
+            </Box>
+            <Box releaseDate>
+              <Field
+                name="releaseDate"
+                component={DatePicker}
+                floatingLabelText="Дата выхода"
+              />
+            </Box>
+            <Box timeTrack>
+              <Field
+                name="timeTrack"
+                component={TimePicker}
+                hintText="Длительность (h:m)"
+              />
+            </Box>
+            <Box videoformat>
+              <Field
+                name="videoformat"
+                component={Select}
+                floatingLabelText="Формат видео"
+                options={[]}
+                currentValue={null}
+                onChange={() => {}}
+              />
+            </Box>
+            <Box sizeMb>
+              <Field
+                name="sizeMb"
+                component={TextField}
+                floatingLabelText="Размер в Mb"
+                type="text"
+              />
+            </Box>
+            <Box screens>
+              <Field name="screens" component={ImagesUpload} />
+            </Box>
+            <Box actions>
+              <div>
+                <RaisedButton
+                  type="button"
+                  label="Отмениь"
+                  primary
+                  onClick={onClose}
+                  style={{ marginRight: 10 }}
+                />
+                <RaisedButton
+                  disabled={!dirty}
+                  type="submit"
+                  label="Сохранить"
+                  secondary
+                />
+              </div>
+            </Box>
+          </Grid>
         </form>
       </Dialog>
     )
