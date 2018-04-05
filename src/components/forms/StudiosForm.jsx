@@ -20,12 +20,12 @@ type Props = {
 }
 
 class StudiosForm extends Component<Props> {
-  componentDidMount() {
+  componentDidMount () {
     const { studios, onFetchStudios } = this.props
     if (!studios.length) onFetchStudios()
   }
 
-  render() {
+  render () {
     const { studios, onRemoveStudio, onCreateStudio } = this.props
 
     const validate = createValidation({
@@ -38,7 +38,7 @@ class StudiosForm extends Component<Props> {
         sendData={onCreateStudio}
         onRemoveTag={onRemoveStudio}
         tags={studios}
-        form="StudiosForm"
+        form='StudiosForm'
         validate={validate}
       />
     )
@@ -53,10 +53,10 @@ const mapDispatchToProps = dispatch => ({
   onFetchStudios: () => {
     dispatch(fetchStudios())
   },
-  onCreateStudio: (data) => {
+  onCreateStudio: data => {
     dispatch(createStudio(data))
   },
-  onRemoveStudio: (id) => {
+  onRemoveStudio: id => {
     dispatch(removeStudio(id))
   }
 })

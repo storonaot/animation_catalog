@@ -8,10 +8,7 @@ import {
   STRING_MAX_LENGTH,
   STRING_MIN_LENGTH
 } from 'constants/validation'
-import {
-  SERIAL_DESCRIPTION_MIN_LENGTH,
-  SERIAL_DESCRIPTION_MAX_LENGTH
-} from 'constants/index'
+import { DESCRIPTION_MIN_LENGTH, DESCRIPTION_MAX_LENGTH } from 'constants/index'
 
 // actions
 import { fetchDirectors } from 'store/actions/directors'
@@ -190,12 +187,12 @@ const SerialFormRedux = reduxForm({
       ({ description }) =>
         STRING_MAX_LENGTH({
           value: description,
-          maxLength: SERIAL_DESCRIPTION_MAX_LENGTH
+          maxLength: DESCRIPTION_MAX_LENGTH
         }),
       ({ description }) =>
         STRING_MIN_LENGTH({
           value: description,
-          minLength: SERIAL_DESCRIPTION_MIN_LENGTH
+          minLength: DESCRIPTION_MIN_LENGTH
         })
     ]
   }),

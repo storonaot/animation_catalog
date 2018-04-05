@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm, isDirty } from 'redux-form'
+import { Field, reduxForm, isDirty, FieldArray } from 'redux-form'
 import { Grid, Box } from 'components/grids/EpisodeGrid'
 
 import {
@@ -16,6 +16,16 @@ import {
 } from 'components/common'
 import RaisedButton from 'material-ui/RaisedButton'
 
+import {
+  INTEGER,
+  REQUIRED,
+  STRING_MAX_LENGTH,
+  STRING_MIN_LENGTH
+} from 'constants/validation'
+import { DESCRIPTION_MIN_LENGTH, DESCRIPTION_MAX_LENGTH } from 'constants/index'
+
+import createValidation from 'utils/validator'
+
 type Props = {
   sendData: Function,
   onClose: Function,
@@ -25,56 +35,56 @@ type Props = {
 }
 
 class EpisodeForm extends Component<Props> {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {}
   }
 
-  render() {
+  render () {
     const { sendData, showed, onClose, handleSubmit, dirty } = this.props
     return (
       <Dialog showed={showed} onClose={onClose}>
         <form onSubmit={handleSubmit(sendData)}>
           <Grid>
             <Box cover>
-              <Field name="cover" component={ImageUpload} />
+              <Field name='cover' component={ImageUpload} />
             </Box>
             <Box number>
               <Field
-                name="number"
+                name='number'
                 component={TextField}
-                floatingLabelText="Номер эпизода"
+                floatingLabelText='Номер эпизода'
               />
             </Box>
             <Box isName>
               <Field
-                name="name"
+                name='name'
                 component={TextField}
-                floatingLabelText="Название эпизода"
+                floatingLabelText='Название эпизода'
               />
             </Box>
             <Box originalName>
               <Field
-                name="originalName"
+                name='originalName'
                 component={TextField}
-                type="text"
-                floatingLabelText="Оригинальное название эпизода"
+                type='text'
+                floatingLabelText='Оригинальное название эпизода'
               />
             </Box>
             <Box description>
               <Field
-                name="description"
+                name='description'
                 component={TextField}
-                type="text"
-                floatingLabelText="Описание эпизода"
+                type='text'
+                floatingLabelText='Описание эпизода'
                 multiLine
               />
             </Box>
             <Box langOriginal>
               <Field
-                name="langOriginal"
+                name='langOriginal'
                 component={AutoComplete}
-                floatingLabelText="Язык оригинала"
+                floatingLabelText='Язык оригинала'
                 dataSource={[]}
               />
             </Box>
@@ -83,8 +93,8 @@ class EpisodeForm extends Component<Props> {
               <Field
                 component={AutoCompleteWithTags}
                 dataSource={[]}
-                name="translations"
-                floatingLabelText="Переводы"
+                name='translations'
+                floatingLabelText='Переводы'
                 tagsList={[]}
               />
             </Box>
@@ -92,30 +102,30 @@ class EpisodeForm extends Component<Props> {
               <Field
                 component={AutoCompleteWithTags}
                 dataSource={[]}
-                name="subtitles"
-                floatingLabelText="Субтитры"
+                name='subtitles'
+                floatingLabelText='Субтитры'
                 tagsList={[]}
               />
             </Box>
             <Box releaseDate>
               <Field
-                name="releaseDate"
+                name='releaseDate'
                 component={DatePicker}
-                floatingLabelText="Дата выхода"
+                floatingLabelText='Дата выхода'
               />
             </Box>
             <Box timeTrack>
               <Field
-                name="timeTrack"
+                name='timeTrack'
                 component={TimePicker}
-                hintText="Длительность (h:m)"
+                hintText='Длительность (h:m)'
               />
             </Box>
             <Box videoformat>
               <Field
-                name="videoformat"
+                name='videoformat'
                 component={Select}
-                floatingLabelText="Формат видео"
+                floatingLabelText='Формат видео'
                 options={[]}
                 currentValue={null}
                 onChange={() => {}}
@@ -123,28 +133,28 @@ class EpisodeForm extends Component<Props> {
             </Box>
             <Box sizeMb>
               <Field
-                name="sizeMb"
+                name='sizeMb'
                 component={TextField}
-                floatingLabelText="Размер в Mb"
-                type="text"
+                floatingLabelText='Размер в Mb'
+                type='text'
               />
             </Box>
             <Box screens>
-              <Field name="screens" component={ImagesUpload} />
+              <FieldArray name='screens' component={ImagesUpload} />
             </Box>
             <Box actions>
               <div>
                 <RaisedButton
-                  type="button"
-                  label="Отмениь"
+                  type='button'
+                  label='Отмениь'
                   primary
                   onClick={onClose}
                   style={{ marginRight: 10 }}
                 />
                 <RaisedButton
                   disabled={!dirty}
-                  type="submit"
-                  label="Сохранить"
+                  type='submit'
+                  label='Сохранить'
                   secondary
                 />
               </div>
@@ -158,6 +168,24 @@ class EpisodeForm extends Component<Props> {
 
 const EpisodeFormRedux = reduxForm({
   form: 'EpisodeForm',
+  validate: createValidation({
+    number: [INTEGER],
+    name: [REQUIRED],
+    originalName: [REQUIRED],
+    description: [
+      ({ description }) =>
+        STRING_MAX_LENGTH({
+          value: description,
+          maxLength: DESCRIPTION_MAX_LENGTH
+        }),
+      ({ description }) =>
+        STRING_MIN_LENGTH({
+          value: description,
+          minLength: DESCRIPTION_MIN_LENGTH
+        })
+    ],
+    sizeMb: [INTEGER]
+  }),
   enableReinitialize: true
 })(EpisodeForm)
 
@@ -167,12 +195,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(EpisodeFormRedux)
 
-// cover
-// number -> integer
-// name -> required
-// originalName -> required
-// description -> 5 - 5000 length
-// sizeMb -> integer
 // season
 // serial
 // subtitles -> array

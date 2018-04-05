@@ -40,6 +40,7 @@ class SeasonPage extends Component<Props> {
   }
 
   send(data) {
+    // TODO: add season and serial ids
     console.log('send', data)
   }
 

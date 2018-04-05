@@ -6,15 +6,13 @@ import ContentClear from 'material-ui/svg-icons/content/clear'
 
 type Props = {
   input: Object<{ onChange: Function }>,
+  onRemove?: Function,
 }
 
 class ImageUpload extends Component<Props> {
   constructor(props) {
     super(props)
-    this.state = {
-      file: null,
-      imagePreviewUrl: null
-    }
+    this.state = {}
 
     this.handleImageUpload = this.handleImageUpload.bind(this)
     this.removeImage = this.removeImage.bind(this)
@@ -23,9 +21,9 @@ class ImageUpload extends Component<Props> {
   getImgUrl() {
     const { input: { value } } = this.props
 
-    return value && value.filename
-      ? `${BASE_URL}/${value.path}`
-      : this.state.imagePreviewUrl
+    console.log('value', value)
+
+    return value && value.filename ? `${BASE_URL}/${value.path}` : value.preview
   }
 
   handleImageUpload(files) {
@@ -33,28 +31,21 @@ class ImageUpload extends Component<Props> {
     const file = files[0]
     const reader = new FileReader()
     reader.onloadend = () => {
-      this.setState(
-        {
-          file,
-          imagePreviewUrl: reader.result
-        },
-        () => {
-          onChange(file)
-        }
-      )
+      onChange(file)
     }
     reader.readAsDataURL(file)
   }
 
   removeImage() {
-    const { input: { onChange } } = this.props
+    const { input: { onChange }, onRemove } = this.props
 
-    this.setState({ file: null, imagePreviewUrl: null }, () => {
-      onChange(null)
-    })
+    if (onRemove) onRemove()
+    else onChange(null)
   }
 
   render() {
+    console.log('render', this.props)
+
     const imageUrl = this.getImgUrl()
 
     const previewStyle = {
