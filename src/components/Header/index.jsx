@@ -13,9 +13,7 @@ const Header = ({ logged, openSidebar, goHome }) => (
     title="Animation Catalog"
     onLeftIconButtonClick={openSidebar}
     iconElementRight={
-      logged
-        ? <AuthControl label="LogOut" />
-        : <div><AuthControl label="LogIn" /><AuthControl label="LogIn" /></div>
+      logged ? <AuthControl label="LogOut" /> : <AuthControl label="LogIn" />
     }
     onTitleClick={goHome}
     titleStyle={titleStyle}

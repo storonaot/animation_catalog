@@ -11,26 +11,27 @@ export const REMOVE_SERIAL = serialId => `/serials/${serialId}`
 // country
 export const GET_COUNTRIES = '/countries'
 export const CREATE_COUNTRY = '/countries/new'
+export const REMOVE_COUNTRY = id => `/countries/${id}`
 
 // translations
 export const GET_TRANSLATIONS = '/translations'
 export const CREATE_TRANSLATION = '/translations/new'
-export const REMOVE_TRANSLATION = translationId =>
-  `/translations/${translationId}`
+export const REMOVE_TRANSLATION = id => `/translations/${id}`
 
 // languages
 export const GET_LANGUAGES = '/languages'
 export const CREATE_LANGUAGE = '/languages/new'
+export const REMOVE_LANGUAGE = id => `/languages/${id}`
 
 // director
 export const GET_DIRECTORS = '/directors'
 export const CREATE_DIRECTOR = '/directors/new'
-export const REMOVE_DIRECTOR = directorId => `/directors/${directorId}`
+export const REMOVE_DIRECTOR = id => `/directors/${id}`
 
 // studio
 export const GET_STUDIOS = '/studios'
 export const CREATE_STUDIO = '/studios/new'
-export const REMOVE_STUDIO = studioId => `/studios/${studioId}`
+export const REMOVE_STUDIO = id => `/studios/${id}`
 
 // serial
 export const GET_SEASONS = serialId => `/seasons/${serialId}`

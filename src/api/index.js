@@ -6,8 +6,6 @@ import seasons from './seasons'
 import translations from './translations'
 import languages from './languages'
 
-console.log('translations', translations)
-
 export default {
   ...serials,
   ...countries,

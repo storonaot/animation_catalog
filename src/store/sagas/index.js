@@ -6,7 +6,11 @@ import {
   watchCreateSerial,
   watchRemoveSerial
 } from './serials'
-import { watchFetchCountries, watchCreateCountry } from './countries'
+import {
+  watchFetchCountries,
+  watchCreateCountry,
+  watchRemoveCountry
+} from './countries'
 import {
   watchFetchDirectors,
   watchCreateDirector,
@@ -36,6 +40,11 @@ import {
   watchCreateTranslation,
   watchRemoveTranslation
 } from './translations'
+import {
+  watchFetchLanguages,
+  watchCreateLanguage,
+  watchRemoveLanguage
+} from './languages'
 
 export function* helloSaga() {
   yield console.log('Hello Sagas!')
@@ -55,6 +64,7 @@ export default function* rootSaga() {
 
     watchFetchCountries(),
     watchCreateCountry(),
+    watchRemoveCountry(),
 
     watchFetchDirectors(),
     watchCreateDirector(),
@@ -78,6 +88,10 @@ export default function* rootSaga() {
 
     watchFetchTranslations(),
     watchCreateTranslation(),
-    watchRemoveTranslation()
+    watchRemoveTranslation(),
+
+    watchFetchLanguages(),
+    watchCreateLanguage(),
+    watchRemoveLanguage()
   ])
 }

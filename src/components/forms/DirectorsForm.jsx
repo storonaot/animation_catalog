@@ -39,7 +39,6 @@ type Props = {
 class DirectorsForm extends Component<Props> {
   constructor(props) {
     super(props)
-    this.state = {}
     this.sendData = this.sendData.bind(this)
   }
   componentDidMount() {

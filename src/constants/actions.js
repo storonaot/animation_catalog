@@ -25,6 +25,8 @@ export const FETCH_COUNTRIES = Symbol('FETCH_COUNTRIES')
 export const FETCH_COUNTRIES_DONE = Symbol('FETCH_COUNTRIES_DONE')
 export const CREATE_COUNTRY = Symbol('CREATE_COUNTRY')
 export const CREATE_COUNTRY_DONE = Symbol('CREATE_COUNTRY_DONE')
+export const REMOVE_COUNTRY = Symbol('REMOVE_COUNTRY')
+export const REMOVE_COUNTRY_DONE = Symbol('REMOVE_COUNTRY_DONE')
 
 // director
 export const FETCH_DIRECTORS = Symbol('FETCH_DIRECTORS')

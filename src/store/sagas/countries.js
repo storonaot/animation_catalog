@@ -5,7 +5,9 @@ import {
   FETCH_COUNTRIES,
   FETCH_COUNTRIES_DONE,
   CREATE_COUNTRY,
-  CREATE_COUNTRY_DONE
+  CREATE_COUNTRY_DONE,
+  REMOVE_COUNTRY,
+  REMOVE_COUNTRY_DONE
 } from 'constants/actions'
 
 import handler from './helpers'
@@ -35,4 +37,17 @@ function* watchCreateCountry() {
 }
 // create**
 
-export { watchFetchCountries, watchCreateCountry }
+// **remove
+function* callRemoveCountry(action) {
+  const countryId = action.payload
+
+  const { response, error } = yield call(() => Api.removeCountry(countryId))
+  yield handler(response, error, REMOVE_COUNTRY_DONE, 'Страна удалена')
+}
+
+function* watchRemoveCountry() {
+  yield takeEvery(REMOVE_COUNTRY, callRemoveCountry)
+}
+// remove**
+
+export { watchFetchCountries, watchCreateCountry, watchRemoveCountry }

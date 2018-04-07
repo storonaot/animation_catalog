@@ -1,4 +1,8 @@
-import { FETCH_COUNTRIES, CREATE_COUNTRY } from 'constants/actions'
+import {
+  FETCH_COUNTRIES,
+  CREATE_COUNTRY,
+  REMOVE_COUNTRY
+} from 'constants/actions'
 
 const fetchCountries = () => (dispatch) => {
   dispatch({
@@ -13,8 +17,13 @@ const createCountry = data => (dispatch) => {
   })
 }
 
-const removeCountry = () => () => {
-  console.log('removeCountry')
+const removeCountry = id => (dispatch) => {
+  console.log('removeCountry', id, REMOVE_COUNTRY)
+
+  dispatch({
+    type: REMOVE_COUNTRY,
+    payload: id
+  })
 }
 
 export { fetchCountries, createCountry, removeCountry }

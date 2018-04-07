@@ -6,10 +6,6 @@ import {
 } from 'constants/api'
 import { onSuccess, onError } from './helpers'
 
-axios.get('/translations').then((res) => {
-  console.log('translations res', res, GET_TRANSLATIONS)
-})
-
 const fetchTranslations = () =>
   axios.get(GET_TRANSLATIONS).then(onSuccess, onError)
 const createTranslation = data =>

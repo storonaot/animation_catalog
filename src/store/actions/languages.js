@@ -4,7 +4,7 @@ import {
   REMOVE_LANGUAGE
 } from 'constants/actions'
 
-const fetchLanguage = () => (dispatch) => {
+const fetchLanguages = () => (dispatch) => {
   dispatch({
     type: FETCH_LANGUAGES
   })
@@ -17,8 +17,11 @@ const createLanguage = data => (dispatch) => {
   })
 }
 
-const removeLanguage = () => () => {
-  console.log('removeLanguage', REMOVE_LANGUAGE)
+const removeLanguage = id => (dispatch) => {
+  dispatch({
+    type: REMOVE_LANGUAGE,
+    payload: id
+  })
 }
 
-export { fetchLanguage, createLanguage, removeLanguage }
+export { fetchLanguages, createLanguage, removeLanguage }

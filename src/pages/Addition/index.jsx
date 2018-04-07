@@ -3,6 +3,7 @@ import DirectorsForm from 'components/forms/DirectorsForm'
 import StudiosForm from 'components/forms/StudiosForm'
 import CountriesForm from 'components/forms/CountriesForm'
 import TranslationsForm from 'components/forms/TranslationsForm'
+import LanguagesForm from 'components/forms/LanguagesForm'
 
 import { Select } from 'components/common'
 
@@ -10,14 +11,15 @@ const SELECT_OPTIONS = [
   { value: 1, label: 'Режиссер' },
   { value: 2, label: 'Страна' },
   { value: 3, label: 'Студия' },
-  { value: 4, label: 'Озвучка' }
+  { value: 4, label: 'Озвучка' },
+  { value: 5, label: 'Язык' }
 ]
 
 class Addition extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentValue: 4
+      currentValue: 5
     }
 
     this.changeForm = this.changeForm.bind(this)
@@ -41,6 +43,7 @@ class Addition extends Component {
         {currentValue === 2 && <CountriesForm />}
         {currentValue === 3 && <StudiosForm />}
         {currentValue === 4 && <TranslationsForm />}
+        {currentValue === 5 && <LanguagesForm />}
       </div>
     )
   }
