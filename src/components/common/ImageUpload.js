@@ -21,8 +21,6 @@ class ImageUpload extends Component<Props> {
   getImgUrl() {
     const { input: { value } } = this.props
 
-    console.log('value', value)
-
     return value && value.filename ? `${BASE_URL}/${value.path}` : value.preview
   }
 
@@ -44,8 +42,6 @@ class ImageUpload extends Component<Props> {
   }
 
   render() {
-    console.log('render', this.props)
-
     const imageUrl = this.getImgUrl()
 
     const previewStyle = {

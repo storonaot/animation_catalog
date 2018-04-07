@@ -3,33 +3,35 @@ import MenuItem from 'material-ui/MenuItem'
 
 type Props = {
   options: Array,
-  currentValue: number,
-  onChange: Function,
   floatingLabelText?: string,
   fullWidth: boolean,
+  input: Object,
 }
 
-const Select = ({
-  options,
-  currentValue,
-  onChange,
-  floatingLabelText,
-  fullWidth
-}: Props) => (
-  <SelectField
-    floatingLabelText={floatingLabelText}
-    value={currentValue}
-    onChange={onChange}
-    fullWidth={fullWidth}
-  >
-    {options.map(({ value, label }) => (
-      <MenuItem key={value} value={value} primaryText={label} />
-    ))}
-  </SelectField>
-)
+const Select = ({ options, floatingLabelText, fullWidth, input }: Props) => {
+  if (options.length) {
+    const currentVal = input.value || options[0]._id
+
+    return (
+      <SelectField
+        floatingLabelText={floatingLabelText}
+        value={currentVal}
+        onChange={(e, index, payload) => input.onChange(payload)}
+        fullWidth={fullWidth}
+      >
+        {options.map(({ _id, name }) => (
+          <MenuItem key={_id} value={_id} primaryText={name} />
+        ))}
+      </SelectField>
+    )
+  }
+
+  return null
+}
 
 Select.defaultProps = {
-  fullWidth: true
+  fullWidth: true,
+  currentValue: null
 }
 
 export default Select

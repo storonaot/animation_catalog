@@ -45,6 +45,11 @@ import {
   watchCreateLanguage,
   watchRemoveLanguage
 } from './languages'
+import {
+  watchFetchVideoformats,
+  watchCreateVideoformat,
+  watchRemoveVideoformat
+} from './videoformats'
 
 export function* helloSaga() {
   yield console.log('Hello Sagas!')
@@ -92,6 +97,10 @@ export default function* rootSaga() {
 
     watchFetchLanguages(),
     watchCreateLanguage(),
-    watchRemoveLanguage()
+    watchRemoveLanguage(),
+
+    watchFetchVideoformats(),
+    watchCreateVideoformat(),
+    watchRemoveVideoformat()
   ])
 }

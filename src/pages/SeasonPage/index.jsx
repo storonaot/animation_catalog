@@ -58,7 +58,7 @@ class SeasonPage extends Component<Props> {
           <Season season={season} />
           <br />
           <br />
-          <h1>Сезоны: </h1>
+          <h1>Серии: </h1>
           <AddBtn handleClick={this.showForm} />
           <EpisodesList
             episodes={episodes}

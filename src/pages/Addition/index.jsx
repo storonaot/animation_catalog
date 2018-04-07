@@ -8,11 +8,11 @@ import LanguagesForm from 'components/forms/LanguagesForm'
 import { Select } from 'components/common'
 
 const SELECT_OPTIONS = [
-  { value: 1, label: 'Режиссер' },
-  { value: 2, label: 'Страна' },
-  { value: 3, label: 'Студия' },
-  { value: 4, label: 'Озвучка' },
-  { value: 5, label: 'Язык' }
+  { _id: 1, name: 'Режиссер' },
+  { _id: 2, name: 'Страна' },
+  { _id: 3, name: 'Студия' },
+  { _id: 4, name: 'Озвучка' },
+  { _id: 5, name: 'Язык' }
 ]
 
 class Addition extends Component {
@@ -25,7 +25,7 @@ class Addition extends Component {
     this.changeForm = this.changeForm.bind(this)
   }
 
-  changeForm(event, index, value) {
+  changeForm(value) {
     this.setState({ currentValue: value })
   }
 
@@ -35,8 +35,7 @@ class Addition extends Component {
       <div>
         <Select
           options={SELECT_OPTIONS}
-          onChange={this.changeForm}
-          currentValue={currentValue}
+          input={{ onChange: this.changeForm, value: currentValue }}
           floatingLabelText="Выбрать форму"
         />
         {currentValue === 1 && <DirectorsForm />}

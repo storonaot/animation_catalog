@@ -1,6 +1,8 @@
 import { getErrorText } from 'utils/validator'
 import DatePickerMUI from 'material-ui/DatePicker'
 
+const DateTimeFormat = global.Intl.DateTimeFormat
+
 type Props = {
   autoOk: boolean,
   floatingLabelText?: string,
@@ -43,13 +45,15 @@ const DatePicker = ({
       errorText={errorText}
       mode={mode}
       cancelLabel={cancelLabel}
+      locale="ru"
+      DateTimeFormat={DateTimeFormat}
     />
   )
 }
 
 DatePicker.defaultProps = {
   autoOk: true,
-  minDate: new Date(),
+  minDate: new Date(1900, 0, 1),
   fullWidth: true,
   mode: 'landscape',
   cancelLabel: 'Отменить'

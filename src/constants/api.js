@@ -18,6 +18,11 @@ export const GET_TRANSLATIONS = '/translations'
 export const CREATE_TRANSLATION = '/translations/new'
 export const REMOVE_TRANSLATION = id => `/translations/${id}`
 
+// videoformats
+export const GET_VIDEOFORMATS = '/videoformats'
+export const CREATE_VIDEOFORMAT = '/videoformats/new'
+export const REMOVE_VIDEOFORMAT = id => `/videoformats/${id}`
+
 // languages
 export const GET_LANGUAGES = '/languages'
 export const CREATE_LANGUAGE = '/languages/new'

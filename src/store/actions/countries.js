@@ -18,8 +18,6 @@ const createCountry = data => (dispatch) => {
 }
 
 const removeCountry = id => (dispatch) => {
-  console.log('removeCountry', id, REMOVE_COUNTRY)
-
   dispatch({
     type: REMOVE_COUNTRY,
     payload: id

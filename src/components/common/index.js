@@ -1,6 +1,6 @@
 import Container from './Container'
 import TextField from './TextField'
-import AutoComplete from './AutoComplete'
+
 import TagsList from './TagsList'
 import AutoCompleteWithTags from './AutoCompleteWithTags'
 import Select from './Select'
@@ -12,11 +12,11 @@ import Dialog from './Dialog'
 import DatePicker from './DatePicker'
 import TimePicker from './TimePicker'
 import ImagesUpload from './ImagesUpload'
+import AutoComplete from './AutoComplete'
 
 export {
   Container,
   TextField,
-  AutoComplete,
   TagsList,
   AutoCompleteWithTags,
   Select,
@@ -27,5 +27,6 @@ export {
   Dialog,
   DatePicker,
   TimePicker,
-  ImagesUpload
+  ImagesUpload,
+  AutoComplete
 }

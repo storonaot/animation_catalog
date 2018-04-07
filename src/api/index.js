@@ -5,6 +5,7 @@ import studios from './studios'
 import seasons from './seasons'
 import translations from './translations'
 import languages from './languages'
+import videoformats from './videoformats'
 
 export default {
   ...serials,
@@ -13,5 +14,6 @@ export default {
   ...studios,
   ...seasons,
   ...translations,
-  ...languages
+  ...languages,
+  ...videoformats
 }

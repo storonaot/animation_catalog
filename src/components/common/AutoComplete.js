@@ -2,55 +2,46 @@ import { getErrorText } from 'utils/validator'
 import AutoCompleteMUI from 'material-ui/AutoComplete'
 
 type Props = {
-  dataSource: Array,
-  name: string,
-  floatingLabelText?: string,
-  fullWidth?: boolean,
   input: Object,
-  dataSourceConfig?: Object,
-  maxSearchResults?: number,
-  openOnFocus?: boolean,
+  dataSource: Array,
+  dataSourceConfig: Object,
+  meta: Object,
+  maxSearchResults: number,
+  floatingLabelText: string,
+  fullWidth: boolean,
+  openOnFocus: boolean,
   onNewRequest: Function,
-  searchText: string,
-  onUpdateInput: Function,
-  meta: Object<{
-    touched: Function,
-    submitFailed: boolean,
-    valid: boolean,
-    error: string,
-  }>,
+  searchText?: string,
 }
 
 const AutoComplete = ({
+  input,
   dataSource,
-  name,
+  dataSourceConfig,
+  meta,
+  maxSearchResults,
   floatingLabelText,
   fullWidth,
-  input,
-  dataSourceConfig,
-  maxSearchResults,
   openOnFocus,
   onNewRequest,
-  searchText,
-  onUpdateInput,
-  meta
+  searchText
 }: Props) => {
   const errorText = getErrorText(meta)
+
   return (
     <AutoCompleteMUI
       dataSource={dataSource}
-      name={name}
+      name={input.name}
+      onUpdateInput={input.onChange}
+      filter={AutoCompleteMUI.caseInsensitiveFilter}
+      dataSourceConfig={dataSourceConfig}
+      errorText={errorText}
+      maxSearchResults={maxSearchResults}
       floatingLabelText={floatingLabelText}
       fullWidth={fullWidth}
-      value={input.value}
-      dataSourceConfig={dataSourceConfig}
-      filter={AutoCompleteMUI.caseInsensitiveFilter}
-      onNewRequest={onNewRequest}
-      maxSearchResults={maxSearchResults}
       openOnFocus={openOnFocus}
+      onNewRequest={onNewRequest}
       searchText={searchText}
-      onUpdateInput={onUpdateInput}
-      errorText={errorText}
     />
   )
 }

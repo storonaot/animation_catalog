@@ -1,6 +1,12 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm, isDirty, FieldArray } from 'redux-form'
+import {
+  Field,
+  reduxForm,
+  isDirty,
+  FieldArray,
+  formValueSelector
+} from 'redux-form'
 import { Grid, Box } from 'components/grids/EpisodeGrid'
 
 import {
@@ -8,11 +14,11 @@ import {
   ImageUpload,
   TextField,
   AutoCompleteWithTags,
-  AutoComplete,
   DatePicker,
   TimePicker,
   Select,
-  ImagesUpload
+  ImagesUpload,
+  AutoComplete
 } from 'components/common'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -24,7 +30,13 @@ import {
 } from 'constants/validation'
 import { DESCRIPTION_MIN_LENGTH, DESCRIPTION_MAX_LENGTH } from 'constants/index'
 
+import { differenceBy as _differenceBy } from 'lodash'
 import createValidation from 'utils/validator'
+
+// actions
+import { fetchLanguages } from 'store/actions/languages'
+import { fetchTranslations } from 'store/actions/translations'
+import { fetchVideoformats } from 'store/actions/videoformats'
 
 type Props = {
   sendData: Function,
@@ -32,128 +44,186 @@ type Props = {
   handleSubmit: Function,
   showed: boolean,
   dirty: boolean,
+  languages: Array,
+  translations: Array,
+  videoformats: Array,
+  selectedVideoformats: Array,
+  onFetchLanguages: Function,
+  onFetchTranslations: Function,
+  onFetchVideoformats: Function,
+  initialValues?: Object,
+  initialize: Function,
+  selectedLanguages: Array,
+  selectedSubtitles: Array,
+  translations: Array,
+  selectedTranslations: Array,
 }
 
 class EpisodeForm extends Component<Props> {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {}
   }
 
-  render() {
-    const { sendData, showed, onClose, handleSubmit, dirty } = this.props
+  componentDidMount () {
+    const {
+      initialize,
+      initialValues,
+      languages,
+      translations,
+      videoformats,
+      onFetchLanguages,
+      onFetchTranslations,
+      onFetchVideoformats
+    } = this.props
+
+    if (!languages.length) onFetchLanguages()
+    if (!translations.length) onFetchTranslations()
+    if (!videoformats.length) onFetchVideoformats()
+
+    if (initialValues) initialize(initialValues)
+    else initialize()
+  }
+
+  render () {
+    const {
+      sendData,
+      showed,
+      onClose,
+      handleSubmit,
+      dirty,
+      videoformats,
+      selectedVideoformats,
+      languages,
+      selectedLanguages,
+      selectedSubtitles,
+      translations,
+      selectedTranslations
+    } = this.props
+
+    const filteredVideoformats = _differenceBy(
+      videoformats,
+      selectedVideoformats,
+      '_id'
+    )
+    const filteredLanguages = _differenceBy(languages, selectedLanguages, '_id')
+    const filteredSubtitles = _differenceBy(languages, selectedSubtitles, '_id')
+    const filteredTranslations = _differenceBy(
+      translations,
+      selectedTranslations,
+      '_id'
+    )
+
     return (
       <Dialog showed={showed} onClose={onClose}>
         <form onSubmit={handleSubmit(sendData)}>
           <Grid>
             <Box cover>
-              <Field name="cover" component={ImageUpload} />
+              <Field name='cover' component={ImageUpload} />
             </Box>
             <Box number>
               <Field
-                name="number"
+                name='number'
                 component={TextField}
-                floatingLabelText="Номер эпизода"
+                floatingLabelText='Номер эпизода'
               />
             </Box>
             <Box isName>
               <Field
-                name="name"
+                name='name'
                 component={TextField}
-                floatingLabelText="Название эпизода"
+                floatingLabelText='Название эпизода'
               />
             </Box>
             <Box originalName>
               <Field
-                name="originalName"
+                name='originalName'
                 component={TextField}
-                type="text"
-                floatingLabelText="Оригинальное название эпизода"
+                type='text'
+                floatingLabelText='Оригинальное название эпизода'
               />
             </Box>
             <Box description>
               <Field
-                name="description"
+                name='description'
                 component={TextField}
-                type="text"
-                floatingLabelText="Описание эпизода"
+                type='text'
+                floatingLabelText='Описание эпизода'
                 multiLine
               />
             </Box>
             <Box langOriginal>
               <Field
-                name="langOriginal"
+                name='langOriginal'
                 component={AutoComplete}
-                floatingLabelText="Язык оригинала"
-                dataSource={[]}
+                floatingLabelText='Язык оригинала'
+                dataSource={filteredLanguages}
               />
             </Box>
             <Box translations>
               <Field
                 component={AutoCompleteWithTags}
-                dataSource={[]}
-                name="translations"
-                floatingLabelText="Переводы"
-                tagsList={[]}
+                dataSource={filteredTranslations}
+                name='translations'
+                floatingLabelText='Переводы'
+                tagsList={selectedTranslations}
               />
             </Box>
             <Box subtitles>
               <Field
                 component={AutoCompleteWithTags}
-                dataSource={[]}
-                name="subtitles"
-                floatingLabelText="Субтитры"
-                tagsList={[]}
+                dataSource={filteredSubtitles}
+                name='subtitles'
+                floatingLabelText='Субтитры'
+                tagsList={selectedSubtitles}
               />
             </Box>
             <Box releaseDate>
               <Field
-                name="releaseDate"
+                name='releaseDate'
                 component={DatePicker}
-                floatingLabelText="Дата выхода"
+                floatingLabelText='Дата выхода'
               />
             </Box>
             <Box timeTrack>
               <Field
-                name="timeTrack"
+                name='timeTrack'
                 component={TimePicker}
-                hintText="Длительность (h:m)"
+                hintText='Длительность (h:m)'
               />
             </Box>
             <Box videoformat>
               <Field
-                name="videoformat"
+                name='videoformat'
                 component={Select}
-                floatingLabelText="Формат видео"
-                options={[]}
-                currentValue={null}
-                onChange={() => {}}
+                floatingLabelText='Формат видео'
+                options={filteredVideoformats}
               />
             </Box>
             <Box sizeMb>
               <Field
-                name="sizeMb"
+                name='sizeMb'
                 component={TextField}
-                floatingLabelText="Размер в Mb"
-                type="text"
+                floatingLabelText='Размер в Mb'
+                type='text'
               />
             </Box>
             <Box screens>
-              <FieldArray name="screens" component={ImagesUpload} />
+              <FieldArray name='screens' component={ImagesUpload} />
             </Box>
             <Box actions>
               <div>
                 <RaisedButton
-                  type="button"
-                  label="Отмениь"
+                  type='button'
+                  label='Отменить'
                   primary
                   onClick={onClose}
                   style={{ marginRight: 10 }}
                 />
                 <RaisedButton
                   disabled={!dirty}
-                  type="submit"
-                  label="Сохранить"
+                  type='submit'
+                  label='Сохранить'
                   secondary
                 />
               </div>
@@ -165,6 +235,7 @@ class EpisodeForm extends Component<Props> {
   }
 }
 
+const selector = formValueSelector('EpisodeForm')
 const EpisodeFormRedux = reduxForm({
   form: 'EpisodeForm',
   validate: createValidation({
@@ -192,14 +263,26 @@ const EpisodeFormRedux = reduxForm({
 })(EpisodeForm)
 
 const mapStateToProps = state => ({
+  languages: state.languages,
+  selectedLanguages: selector(state, 'languages') || [],
+  translations: state.translations,
+  selectedTranslations: selector(state, 'translations') || [],
+  videoformats: state.videoformats,
+  selectedVideoformats: selector(state, 'videoformats') || [],
+  selectedSubtitles: selector(state, 'subtitles') || [],
   dirty: isDirty('EpisodeForm')(state)
 })
 
-export default connect(mapStateToProps)(EpisodeFormRedux)
+const mapDispatchToProps = dispatch => ({
+  onFetchLanguages: () => {
+    dispatch(fetchLanguages())
+  },
+  onFetchTranslations: () => {
+    dispatch(fetchTranslations())
+  },
+  onFetchVideoformats: () => {
+    dispatch(fetchVideoformats())
+  }
+})
 
-// season
-// serial
-// subtitles -> array
-// translations -> array
-// langOriginal -> required
-// videoformat
+export default connect(mapStateToProps, mapDispatchToProps)(EpisodeFormRedux)

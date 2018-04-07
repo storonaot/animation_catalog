@@ -50,7 +50,6 @@ export default function ui(state = defaultState, action) {
     case SHOW_SNACKBAR:
       return { ...state, snackbar: { showed: true, message: action.message } }
     case SHOW_HTTP_ERROR_DIALOG: {
-      console.log('SHOW_HTTP_ERROR_DIALOG', action)
       return {
         ...state,
         HTTPErrorDialog: { ...defaultState.HTTPErrorDialog, showed: true }
