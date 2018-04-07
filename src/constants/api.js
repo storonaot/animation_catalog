@@ -12,6 +12,16 @@ export const REMOVE_SERIAL = serialId => `/serials/${serialId}`
 export const GET_COUNTRIES = '/countries'
 export const CREATE_COUNTRY = '/countries/new'
 
+// translations
+export const GET_TRANSLATIONS = '/translations'
+export const CREATE_TRANSLATION = '/translations/new'
+export const REMOVE_TRANSLATION = translationId =>
+  `/translations/${translationId}`
+
+// languages
+export const GET_LANGUAGES = '/languages'
+export const CREATE_LANGUAGE = '/languages/new'
+
 // director
 export const GET_DIRECTORS = '/directors'
 export const CREATE_DIRECTOR = '/directors/new'

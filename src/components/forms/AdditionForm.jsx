@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, reset } from 'redux-form'
 
-import { showDialog } from 'store/actions/ui'
+import { showConfirmDialog } from 'store/actions/ui'
 
 import { TagsList } from 'components/common'
 
@@ -117,7 +117,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(reset(formName))
   },
   onShowDialog: (data) => {
-    dispatch(showDialog(data))
+    dispatch(showConfirmDialog(data))
   }
 })
 

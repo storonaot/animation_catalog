@@ -12,6 +12,8 @@ import seasons from './seasons'
 import season from './season'
 import episode from './episode'
 import episodes from './episodes'
+import translations from './translations'
+import languages from './languages'
 
 export default combineReducers({
   router: routerReducer,
@@ -25,5 +27,7 @@ export default combineReducers({
   seasons,
   season,
   episode,
-  episodes
+  episodes,
+  languages,
+  translations
 })

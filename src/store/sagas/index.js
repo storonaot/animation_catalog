@@ -31,6 +31,11 @@ import {
   watchUpdateEpisode,
   watchRemoveEpisode
 } from './episodes'
+import {
+  watchFetchTranslations,
+  watchCreateTranslation,
+  watchRemoveTranslation
+} from './translations'
 
 export function* helloSaga() {
   yield console.log('Hello Sagas!')
@@ -69,6 +74,10 @@ export default function* rootSaga() {
     watchFetchEpisode(),
     watchCreateEpisode(),
     watchUpdateEpisode(),
-    watchRemoveEpisode()
+    watchRemoveEpisode(),
+
+    watchFetchTranslations(),
+    watchCreateTranslation(),
+    watchRemoveTranslation()
   ])
 }
