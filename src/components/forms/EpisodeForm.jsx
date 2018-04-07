@@ -60,12 +60,12 @@ type Props = {
 }
 
 class EpisodeForm extends Component<Props> {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {}
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const {
       initialize,
       initialValues,
@@ -85,7 +85,7 @@ class EpisodeForm extends Component<Props> {
     else initialize()
   }
 
-  render () {
+  render() {
     const {
       sendData,
       showed,
@@ -119,44 +119,44 @@ class EpisodeForm extends Component<Props> {
         <form onSubmit={handleSubmit(sendData)}>
           <Grid>
             <Box cover>
-              <Field name='cover' component={ImageUpload} />
+              <Field name="cover" component={ImageUpload} />
             </Box>
             <Box number>
               <Field
-                name='number'
+                name="number"
                 component={TextField}
-                floatingLabelText='Номер эпизода'
+                floatingLabelText="Номер эпизода"
               />
             </Box>
             <Box isName>
               <Field
-                name='name'
+                name="name"
                 component={TextField}
-                floatingLabelText='Название эпизода'
+                floatingLabelText="Название эпизода"
               />
             </Box>
             <Box originalName>
               <Field
-                name='originalName'
+                name="originalName"
                 component={TextField}
-                type='text'
-                floatingLabelText='Оригинальное название эпизода'
+                type="text"
+                floatingLabelText="Оригинальное название эпизода"
               />
             </Box>
             <Box description>
               <Field
-                name='description'
+                name="description"
                 component={TextField}
-                type='text'
-                floatingLabelText='Описание эпизода'
+                type="text"
+                floatingLabelText="Описание эпизода"
                 multiLine
               />
             </Box>
             <Box langOriginal>
               <Field
-                name='langOriginal'
+                name="langOriginal"
                 component={AutoComplete}
-                floatingLabelText='Язык оригинала'
+                floatingLabelText="Язык оригинала"
                 dataSource={filteredLanguages}
               />
             </Box>
@@ -164,8 +164,8 @@ class EpisodeForm extends Component<Props> {
               <Field
                 component={AutoCompleteWithTags}
                 dataSource={filteredTranslations}
-                name='translations'
-                floatingLabelText='Переводы'
+                name="translations"
+                floatingLabelText="Переводы"
                 tagsList={selectedTranslations}
               />
             </Box>
@@ -173,57 +173,57 @@ class EpisodeForm extends Component<Props> {
               <Field
                 component={AutoCompleteWithTags}
                 dataSource={filteredSubtitles}
-                name='subtitles'
-                floatingLabelText='Субтитры'
+                name="subtitles"
+                floatingLabelText="Субтитры"
                 tagsList={selectedSubtitles}
               />
             </Box>
             <Box releaseDate>
               <Field
-                name='releaseDate'
+                name="releaseDate"
                 component={DatePicker}
-                floatingLabelText='Дата выхода'
+                floatingLabelText="Дата выхода"
               />
             </Box>
             <Box timeTrack>
               <Field
-                name='timeTrack'
+                name="timeTrack"
                 component={TimePicker}
-                hintText='Длительность (h:m)'
+                hintText="Длительность (h:m)"
               />
             </Box>
             <Box videoformat>
               <Field
-                name='videoformat'
+                name="videoformat"
                 component={Select}
-                floatingLabelText='Формат видео'
+                floatingLabelText="Формат видео"
                 options={filteredVideoformats}
               />
             </Box>
             <Box sizeMb>
               <Field
-                name='sizeMb'
+                name="sizeMb"
                 component={TextField}
-                floatingLabelText='Размер в Mb'
-                type='text'
+                floatingLabelText="Размер в Mb"
+                type="text"
               />
             </Box>
             <Box screens>
-              <FieldArray name='screens' component={ImagesUpload} />
+              <FieldArray name="screens" component={ImagesUpload} />
             </Box>
             <Box actions>
               <div>
                 <RaisedButton
-                  type='button'
-                  label='Отменить'
+                  type="button"
+                  label="Отменить"
                   primary
                   onClick={onClose}
                   style={{ marginRight: 10 }}
                 />
                 <RaisedButton
                   disabled={!dirty}
-                  type='submit'
-                  label='Сохранить'
+                  type="submit"
+                  label="Сохранить"
                   secondary
                 />
               </div>

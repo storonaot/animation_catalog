@@ -1,4 +1,3 @@
-// import { directorsFormatter } from 'utils/formatter'
 import {
   FETCH_SEASONS_DONE,
   CREATE_SEASON_DONE,

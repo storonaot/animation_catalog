@@ -9,7 +9,7 @@ import {
   updateSerial
 } from 'store/actions/serials'
 import { showConfirmDialog } from 'store/actions/ui'
-import { formDataFormatter } from 'utils/formatter'
+import { formDataFormatter } from 'utils/form-helper'
 
 import SerialForm from 'components/forms/SerialForm'
 

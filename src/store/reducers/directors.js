@@ -1,5 +1,5 @@
-import { directorsFormatter, directorFormatter } from 'utils/formatter'
 import { removeObjById } from 'utils/newState'
+import { formatInArr, directorFormatter } from 'utils/data-formatter'
 
 import {
   FETCH_DIRECTORS_DONE,
@@ -11,8 +11,10 @@ const defaultState = []
 
 export default function directors(state = defaultState, action) {
   switch (action.type) {
-    case FETCH_DIRECTORS_DONE:
-      return directorsFormatter(action.result)
+    case FETCH_DIRECTORS_DONE: {
+      const directorsArr = action.result
+      return formatInArr(directorsArr, directorFormatter)
+    }
     case CREATE_DIRECTOR_DONE: {
       const newDirector = directorFormatter(action.result)
       return [...state, newDirector]

@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { formDataFormatter } from 'utils/formatter'
+import { formDataFormatter } from 'utils/form-helper'
 
 // actions
 import { fetchSerial } from 'store/actions/serials'

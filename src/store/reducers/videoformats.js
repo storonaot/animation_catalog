@@ -1,5 +1,5 @@
 import { removeObjById } from 'utils/newState'
-import { videoformatsFormatter, videoformatFormatter } from 'utils/formatter'
+import { formatInArr, videoformatFormatter } from 'utils/data-formatter'
 
 import {
   FETCH_VIDEOFORMATS_DONE,
@@ -12,7 +12,7 @@ const defaultState = []
 export default function videoformats(state = defaultState, action) {
   switch (action.type) {
     case FETCH_VIDEOFORMATS_DONE:
-      return videoformatsFormatter(action.result)
+      return formatInArr(action.result, videoformatFormatter)
     case CREATE_VIDEOFORMAT_DONE: {
       const newVideoformat = videoformatFormatter(action.result)
       return [...state, newVideoformat]

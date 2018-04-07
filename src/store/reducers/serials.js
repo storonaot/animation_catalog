@@ -4,10 +4,12 @@ import {
   CREATE_SERIAL_DONE,
   REMOVE_SERIAL_DONE
 } from 'constants/actions'
+
 import {
-  formatDirestorsInCollection,
-  formatDirectorsInObj
-} from 'utils/formatter'
+  formatInObj,
+  formatInCollection,
+  directorFormatter
+} from 'utils/data-formatter'
 import { removeObjById } from 'utils/newState'
 
 const defaultState = []
@@ -15,11 +17,13 @@ const defaultState = []
 export default function serials(state = defaultState, action) {
   switch (action.type) {
     case FETCH_SERIALS_DONE:
-      return formatDirestorsInCollection(action.result)
+      return formatInCollection(action.result, 'directors', directorFormatter)
     case UPDATE_SERIAL_DONE: {
       const serialId = action.result._id
       const newState = state.map((serial) => {
-        if (serial._id === serialId) return formatDirectorsInObj(action.result)
+        if (serial._id === serialId) {
+          return formatInObj(action.result, 'directors', directorFormatter)
+        }
         return serial
       })
       return newState

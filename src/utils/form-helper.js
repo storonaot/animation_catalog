@@ -1,36 +1,5 @@
 import { forIn as _forIn, unset as _unset } from 'lodash'
 
-// TODO: Подумать как объединить функции форматирования directors и videoformats
-const directorFormatter = ({ name, originalName, ...rest }) => ({
-  name: `${name.first || ''} ${name.last}`,
-  originalName: `${originalName.first || ''} ${originalName.last}`,
-  ...rest
-})
-const directorsFormatter = directors => directors.map(directorFormatter)
-const formatDirectorsInObj = (data) => {
-  const { directors } = data
-  const formattedDirectors = directorsFormatter(directors)
-  return { ...data, directors: formattedDirectors }
-}
-
-const formatDirestorsInCollection = collection =>
-  collection.map(formatDirectorsInObj)
-
-const videoformatFormatter = ({ name, format, ...rest }) => ({
-  name: `${format} ${name}`,
-  ...rest
-})
-const videoformatsFormatter = videoformats =>
-  videoformats.map(videoformatFormatter)
-const formatVideoformatsInObj = (data) => {
-  const { videoformats } = data
-  const formattedVideoformats = videoformatsFormatter(videoformats)
-  return { ...data, directors: formattedVideoformats }
-}
-const formatVideoformatsInCollection = collection =>
-  collection.map(formatVideoformatsInObj)
-// TODO: end
-
 // Необходимо получить массив из айдишников
 // [{ _id: 123, name: 'Name1' }, { _id: 456, name: 'Name2' }] => [123, 456]
 const extractIds = arr => arr.map(({ _id }) => _id)
@@ -73,16 +42,4 @@ const formDataFormatter = (data) => {
   return { data: JSON.stringify(sendData) }
 }
 
-export {
-  directorsFormatter,
-  directorFormatter,
-  extractIds,
-  extractedIdsObj,
-  formDataFormatter,
-  formatDirectorsInObj,
-  formatDirestorsInCollection,
-  videoformatFormatter,
-  videoformatsFormatter,
-  formatVideoformatsInObj,
-  formatVideoformatsInCollection
-}
+export { extractIds, extractedIdsObj, formDataFormatter }
