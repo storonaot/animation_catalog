@@ -21,7 +21,7 @@ type Props = {
   filterFunc: Function,
   form: string,
   onReset: Function,
-  onShowDialog: Function,
+  onShowDialog: Function
 }
 
 class AdditionForm extends Component<Props> {
@@ -53,7 +53,7 @@ class AdditionForm extends Component<Props> {
 
   showDialog(id) {
     const { onShowDialog, onRemoveTag, tags } = this.props
-    const name = tags.find(tag => tag._id === id).name
+    const { name } = tags.find(tag => tag._id === id)
     onShowDialog({
       title: 'Удаление',
       message: `Вы уверены что хотите удалить ${name}?`,
@@ -90,11 +90,7 @@ class AdditionForm extends Component<Props> {
               name="substring"
               floatingLabelText="Фильтр"
             />
-            <IconButton
-              disabled={!substring}
-              tooltip="Очистить"
-              onClick={this.resetSubstring}
-            >
+            <IconButton disabled={!substring} tooltip="Очистить" onClick={this.resetSubstring}>
               <HighlightOff />
             </IconButton>
             <TagsList tags={filteredTags} deleteTag={this.showDialog} />
@@ -106,8 +102,7 @@ class AdditionForm extends Component<Props> {
 }
 
 AdditionForm.defaultProps = {
-  filterFunc: substring => ({ name }) =>
-    name.toLowerCase().match(substring.toLowerCase())
+  filterFunc: substring => ({ name }) => name.toLowerCase().match(substring.toLowerCase())
 }
 
 const AdditionFormRedux = reduxForm()(AdditionForm)

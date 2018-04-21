@@ -6,6 +6,8 @@ import seasons from './seasons'
 import translations from './translations'
 import languages from './languages'
 import videoformats from './videoformats'
+import episodes from './episodes'
+
 
 export default {
   ...serials,
@@ -15,5 +17,6 @@ export default {
   ...seasons,
   ...translations,
   ...languages,
-  ...videoformats
+  ...videoformats,
+  ...episodes
 }

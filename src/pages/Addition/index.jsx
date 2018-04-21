@@ -37,6 +37,7 @@ class Addition extends Component {
           options={SELECT_OPTIONS}
           input={{ onChange: this.changeForm, value: currentValue }}
           floatingLabelText="Выбрать форму"
+          fullWidth={false}
         />
         {currentValue === 1 && <DirectorsForm />}
         {currentValue === 2 && <CountriesForm />}

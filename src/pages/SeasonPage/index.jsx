@@ -1,6 +1,11 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+
+import { formDataFormatter } from 'utils/form-helper'
+
 import { fetchSeason } from 'store/actions/seasons'
+import { createEpisode } from 'store/actions/episodes'
+
 import { GoBack, AddBtn } from 'components/common'
 import Season from 'components/Season'
 import EpisodesList from 'components/EpisodesList'
@@ -11,18 +16,13 @@ type Props = {
   onFetchSeason: Function,
   season?: Object,
   episodes: Array,
+  onCreateEpisode: Function
 }
 
 class SeasonPage extends Component<Props> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      formOpened: true,
-      currentEpisode: null
-    }
-
-    this.showForm = this.showForm.bind(this)
-    this.closeForm = this.closeForm.bind(this)
+  state = {
+    formOpened: true,
+    currentEpisode: null
   }
 
   componentDidMount() {
@@ -30,19 +30,28 @@ class SeasonPage extends Component<Props> {
     onFetchSeason(id)
   }
 
-  showForm() {
-    // if (episodeId) console.log('showForm', episodeId)
+  showForm = () => {
     this.setState({ formOpened: true })
-  }
+  };
 
-  closeForm() {
-    this.setState({ formOpened: false, currentSeason: null })
-  }
+  closeForm = () => {
+    this.setState({ formOpened: false })
+  };
 
-  send(data) {
+  send = (data) => {
     // TODO: add season and serial ids
-    console.log('send', data)
-  }
+
+    console.log('data', data)
+
+    // const { onCreateEpisode, season } = this.props
+
+    // const seasonId = season._id
+    // const serialId = season.serial._id
+
+    // const dataObj = Object.assign(data, { season: seasonId, serial: serialId })
+
+    // onCreateEpisode(formDataFormatter(dataObj))
+  };
 
   render() {
     const { formOpened, currentEpisode } = this.state
@@ -65,13 +74,14 @@ class SeasonPage extends Component<Props> {
             removeEpisode={() => {}}
             editEpisode={() => {}}
           />
-          {formOpened &&
+          {formOpened && (
             <EpisodeForm
               sendData={this.send}
               showed={formOpened}
               onClose={this.closeForm}
               initialValues={currentEpisode}
-            />}
+            />
+          )}
         </div>
       )
     }
@@ -88,6 +98,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onFetchSeason: (id) => {
     dispatch(fetchSeason(id))
+  },
+  onCreateEpisode: (data) => {
+    dispatch(createEpisode(data))
   }
 })
 

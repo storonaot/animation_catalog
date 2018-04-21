@@ -4,7 +4,6 @@ import {
   Field,
   reduxForm,
   isDirty,
-  FieldArray,
   formValueSelector
 } from 'redux-form'
 import { Grid, Box } from 'components/grids/EpisodeGrid'
@@ -17,7 +16,6 @@ import {
   DatePicker,
   TimePicker,
   Select,
-  ImagesUpload,
   AutoComplete
 } from 'components/common'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -208,9 +206,9 @@ class EpisodeForm extends Component<Props> {
                 type="text"
               />
             </Box>
-            <Box screens>
+            {/* <Box screens>
               <FieldArray name="screens" component={ImagesUpload} />
-            </Box>
+            </Box> */}
             <Box actions>
               <div>
                 <RaisedButton

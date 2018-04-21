@@ -76,8 +76,8 @@ class SerialPage extends Component<Props> {
       const { _id } = data
       onUpdateSeason(_id, formDataFormatter(data))
     } else {
-      const hhh = Object.assign(data, { serial: serialId })
-      onCreateSeason(formDataFormatter(hhh))
+      const dataObj = Object.assign(data, { serial: serialId })
+      onCreateSeason(formDataFormatter(dataObj))
     }
     this.closeForm()
   }
@@ -85,7 +85,7 @@ class SerialPage extends Component<Props> {
   showConfirmDialog(seasonId) {
     const { onShowConfirmDialog, seasons, onRemoveSeason } = this.props
 
-    const number = seasons.find(season => season._id === seasonId).number
+    const { number } = seasons.find(season => season._id === seasonId)
 
     onShowConfirmDialog({
       title: 'Удаление',

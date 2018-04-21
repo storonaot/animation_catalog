@@ -15,6 +15,8 @@ const extractIds = arr => arr.map(({ _id }) => _id)
 // }
 
 const extractedIdsObj = (obj) => {
+  console.log('extractedIdsObj obj', obj)
+
   const newObj = {}
   _forIn(obj, (value, key) => {
     if (Array.isArray(value)) {
@@ -30,7 +32,7 @@ const extractedIdsObj = (obj) => {
 
 const formDataFormatter = (data) => {
   if (data.cover instanceof File) {
-    const cover = data.cover
+    const { cover } = data
     _unset(data, 'cover')
     const stringData = JSON.stringify(extractedIdsObj(data))
     const form = new FormData()

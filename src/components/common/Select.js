@@ -4,7 +4,7 @@ import MenuItem from 'material-ui/MenuItem'
 type Props = {
   options: Array,
   floatingLabelText?: string,
-  fullWidth: boolean,
+  fullWidth?: boolean,
   input: Object,
 }
 
@@ -31,7 +31,7 @@ const Select = ({ options, floatingLabelText, fullWidth, input }: Props) => {
 
 Select.defaultProps = {
   fullWidth: true,
-  currentValue: null
+  floatingLabelText: null
 }
 
 export default Select
