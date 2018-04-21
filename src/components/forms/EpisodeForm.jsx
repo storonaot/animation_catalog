@@ -58,11 +58,6 @@ type Props = {
 }
 
 class EpisodeForm extends Component<Props> {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
   componentDidMount() {
     const {
       initialize,

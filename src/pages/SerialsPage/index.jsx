@@ -65,7 +65,7 @@ class SerialsPage extends Component<Props> {
   showConfirmDialog(serialId) {
     const { onShowConfirmDialog, onRemoveSerial, serials } = this.props
 
-    const name = serials.find(serial => serial._id === serialId).name
+    const { name } = serials.find(serial => serial._id === serialId)
 
     onShowConfirmDialog({
       title: 'Удаление',

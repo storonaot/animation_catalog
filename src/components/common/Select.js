@@ -10,12 +10,12 @@ type Props = {
 
 const Select = ({ options, floatingLabelText, fullWidth, input }: Props) => {
   if (options.length) {
-    const currentVal = input.value || options[0]._id
+    // const currentVal = input.value || options[0]._id
 
     return (
       <SelectField
         floatingLabelText={floatingLabelText}
-        value={currentVal}
+        value={input.value}
         onChange={(e, index, payload) => input.onChange(payload)}
         fullWidth={fullWidth}
       >

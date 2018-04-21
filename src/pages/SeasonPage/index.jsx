@@ -39,18 +39,14 @@ class SeasonPage extends Component<Props> {
   };
 
   send = (data) => {
-    // TODO: add season and serial ids
+    const { onCreateEpisode, season } = this.props
 
-    console.log('data', data)
+    const seasonId = season._id
+    const serialId = season.serial._id
 
-    // const { onCreateEpisode, season } = this.props
+    const dataObj = Object.assign(data, { season: seasonId, serial: serialId })
 
-    // const seasonId = season._id
-    // const serialId = season.serial._id
-
-    // const dataObj = Object.assign(data, { season: seasonId, serial: serialId })
-
-    // onCreateEpisode(formDataFormatter(dataObj))
+    onCreateEpisode(formDataFormatter(dataObj))
   };
 
   render() {
