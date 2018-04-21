@@ -29,7 +29,7 @@ class AutoCompleteWithTags extends Component<Props> {
   }
 
   onUpdateInput(value) {
-    this.setState({ searchText: value })
+    this.setState({ searchText: value.name })
   }
 
   onDeleteTag(tagId) {

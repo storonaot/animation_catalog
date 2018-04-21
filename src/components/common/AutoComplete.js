@@ -4,14 +4,14 @@ import AutoCompleteMUI from 'material-ui/AutoComplete'
 type Props = {
   input: Object,
   dataSource: Array,
-  dataSourceConfig: Object,
+  dataSourceConfig?: Object,
   meta: Object,
-  maxSearchResults: number,
+  maxSearchResults?: number,
   floatingLabelText: string,
-  fullWidth: boolean,
-  openOnFocus: boolean,
+  fullWidth?: boolean,
+  openOnFocus?: boolean,
   onNewRequest: Function,
-  searchText?: string,
+  searchText: string,
 }
 
 const AutoComplete = ({
@@ -28,11 +28,17 @@ const AutoComplete = ({
 }: Props) => {
   const errorText = getErrorText(meta)
 
+  const onChange = (currentValue, allItems) => {
+    const key = dataSourceConfig.text
+    const value = allItems.find(item => item[key] === currentValue)
+    input.onChange(value)
+  }
+
   return (
     <AutoCompleteMUI
       dataSource={dataSource}
       name={input.name}
-      onUpdateInput={input.onChange}
+      onUpdateInput={onChange}
       filter={AutoCompleteMUI.caseInsensitiveFilter}
       dataSourceConfig={dataSourceConfig}
       errorText={errorText}
