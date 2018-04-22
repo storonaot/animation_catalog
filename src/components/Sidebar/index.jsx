@@ -6,12 +6,13 @@ import { uniqueId as _uniqueId } from 'lodash'
 const sidebarLinks = [
   { label: 'Home', to: '/' },
   { label: 'Serials', to: '/serials' },
+  { label: 'Films', to: '/films' },
   { label: 'Addition', to: '/addition' }
 ]
 
 type Props = {
   opened: boolean,
-  closeSidebar: Function,
+  closeSidebar: Function
 }
 
 const Sidebar = ({ opened, closeSidebar }: Props) => (

@@ -38,7 +38,7 @@ class SeasonPage extends Component<Props> {
 
   setCurrentEpisode = (episodeId) => {
     const { episodes } = this.props
-    const currentEpisode = episodes.find(season => season._id === episodeId)
+    const currentEpisode = episodes.find(episode => episode._id === episodeId)
     this.setState({ currentEpisode })
   }
 
@@ -70,7 +70,7 @@ class SeasonPage extends Component<Props> {
   showConfirmDialog = (episodeId) => {
     const { onShowConfirmDialog, episodes, onRemoveEpisode } = this.props
 
-    const { name } = episodes.find(season => season._id === episodeId)
+    const { name } = episodes.find(episode => episode._id === episodeId)
 
     onShowConfirmDialog({
       title: 'Удаление',

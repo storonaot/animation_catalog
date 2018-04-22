@@ -15,6 +15,10 @@ import episodes from './episodes'
 import translations from './translations'
 import languages from './languages'
 import videoformats from './videoformats'
+import films from './films'
+import film from './film'
+import dvds from './dvds'
+import dvd from './dvd'
 
 export default combineReducers({
   router: routerReducer,
@@ -31,5 +35,9 @@ export default combineReducers({
   episodes,
   languages,
   translations,
-  videoformats
+  videoformats,
+  films,
+  film,
+  dvds,
+  dvd
 })

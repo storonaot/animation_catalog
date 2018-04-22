@@ -1,10 +1,9 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { differenceBy as _differenceBy } from 'lodash'
-import createValidation from 'utils/validator'
 import { Field, reduxForm, isDirty, formValueSelector } from 'redux-form'
-// import { Grid, Box } from 'components/grids/FilmGrid'
+import { Grid, Box } from 'components/grids/FilmGrid'
 
+// components
 import {
   Dialog,
   ImageUpload,
@@ -17,9 +16,12 @@ import {
 } from 'components/common'
 import RaisedButton from 'material-ui/RaisedButton'
 
+// validation constants
 import { INTEGER, REQUIRED, STRING_MAX_LENGTH, STRING_MIN_LENGTH } from 'constants/validation'
 import { DESCRIPTION_MIN_LENGTH, DESCRIPTION_MAX_LENGTH } from 'constants/index'
+import createValidation from 'utils/validator'
 
+// actions
 import { fetchLanguages } from 'store/actions/languages'
 import { fetchTranslations } from 'store/actions/translations'
 import { fetchDirectors } from 'store/actions/directors'
@@ -27,6 +29,8 @@ import { fetchCountries } from 'store/actions/countries'
 import { fetchStudios } from 'store/actions/studios'
 import { fetchVideoformats } from 'store/actions/videoformats'
 // import { fetchDvds } from 'store/actions/dvds'
+
+import { differenceBy as _differenceBy } from 'lodash'
 
 type Props = {
   showed: boolean,
@@ -100,6 +104,7 @@ class FilmForm extends Component<Props> {
       selectedDvds,
       dirty
     } = this.props
+
     const filteredTranslations = _differenceBy(translations, selectedTranslations, '_id')
     const filteredSubtitles = _differenceBy(languages, selectedSubtitles, '_id')
     const filteredDirectors = _differenceBy(directors, selectedDirectors, '_id')
@@ -110,89 +115,131 @@ class FilmForm extends Component<Props> {
     return (
       <Dialog showed={showed} onClose={onClose}>
         <form onSubmit={handleSubmit(sendData)}>
-          <Field name="cover" component={ImageUpload} />
-          <Field name="name" component={TextField} floatingLabelText="Название фильма" />
-          <Field
-            name="originalName"
-            component={TextField}
-            type="text"
-            floatingLabelText="Оригинальное название фильма"
-          />
-          <Field
-            name="description"
-            component={TextField}
-            type="text"
-            floatingLabelText="Описание эпизода"
-            multiLine
-          />
-          <Field
-            name="langOriginal"
-            component={AutoComplete}
-            floatingLabelText="Язык оригинала"
-            dataSource={languages}
-          />
-          <Field
-            component={AutoCompleteWithTags}
-            dataSource={filteredTranslations}
-            name="translations"
-            floatingLabelText="Переводы"
-            tagsList={selectedTranslations}
-          />
-          <Field
-            component={AutoCompleteWithTags}
-            dataSource={filteredSubtitles}
-            name="subtitles"
-            floatingLabelText="Субтитры"
-            tagsList={selectedSubtitles}
-          />
-          <Field
-            component={AutoCompleteWithTags}
-            dataSource={filteredDirectors}
-            name="directors"
-            floatingLabelText="Режиссеры"
-            tagsList={selectedDirectors}
-          />
-          <Field
-            component={AutoCompleteWithTags}
-            dataSource={filteredCountries}
-            name="countries"
-            floatingLabelText="Страны"
-            tagsList={selectedCountries}
-          />
-          <Field
-            component={AutoCompleteWithTags}
-            dataSource={filteredStudios}
-            name="studios"
-            floatingLabelText="Студии"
-            tagsList={selectedStudios}
-          />
-          <Field name="releaseDate" component={DatePicker} floatingLabelText="Дата выхода" />
-          <Field name="timeTrack" component={TimePicker} hintText="Длительность (h:m)" />
-          <Field
-            name="videoformat"
-            component={Select}
-            floatingLabelText="Формат видео"
-            options={videoformats}
-          />
-          <Field name="sizeMb" component={TextField} floatingLabelText="Размер в Mb" type="text" />
-          <Field
-            component={AutoCompleteWithTags}
-            dataSource={filteredDvds}
-            name="inDvd"
-            floatingLabelText="DVD"
-            tagsList={selectedDvds}
-          />
-          {/* <FieldArray name="screens" component={ImagesUpload} /> */}
-          <div>
-            <RaisedButton
-              type="button"
-              label="Отменить"
-              primary
-              onClick={onClose}
-              style={{ marginRight: 10 }}
-            />
-            <RaisedButton disabled={!dirty} type="submit" label="Сохранить" secondary />
-          </div>
+          <Grid>
+            <Box cover>
+              <Field name="cover" component={ImageUpload} />
+            </Box>
+            <Box isName>
+              <Field name="name" component={TextField} floatingLabelText="Название фильма" />
+            </Box>
+            <Box originalName>
+              <Field
+                name="originalName"
+                component={TextField}
+                type="text"
+                floatingLabelText="Оригинальное название фильма"
+              />
+            </Box>
+            <Box description>
+              <Field
+                name="description"
+                component={TextField}
+                type="text"
+                floatingLabelText="Описание эпизода"
+                multiLine
+              />
+            </Box>
+            <Box directors>
+              <Field
+                component={AutoCompleteWithTags}
+                dataSource={filteredDirectors}
+                name="directors"
+                floatingLabelText="Режиссеры"
+                tagsList={selectedDirectors}
+              />
+            </Box>
+            <Box countries>
+              <Field
+                component={AutoCompleteWithTags}
+                dataSource={filteredCountries}
+                name="countries"
+                floatingLabelText="Страны"
+                tagsList={selectedCountries}
+              />
+            </Box>
+            <Box studios>
+              <Field
+                component={AutoCompleteWithTags}
+                dataSource={filteredStudios}
+                name="studios"
+                floatingLabelText="Студии"
+                tagsList={selectedStudios}
+              />
+            </Box>
+
+            <Box langOriginal>
+              <Field
+                name="langOriginal"
+                component={AutoComplete}
+                floatingLabelText="Язык оригинала"
+                dataSource={languages}
+              />
+            </Box>
+            <Box translations>
+              <Field
+                component={AutoCompleteWithTags}
+                dataSource={filteredTranslations}
+                name="translations"
+                floatingLabelText="Переводы"
+                tagsList={selectedTranslations}
+              />
+            </Box>
+            <Box subtitles>
+              <Field
+                component={AutoCompleteWithTags}
+                dataSource={filteredSubtitles}
+                name="subtitles"
+                floatingLabelText="Субтитры"
+                tagsList={selectedSubtitles}
+              />
+            </Box>
+            <Box releaseDate>
+              <Field name="releaseDate" component={DatePicker} floatingLabelText="Дата выхода" />
+            </Box>
+            <Box timeTrack>
+              <Field name="timeTrack" component={TimePicker} hintText="Длительность (h:m)" />
+            </Box>
+            <Box videoformat>
+              <Field
+                name="videoformat"
+                component={Select}
+                floatingLabelText="Формат видео"
+                options={videoformats}
+              />
+            </Box>
+            <Box sizeMb>
+              <Field
+                name="sizeMb"
+                component={TextField}
+                floatingLabelText="Размер в Mb"
+                type="text"
+              />
+            </Box>
+            <Box inDvd>
+              <Field
+                component={AutoCompleteWithTags}
+                dataSource={filteredDvds}
+                name="inDvd"
+                floatingLabelText="DVD"
+                tagsList={selectedDvds}
+              />
+            </Box>
+            {/* <Box screens>
+              <FieldArray name="screens" component={ImagesUpload} />
+            </Box> */}
+            <Box actions>
+              <div>
+                <RaisedButton
+                  type="button"
+                  label="Отменить"
+                  primary
+                  onClick={onClose}
+                  style={{ marginRight: 10 }}
+                />
+                <RaisedButton disabled={!dirty} type="submit" label="Сохранить" secondary />
+              </div>
+            </Box>
+          </Grid>
         </form>
       </Dialog>
     )
@@ -218,10 +265,13 @@ const FilmFormRedux = reduxForm({
           minLength: DESCRIPTION_MIN_LENGTH
         })
     ],
-    sizeMb: [INTEGER, REQUIRED],
+    sizeMb: [INTEGER],
     timeTrack: [REQUIRED],
     releaseDate: [REQUIRED],
-    langOriginal: [REQUIRED]
+    langOriginal: [REQUIRED],
+    videoformat: [REQUIRED],
+    directors: [REQUIRED],
+    countries: [REQUIRED]
   })
 })(FilmForm)
 

@@ -35,7 +35,7 @@ const DatePicker = ({
     input.onChange(date)
   }
 
-  const val = input.value ? new Date(input.value) : minDate
+  const value = input.value ? new Date(input.value) : null
 
   return (
     <DatePickerMUI
@@ -49,7 +49,7 @@ const DatePicker = ({
       cancelLabel={cancelLabel}
       locale="ru"
       DateTimeFormat={DateTimeFormat}
-      defaultDate={val}
+      value={value}
     />
   )
 }

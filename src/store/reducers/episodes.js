@@ -14,7 +14,8 @@ export default function episodes(state = defaultState, action) {
     case FETCH_EPISODES_DONE:
       return formatInCollection(action.result, 'videoformat', videoformatFormatter)
     case CREATE_EPISODE_DONE: {
-      const newState = [...state, action.result]
+      const dataFormatted = formatInObj(action.result, 'videoformat', videoformatFormatter)
+      const newState = [...state, dataFormatted]
       return _sortBy(newState, ['number'])
     }
     case UPDATE_EPISODE_DONE: {
