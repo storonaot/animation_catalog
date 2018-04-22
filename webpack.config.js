@@ -9,7 +9,6 @@ const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
 console.log('BASE_URL', BASE_URL)
 
 module.exports = {
-  // context: path.join(__dirname, '/'),
   entry: { modules: './index.js' },
   output: {
     path: path.resolve(__dirname, 'public/bundles/'),
@@ -21,10 +20,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx$|\.js$/,
-        exclude: [
-          path.resolve(__dirname, 'public'),
-          path.resolve(__dirname, 'node_modules')
-        ],
+        exclude: [path.resolve(__dirname, 'public'), path.resolve(__dirname, 'node_modules')],
         use: ['babel-loader']
       },
       {
@@ -61,10 +57,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: [
-      path.resolve(__dirname, 'node_modules'),
-      path.resolve(__dirname, './src')
-    ],
+    modules: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, './src')],
     extensions: ['.js', '.css', '.jsx', '.sss']
   },
   plugins: [
@@ -84,8 +77,11 @@ module.exports = {
       template: 'index.html'
     }),
     new FlowWebpackPlugin()
-  ],
-  devServer: {
+  ]
+}
+
+if (NODE_ENV === 'development') {
+  module.exports.devServer = {
     host: 'localhost',
     contentBase: path.join(__dirname, 'public'),
     port: 8080,
