@@ -6,7 +6,7 @@ type Props = {
   tagsList: Array<{ _id: string, label: string }> | [],
   input: Object,
   searchText: string,
-  onNewRequest: Function,
+  onNewRequest: Function
 }
 
 class AutoCompleteWithTags extends Component<Props> {
@@ -29,7 +29,9 @@ class AutoCompleteWithTags extends Component<Props> {
   }
 
   onUpdateInput(value) {
-    this.setState({ searchText: value.name })
+    const searchText = typeof value === 'string' ? value : value.name
+
+    this.setState({ searchText })
   }
 
   onDeleteTag(tagId) {
