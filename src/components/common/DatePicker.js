@@ -1,22 +1,22 @@
 import { getErrorText } from 'utils/validator'
 import DatePickerMUI from 'material-ui/DatePicker'
 
-const DateTimeFormat = global.Intl.DateTimeFormat
+const { DateTimeFormat } = global.Intl
 
 type Props = {
-  autoOk: boolean,
+  autoOk?: boolean,
   floatingLabelText?: string,
-  minDate: Date,
-  fullWidth: boolean,
+  minDate?: Date,
+  fullWidth?: boolean,
   input: Object<{ value?: string, onChange: Function }>,
   meta: Object<{
     touched: Function,
     submitFailed: boolean,
     valid: boolean,
-    error: string,
+    error: string
   }>,
-  mode: string,
-  cancelLabel: string,
+  mode?: string,
+  cancelLabel?: string
 }
 
 const DatePicker = ({
@@ -35,6 +35,8 @@ const DatePicker = ({
     input.onChange(date)
   }
 
+  const val = input.value ? new Date(input.value) : minDate
+
   return (
     <DatePickerMUI
       onChange={onChange}
@@ -47,6 +49,7 @@ const DatePicker = ({
       cancelLabel={cancelLabel}
       locale="ru"
       DateTimeFormat={DateTimeFormat}
+      defaultDate={val}
     />
   )
 }
@@ -54,6 +57,7 @@ const DatePicker = ({
 DatePicker.defaultProps = {
   autoOk: true,
   minDate: new Date(1900, 0, 1),
+  floatingLabelText: null,
   fullWidth: true,
   mode: 'landscape',
   cancelLabel: 'Отменить'

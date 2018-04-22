@@ -5,11 +5,7 @@ import {
   REMOVE_SERIAL_DONE
 } from 'constants/actions'
 
-import {
-  formatInObj,
-  formatInCollection,
-  directorFormatter
-} from 'utils/data-formatter'
+import { formatInObj, formatInCollection, directorFormatter } from 'utils/data-formatter'
 import { removeObjById } from 'utils/newState'
 
 const defaultState = []

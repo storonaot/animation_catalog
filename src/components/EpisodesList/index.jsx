@@ -4,7 +4,7 @@ import Cover from 'components/common/Cover'
 type Props = {
   episodes: Array,
   removeEpisode: Function,
-  editEpisode: Function,
+  editEpisode: Function
 }
 
 const EpisodesList = ({ episodes, removeEpisode, editEpisode }: Props) => (
@@ -14,9 +14,9 @@ const EpisodesList = ({ episodes, removeEpisode, editEpisode }: Props) => (
         key={episode._id}
         cover={episode.cover}
         id={episode._id}
-        name={`${episode.name}.`}
+        name={`${episode.number}. ${episode.name}.`}
         showPath={`/episodes/${episode._id}/show`}
-        small
+        orientation="gorizontal"
         remove={removeEpisode}
         edit={editEpisode}
       />

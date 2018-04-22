@@ -39,15 +39,17 @@ export const CREATE_STUDIO = '/studios/new'
 export const REMOVE_STUDIO = id => `/studios/${id}`
 
 // serial
-export const GET_SEASONS = serialId => `/seasons/${serialId}`
-export const GET_SEASON = seasonId => `/seasons/${seasonId}/show`
+// export const GET_SEASONS = serialId => `/seasons/${serialId}`
+export const GET_SEASONS = serialId => `/serials/${serialId}/seasons`
+export const GET_SEASON = seasonId => `/seasons/${seasonId}`
 export const CREATE_SEASON = '/seasons/new'
 export const UPDATE_SEASON = seasonId => `/seasons/${seasonId}`
 export const REMOVE_SEASON = seasonId => `/seasons/${seasonId}`
 
 // episode
-export const GET_EPISODES = seasonId => `/episodes/${seasonId}`
-export const GET_EPISODE = episodeId => `/episodes/${episodeId}/show`
+export const GET_EPISODES = seasonId => `seasons/${seasonId}/episodes`
+export const GET_EPISODE = episodeId => `/episodes/${episodeId}`
 export const CREATE_EPISODE = '/episodes/new'
 export const UPDATE_EPISODE = episodeId => `/episodes/${episodeId}`
 export const REMOVE_EPISODE = episodeId => `/episodes/${episodeId}`
+

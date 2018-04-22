@@ -5,23 +5,23 @@ type Props = {
   options: Array,
   floatingLabelText?: string,
   fullWidth?: boolean,
-  input: Object,
+  input: Object
 }
 
-const Select = ({ options, floatingLabelText, fullWidth, input }: Props) => {
+const Select = ({
+  options, floatingLabelText, fullWidth, input
+}: Props) => {
   if (options.length) {
-    // const currentVal = input.value || options[0]._id
+    const currentValue = input.value && input.value._id ? input.value._id : input.value
 
     return (
       <SelectField
         floatingLabelText={floatingLabelText}
-        value={input.value}
+        value={currentValue}
         onChange={(e, index, payload) => input.onChange(payload)}
         fullWidth={fullWidth}
       >
-        {options.map(({ _id, name }) => (
-          <MenuItem key={_id} value={_id} primaryText={name} />
-        ))}
+        {options.map(({ _id, name }) => <MenuItem key={_id} value={_id} primaryText={name} />)}
       </SelectField>
     )
   }

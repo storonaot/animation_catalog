@@ -34,24 +34,35 @@ const Box = styled.li`
   @media ${media.giant} {
     width: calc(12.5% - 15px);
   }
-  ${props => props.small && css`
-    width: 50%;
-    @media ${media.mobile} {
-      width: calc(33% - 15px);
-    }
-    @media ${media.tablet} {
-      width: calc(25% - 15px);
-    }
-    @media ${media.laptop} {
-      width: calc(16.66% - 15px);
-    }
-    @media ${media.desktop} {
-      width: calc(12.5% - 15px);
-    }
-    @media ${media.giant} {
-      width: calc(10% - 15px);
-    }
-  `}
+  ${props =>
+    props.small &&
+    css`
+      width: 50%;
+      @media ${media.mobile} {
+        width: calc(33% - 15px);
+      }
+      @media ${media.tablet} {
+        width: calc(25% - 15px);
+      }
+      @media ${media.laptop} {
+        width: calc(16.66% - 15px);
+      }
+      @media ${media.desktop} {
+        width: calc(12.5% - 15px);
+      }
+      @media ${media.giant} {
+        width: calc(10% - 15px);
+      }
+    `};
+  ${props =>
+    props.orientation === 'gorizontal' &&
+    css`
+      &::before {
+        content: '';
+        padding-bottom: 75%;
+        display: block;
+      }
+    `};
 `
 
 export { Grid, Box }

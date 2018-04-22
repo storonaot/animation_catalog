@@ -1,7 +1,7 @@
 import getCover from 'utils/cover'
 
 type Props = {
-  season?: Object,
+  season?: Object
 }
 
 const Season = ({ season }: Props) => (
@@ -14,8 +14,14 @@ const Season = ({ season }: Props) => (
         backgroundSize: 'cover'
       }}
     />
-    <div>{season.serial.name} - {season.number} сезон. {season.name}</div>
+    <div>
+      {season.serial.name} - {season.number} сезон. {season.name}
+    </div>
   </div>
 )
+
+Season.defaultProps = {
+  season: null
+}
 
 export default Season

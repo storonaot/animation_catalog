@@ -44,10 +44,13 @@ type Props = {
   remove?: Function,
   edit?: Function,
   small?: boolean,
+  orientation?: string
 }
 
-const Cover = ({ cover, id, name, showPath, remove, edit, small }: Props) => (
-  <Box style={coverStyles(cover)} small={small}>
+const Cover = ({
+  cover, id, name, showPath, remove, edit, small, orientation
+}: Props) => (
+  <Box style={coverStyles(cover)} small={small} orientation={orientation}>
     <Controls
       onRemove={() => {
         remove(id)
@@ -56,13 +59,20 @@ const Cover = ({ cover, id, name, showPath, remove, edit, small }: Props) => (
         edit(id)
       }}
     />
-    <Link to={showPath} style={nameLinkStyle}>
+    <Link to={showPath} href={showPath} style={nameLinkStyle}>
       <Tooltip title={name} style={nameStyle}>
         <span>{cropper(name, 25)}</span>
       </Tooltip>
     </Link>
-
   </Box>
 )
+
+Cover.defaultProps = {
+  remove: false,
+  edit: false,
+  small: false,
+  cover: null,
+  orientation: 'vertical' // 'gorizontal'
+}
 
 export default Cover

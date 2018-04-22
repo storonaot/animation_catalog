@@ -12,7 +12,6 @@
     "flowtype/no-types-missing-file-annotation": 0,
     "flowtype/define-flow-type": 1,
     "flowtype/use-flow-type": 1,
-    "object-curly-newline": "off",
     "no-underscore-dangle": [
       "error",
       {

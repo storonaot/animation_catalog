@@ -4,12 +4,7 @@ import { formDataFormatter } from 'utils/form-helper'
 
 // actions
 import { fetchSerial } from 'store/actions/serials'
-import {
-  createSeason,
-  fetchSeasons,
-  removeSeason,
-  updateSeason
-} from 'store/actions/seasons'
+import { createSeason, fetchSeasons, removeSeason, updateSeason } from 'store/actions/seasons'
 import { showConfirmDialog } from 'store/actions/ui'
 
 // components
@@ -27,24 +22,19 @@ type Props = {
   onFetchSeasons: Function,
   onShowConfirmDialog: Function,
   onRemoveSeason: Function,
-  onUpdateSeason: Function,
+  onUpdateSeason: Function
 }
 
 class SerialPage extends Component<Props> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      formOpened: false,
-      currentSeason: null
-    }
-
-    this.showForm = this.showForm.bind(this)
-    this.closeForm = this.closeForm.bind(this)
-    this.send = this.send.bind(this)
+  state = {
+    formOpened: false,
+    currentSeason: null
   }
 
   componentDidMount() {
-    const { match, onFetchSerial, serial, onFetchSeasons } = this.props
+    const {
+      match, onFetchSerial, serial, onFetchSeasons
+    } = this.props
     const { id } = match.params
     if (!serial || serial._id !== id) {
       onFetchSerial(id)
@@ -58,16 +48,16 @@ class SerialPage extends Component<Props> {
     this.setState({ currentSeason })
   }
 
-  showForm(seasonId) {
+  showForm = (seasonId) => {
     if (seasonId) this.setCurrentSeason(seasonId)
     this.setState({ formOpened: true })
   }
 
-  closeForm() {
+  closeForm = () => {
     this.setState({ formOpened: false, currentSeason: null })
   }
 
-  send(data) {
+  send = (data) => {
     const { onUpdateSeason, onCreateSeason, match } = this.props
 
     const serialId = match.params.id
@@ -82,7 +72,7 @@ class SerialPage extends Component<Props> {
     this.closeForm()
   }
 
-  showConfirmDialog(seasonId) {
+  showConfirmDialog = (seasonId) => {
     const { onShowConfirmDialog, seasons, onRemoveSeason } = this.props
 
     const { number } = seasons.find(season => season._id === seasonId)
@@ -115,13 +105,14 @@ class SerialPage extends Component<Props> {
               this.showForm(id)
             }}
           />
-          {formOpened &&
+          {formOpened && (
             <SeasonForm
               sendData={this.send}
               showed={formOpened}
               onClose={this.closeForm}
               initialValues={currentSeason}
-            />}
+            />
+          )}
         </div>
       )
     }

@@ -11,16 +11,16 @@ const videoformatFormatter = ({ name, format, ...rest }) => ({
 
 const formatInArr = (arr, formatter) => arr.map(formatter)
 const formatInObj = (obj, key, formatter) => {
-  const formatted = formatInArr(obj[key], formatter)
-  return { ...obj, [key]: formatted }
+  // if we have array
+  if (typeof obj[key] === 'object' && Array.isArray(obj[key])) {
+    const formatted = formatInArr(obj[key], formatter)
+    return { ...obj, [key]: formatted }
+  }
+
+  // if we have object
+  return { ...obj, [key]: formatter(obj[key]) }
 }
 const formatInCollection = (collection, key, formatter) =>
   collection.map(obj => formatInObj(obj, key, formatter))
 
-export {
-  directorFormatter,
-  videoformatFormatter,
-  formatInArr,
-  formatInObj,
-  formatInCollection
-}
+export { directorFormatter, videoformatFormatter, formatInArr, formatInObj, formatInCollection }
