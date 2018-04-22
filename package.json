@@ -72,7 +72,7 @@
     "utils": "^0.3.1"
   },
   "scripts": {
-    "start": "node /node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node webpack-dev-server",
     "prod": "NODE_ENV=production node server.js",
     "dev": "webpack-dev-server --inline --hot",
     "build": "NODE_ENV=production webpack",
