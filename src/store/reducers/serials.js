@@ -26,7 +26,8 @@ export default function serials(state = defaultState, action) {
     }
     case CREATE_SERIAL_DONE: {
       if (state.length) {
-        return [...state, action.result]
+        const newState = [...state, action.result]
+        return formatInCollection(newState, 'directors', directorFormatter)
       }
       return state
     }

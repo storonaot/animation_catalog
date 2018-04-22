@@ -5,7 +5,7 @@ const defaultState = null
 export default function episode(state = defaultState, action) {
   switch (action.type) {
     case FETCH_EPISODE_DONE:
-      return state
+      return action.result
     default:
       return state
   }
