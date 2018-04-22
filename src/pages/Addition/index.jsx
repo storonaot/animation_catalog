@@ -19,7 +19,7 @@ class Addition extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentValue: 5
+      currentValue: { _id: 5, name: 'Язык' }
     }
 
     this.changeForm = this.changeForm.bind(this)
@@ -38,12 +38,13 @@ class Addition extends Component {
           input={{ onChange: this.changeForm, value: currentValue }}
           floatingLabelText="Выбрать форму"
           fullWidth={false}
+          meta={{ touched: false }}
         />
-        {currentValue === 1 && <DirectorsForm />}
-        {currentValue === 2 && <CountriesForm />}
-        {currentValue === 3 && <StudiosForm />}
-        {currentValue === 4 && <TranslationsForm />}
-        {currentValue === 5 && <LanguagesForm />}
+        {currentValue._id === 1 && <DirectorsForm />}
+        {currentValue._id === 2 && <CountriesForm />}
+        {currentValue._id === 3 && <StudiosForm />}
+        {currentValue._id === 4 && <TranslationsForm />}
+        {currentValue._id === 5 && <LanguagesForm />}
       </div>
     )
   }

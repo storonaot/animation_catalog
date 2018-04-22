@@ -17,6 +17,8 @@ const Select = ({
     const currentValue = input.value && input.value._id ? input.value._id : input.value
     const errorText = getErrorText(meta)
 
+    console.log('currentValue', currentValue)
+
     return (
       <SelectField
         floatingLabelText={floatingLabelText}
