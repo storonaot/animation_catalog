@@ -72,7 +72,7 @@
     "utils": "^0.3.1"
   },
   "scripts": {
-    "start": "node_modules/webpack/bin/webpack.js",
+    "start": "./node_modules/webpack/bin/webpack.js",
     "development": "webpack-dev-server --inline --hot",
     "build": "NODE_ENV=production webpack",
     "heroku-api":
