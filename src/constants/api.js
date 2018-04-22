@@ -53,3 +53,16 @@ export const CREATE_EPISODE = '/episodes/new'
 export const UPDATE_EPISODE = episodeId => `/episodes/${episodeId}`
 export const REMOVE_EPISODE = episodeId => `/episodes/${episodeId}`
 
+// dvds
+export const GET_DVDS = '/dvds'
+export const GET_DVD = id => `/dvds/${id}`
+export const CREATE_DVD = '/dvds/new'
+export const UPDATE_DVD = id => `/dvds/${id}`
+export const REMOVE_DVD = id => `/dvds/${id}`
+
+// films
+export const GET_FILMS = '/films'
+export const GET_FILM = id => `/films/${id}`
+export const CREATE_FILM = '/films/new'
+export const UPDATE_FILM = id => `/films/${id}`
+export const REMOVE_FILM = id => `/films/${id}`

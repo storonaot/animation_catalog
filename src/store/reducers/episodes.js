@@ -26,7 +26,7 @@ export default function episodes(state = defaultState, action) {
         return episode
       })
 
-      return newState
+      return _sortBy(newState, ['number'])
     }
     case REMOVE_EPISODE_DONE:
       return state

@@ -6,21 +6,9 @@ import {
   watchCreateSerial,
   watchRemoveSerial
 } from './serials'
-import {
-  watchFetchCountries,
-  watchCreateCountry,
-  watchRemoveCountry
-} from './countries'
-import {
-  watchFetchDirectors,
-  watchCreateDirector,
-  watchRemoveDirector
-} from './directors'
-import {
-  watchFetchStudios,
-  watchCreateStudios,
-  watchRemoveStudio
-} from './studios'
+import { watchFetchCountries, watchCreateCountry, watchRemoveCountry } from './countries'
+import { watchFetchDirectors, watchCreateDirector, watchRemoveDirector } from './directors'
+import { watchFetchStudios, watchCreateStudios, watchRemoveStudio } from './studios'
 import {
   watchCreateSeason,
   watchFetchSeasons,
@@ -40,16 +28,27 @@ import {
   watchCreateTranslation,
   watchRemoveTranslation
 } from './translations'
-import {
-  watchFetchLanguages,
-  watchCreateLanguage,
-  watchRemoveLanguage
-} from './languages'
+import { watchFetchLanguages, watchCreateLanguage, watchRemoveLanguage } from './languages'
 import {
   watchFetchVideoformats,
   watchCreateVideoformat,
   watchRemoveVideoformat
 } from './videoformats'
+import {
+  watchFetchDvds,
+  watchFetchDvd,
+  watchCreateDvd,
+  watchUpdateDvd,
+  watchRemoveDvd
+} from './dvds'
+
+import {
+  watchFetchFilms,
+  watchFetchFilm,
+  watchCreateFilm,
+  watchUpdateFilm,
+  watchRemoveFilm
+} from './films'
 
 export function* helloSaga() {
   yield console.log('Hello Sagas!')
@@ -101,6 +100,18 @@ export default function* rootSaga() {
 
     watchFetchVideoformats(),
     watchCreateVideoformat(),
-    watchRemoveVideoformat()
+    watchRemoveVideoformat(),
+
+    watchFetchDvds(),
+    watchFetchDvd(),
+    watchCreateDvd(),
+    watchUpdateDvd(),
+    watchRemoveDvd(),
+
+    watchFetchFilms(),
+    watchFetchFilm(),
+    watchCreateFilm(),
+    watchUpdateFilm(),
+    watchRemoveFilm()
   ])
 }

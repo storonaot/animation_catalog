@@ -7,7 +7,8 @@ import translations from './translations'
 import languages from './languages'
 import videoformats from './videoformats'
 import episodes from './episodes'
-
+import dvds from './dvds'
+import films from './films'
 
 export default {
   ...serials,
@@ -18,5 +19,7 @@ export default {
   ...translations,
   ...languages,
   ...videoformats,
-  ...episodes
+  ...episodes,
+  ...dvds,
+  ...films
 }

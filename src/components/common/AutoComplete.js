@@ -12,24 +12,26 @@ type Props = {
   fullWidth?: boolean,
   openOnFocus?: boolean,
   onNewRequest: Function,
-  searchText: string
+  searchText: string,
+  clearAfterChange?: boolean
 }
 
 class AutoComplete extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {
-      search: props.searchText || props.input.value.name
+      search: props.input.value.name || props.searchText
     }
   }
 
   onChange = (currentValue, allItems) => {
-    const { dataSourceConfig, input } = this.props
+    const { dataSourceConfig, input, clearAfterChange } = this.props
     this.setState({ search: currentValue })
 
     const key = dataSourceConfig.text
     const result = allItems.find(item => item[key] === currentValue)
     input.onChange(result || currentValue)
+    if (result && clearAfterChange) this.setState({ search: '' })
   }
 
   render() {
@@ -71,7 +73,8 @@ AutoComplete.defaultProps = {
   },
   maxSearchResults: 7,
   openOnFocus: true,
-  fullWidth: true
+  fullWidth: true,
+  clearAfterChange: false
 }
 
 export default AutoComplete

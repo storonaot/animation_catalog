@@ -13,7 +13,7 @@ class AutoCompleteWithTags extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {
-      searchText: null
+      searchText: ''
     }
     this.onNewRequest = this.onNewRequest.bind(this)
     this.onUpdateInput = this.onUpdateInput.bind(this)
@@ -25,7 +25,7 @@ class AutoCompleteWithTags extends Component<Props> {
       const { input } = this.props
       input.onChange([...input.value, tag])
     }
-    this.setState({ searchText: '' })
+    this.setState({ searchText: null })
   }
 
   onUpdateInput(value) {
@@ -50,6 +50,7 @@ class AutoCompleteWithTags extends Component<Props> {
           onNewRequest={this.onNewRequest}
           searchText={this.state.searchText}
           input={{ onChange: this.onUpdateInput, value: input.value }}
+          clearAfterChange
         />
         <TagsList tags={tagsList} deleteTag={this.onDeleteTag} />
       </div>

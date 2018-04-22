@@ -42,9 +42,9 @@ function* watchFetchEpisode() {
 
 // **create
 function* callCreateEpisode(action) {
-  const newSeason = action.payload
+  const newEpisode = action.payload
 
-  const { response, error } = yield call(() => Api.createEpisode(newSeason))
+  const { response, error } = yield call(() => Api.createEpisode(newEpisode))
   yield handler(response, error, CREATE_EPISODE_DONE, 'Эпизод создан')
 }
 

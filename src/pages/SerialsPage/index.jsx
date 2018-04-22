@@ -2,12 +2,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { AddBtn } from 'components/common'
 
-import {
-  fetchSerials,
-  removeSerial,
-  createSerial,
-  updateSerial
-} from 'store/actions/serials'
+import { fetchSerials, removeSerial, createSerial, updateSerial } from 'store/actions/serials'
 import { showConfirmDialog } from 'store/actions/ui'
 import { formDataFormatter } from 'utils/form-helper'
 
@@ -21,12 +16,12 @@ type Props = {
     _id: string,
     description: string,
     name: string,
-    originalName: string,
+    originalName: string
   }>,
   onRemoveSerial: Function,
   onShowConfirmDialog: Function,
   onCreateSerial: Function,
-  onUpdateSerial: Function,
+  onUpdateSerial: Function
 }
 
 class SerialsPage extends Component<Props> {
@@ -101,13 +96,14 @@ class SerialsPage extends Component<Props> {
             this.showForm(id)
           }}
         />
-        {formOpened &&
+        {formOpened && (
           <SerialForm
             showed={formOpened}
             sendData={this.send}
             onClose={this.closeForm}
             initialValues={currentSerial}
-          />}
+          />
+        )}
       </div>
     )
   }

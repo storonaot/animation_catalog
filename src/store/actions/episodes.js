@@ -42,10 +42,4 @@ const removeEpisode = id => (dispatch) => {
   })
 }
 
-export {
-  createEpisode,
-  fetchEpisodes,
-  updateEpisode,
-  removeEpisode,
-  fetchEpisode
-}
+export { createEpisode, fetchEpisodes, updateEpisode, removeEpisode, fetchEpisode }

@@ -1,11 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-  Field,
-  reduxForm,
-  isDirty,
-  formValueSelector
-} from 'redux-form'
+import { Field, reduxForm, isDirty, formValueSelector } from 'redux-form'
 import { Grid, Box } from 'components/grids/EpisodeGrid'
 
 import {
@@ -20,12 +15,7 @@ import {
 } from 'components/common'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import {
-  INTEGER,
-  REQUIRED,
-  STRING_MAX_LENGTH,
-  STRING_MIN_LENGTH
-} from 'constants/validation'
+import { INTEGER, REQUIRED, STRING_MAX_LENGTH, STRING_MIN_LENGTH } from 'constants/validation'
 import { DESCRIPTION_MIN_LENGTH, DESCRIPTION_MAX_LENGTH } from 'constants/index'
 
 import { differenceBy as _differenceBy } from 'lodash'
@@ -45,16 +35,14 @@ type Props = {
   languages: Array,
   translations: Array,
   videoformats: Array,
-  selectedVideoformats: Array,
   onFetchLanguages: Function,
   onFetchTranslations: Function,
   onFetchVideoformats: Function,
   initialValues?: Object,
   initialize: Function,
-  selectedLanguages: Array,
   selectedSubtitles: Array,
   translations: Array,
-  selectedTranslations: Array,
+  selectedTranslations: Array
 }
 
 class EpisodeForm extends Component<Props> {
@@ -86,26 +74,14 @@ class EpisodeForm extends Component<Props> {
       handleSubmit,
       dirty,
       videoformats,
-      selectedVideoformats,
       languages,
-      selectedLanguages,
       selectedSubtitles,
       translations,
       selectedTranslations
     } = this.props
 
-    const filteredVideoformats = _differenceBy(
-      videoformats,
-      selectedVideoformats,
-      '_id'
-    )
-    const filteredLanguages = _differenceBy(languages, selectedLanguages, '_id')
     const filteredSubtitles = _differenceBy(languages, selectedSubtitles, '_id')
-    const filteredTranslations = _differenceBy(
-      translations,
-      selectedTranslations,
-      '_id'
-    )
+    const filteredTranslations = _differenceBy(translations, selectedTranslations, '_id')
 
     return (
       <Dialog showed={showed} onClose={onClose}>
@@ -115,18 +91,10 @@ class EpisodeForm extends Component<Props> {
               <Field name="cover" component={ImageUpload} />
             </Box>
             <Box number>
-              <Field
-                name="number"
-                component={TextField}
-                floatingLabelText="Номер эпизода"
-              />
+              <Field name="number" component={TextField} floatingLabelText="Номер эпизода" />
             </Box>
             <Box isName>
-              <Field
-                name="name"
-                component={TextField}
-                floatingLabelText="Название эпизода"
-              />
+              <Field name="name" component={TextField} floatingLabelText="Название эпизода" />
             </Box>
             <Box originalName>
               <Field
@@ -150,7 +118,7 @@ class EpisodeForm extends Component<Props> {
                 name="langOriginal"
                 component={AutoComplete}
                 floatingLabelText="Язык оригинала"
-                dataSource={filteredLanguages}
+                dataSource={languages}
               />
             </Box>
             <Box translations>
@@ -172,25 +140,17 @@ class EpisodeForm extends Component<Props> {
               />
             </Box>
             <Box releaseDate>
-              <Field
-                name="releaseDate"
-                component={DatePicker}
-                floatingLabelText="Дата выхода"
-              />
+              <Field name="releaseDate" component={DatePicker} floatingLabelText="Дата выхода" />
             </Box>
             <Box timeTrack>
-              <Field
-                name="timeTrack"
-                component={TimePicker}
-                hintText="Длительность (h:m)"
-              />
+              <Field name="timeTrack" component={TimePicker} hintText="Длительность (h:m)" />
             </Box>
             <Box videoformat>
               <Field
                 name="videoformat"
                 component={Select}
                 floatingLabelText="Формат видео"
-                options={filteredVideoformats}
+                options={videoformats}
               />
             </Box>
             <Box sizeMb>
@@ -213,12 +173,7 @@ class EpisodeForm extends Component<Props> {
                   onClick={onClose}
                   style={{ marginRight: 10 }}
                 />
-                <RaisedButton
-                  disabled={!dirty}
-                  type="submit"
-                  label="Сохранить"
-                  secondary
-                />
+                <RaisedButton disabled={!dirty} type="submit" label="Сохранить" secondary />
               </div>
             </Box>
           </Grid>
@@ -257,11 +212,9 @@ const EpisodeFormRedux = reduxForm({
 
 const mapStateToProps = state => ({
   languages: state.languages,
-  selectedLanguages: selector(state, 'languages') || [],
   translations: state.translations,
   selectedTranslations: selector(state, 'translations') || [],
   videoformats: state.videoformats,
-  selectedVideoformats: selector(state, 'videoformats') || [],
   selectedSubtitles: selector(state, 'subtitles') || [],
   dirty: isDirty('EpisodeForm')(state)
 })
