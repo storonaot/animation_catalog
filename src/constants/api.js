@@ -1,3 +1,5 @@
+import concatQuery from 'utils/concatQuery'
+
 export const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
 export const API = 'api/v1'
 
@@ -61,8 +63,9 @@ export const UPDATE_DVD = id => `/dvds/${id}`
 export const REMOVE_DVD = id => `/dvds/${id}`
 
 // films
-export const GET_FILMS = '/films'
+export const GET_FILMS = query => concatQuery('/films', query)
 export const GET_FILM = id => `/films/${id}`
 export const CREATE_FILM = '/films/new'
 export const UPDATE_FILM = id => `/films/${id}`
 export const REMOVE_FILM = id => `/films/${id}`
+export const CHANGE_FILM_MARK = id => `/films/${id}/mark`

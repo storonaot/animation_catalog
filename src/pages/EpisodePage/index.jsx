@@ -20,6 +20,8 @@ class EpisodePage extends Component<Props> {
     const { episode } = this.props
     const seasonId = episode ? episode.season : null
 
+    console.log('episode', episode)
+
     if (episode) {
       return (
         <div>

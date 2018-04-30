@@ -6,6 +6,7 @@ import getCover from 'utils/cover'
 import cropper from 'utils/cropper'
 
 import Controls from './Controls'
+import Marks from './Marks'
 
 const coverStyles = cover => ({
   backgroundImage: `url(${getCover(cover)})`,
@@ -44,11 +45,22 @@ type Props = {
   remove?: Function,
   edit?: Function,
   small?: boolean,
-  orientation?: string
+  orientation?: string,
+  selectMark?: string,
+  marks: Object
 }
 
 const Cover = ({
-  cover, id, name, showPath, remove, edit, small, orientation
+  cover,
+  id,
+  name,
+  showPath,
+  remove,
+  edit,
+  small,
+  orientation,
+  selectMark,
+  marks
 }: Props) => (
   <Box style={coverStyles(cover)} small={small} orientation={orientation}>
     <Controls
@@ -59,6 +71,8 @@ const Cover = ({
         edit(id)
       }}
     />
+    {selectMark && <Marks id={id} selectMark={selectMark} marks={marks} />}
+
     <Link to={showPath} href={showPath} style={nameLinkStyle}>
       <Tooltip title={name} style={nameStyle}>
         <span>{cropper(name, 25)}</span>
@@ -72,6 +86,7 @@ Cover.defaultProps = {
   edit: false,
   small: false,
   cover: null,
+  selectMark: null,
   orientation: 'vertical' // 'gorizontal'
 }
 

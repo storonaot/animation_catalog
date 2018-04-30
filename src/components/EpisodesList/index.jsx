@@ -6,11 +6,20 @@ type Props = {
   removeEpisode: Function,
   editEpisode: Function,
   orientation?: string,
-  small?: boolean
+  small?: boolean,
+  selectMark?: Function
 }
 
+const getName = episode =>
+  (episode.number ? `${episode.number}. ${episode.name}` : `${episode.name}`)
+
 const EpisodesList = ({
-  episodes, removeEpisode, editEpisode, orientation, small
+  episodes,
+  removeEpisode,
+  editEpisode,
+  orientation,
+  small,
+  selectMark
 }: Props) => (
   <Grid>
     {episodes.map(episode => (
@@ -18,12 +27,14 @@ const EpisodesList = ({
         key={episode._id}
         cover={episode.cover}
         id={episode._id}
-        name={`${episode.number}. ${episode.name}.`}
+        name={getName(episode)}
         showPath={`/episodes/${episode._id}/show`}
         orientation={orientation}
         remove={removeEpisode}
         edit={editEpisode}
         small={small}
+        selectMark={selectMark}
+        marks={episode.marks}
       />
     ))}
   </Grid>
@@ -31,7 +42,8 @@ const EpisodesList = ({
 
 EpisodesList.defaultProps = {
   orientation: 'gorizontal',
-  small: false
+  small: false,
+  selectMark: null
 }
 
 export default EpisodesList

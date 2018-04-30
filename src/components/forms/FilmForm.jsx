@@ -268,7 +268,6 @@ const FilmFormRedux = reduxForm({
     sizeMb: [INTEGER],
     timeTrack: [REQUIRED],
     releaseDate: [REQUIRED],
-    langOriginal: [REQUIRED],
     videoformat: [REQUIRED],
     directors: [REQUIRED],
     countries: [REQUIRED]

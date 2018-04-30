@@ -26,7 +26,9 @@ class Addition extends Component {
   }
 
   changeForm(value) {
-    this.setState({ currentValue: value })
+    const currentValue = SELECT_OPTIONS.find(option => option._id === Number(value))
+
+    this.setState({ currentValue })
   }
 
   render() {

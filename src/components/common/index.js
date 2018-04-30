@@ -13,6 +13,7 @@ import DatePicker from './DatePicker'
 import TimePicker from './TimePicker'
 import ImagesUpload from './ImagesUpload'
 import AutoComplete from './AutoComplete'
+import Pagination from './Pagination'
 
 export {
   Container,
@@ -28,5 +29,6 @@ export {
   DatePicker,
   TimePicker,
   ImagesUpload,
-  AutoComplete
+  AutoComplete,
+  Pagination
 }

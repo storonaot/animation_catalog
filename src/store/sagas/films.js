@@ -11,15 +11,19 @@ import {
   UPDATE_FILM,
   UPDATE_FILM_DONE,
   REMOVE_FILM,
-  REMOVE_FILM_DONE
+  REMOVE_FILM_DONE,
+  CHANGE_FILM_MARK,
+  CHANGE_FILM_MARK_DONE
 } from 'constants/actions'
+
+// export const CHANGE_FILM_MARK = Symbol('CHANGE_FILM_MARK')
+// export const CHANGE_FILM_MARK_DONE = Symbol('CHANGE_FILM_MARK_DONE')
 
 import handler from './helpers'
 
 // **fetch all
 function* callFetchFilms(action) {
-  const { seasonId } = action
-  const { response, error } = yield call(() => Api.fetchFilms(seasonId))
+  const { response, error } = yield call(() => Api.fetchFilms(action.query))
   yield handler(response, error, FETCH_FILMS_DONE)
 }
 
@@ -67,8 +71,8 @@ function* watchUpdateFilm() {
 
 // **delete
 function* callRemoveFilm(action) {
-  const episodeId = action.id
-  const { response, error } = yield call(() => Api.removeFilm(episodeId))
+  const filmId = action.id
+  const { response, error } = yield call(() => Api.removeFilm(filmId))
   yield handler(response, error, REMOVE_FILM_DONE, 'Cезон удален')
 }
 
@@ -77,4 +81,24 @@ function* watchRemoveFilm() {
 }
 // delete**
 
-export { watchFetchFilms, watchFetchFilm, watchCreateFilm, watchUpdateFilm, watchRemoveFilm }
+// **change mark
+function* callChangeFilmMark(action) {
+  const { payload, id } = action
+  const { response, error } = yield call(() => Api.changeFilmMark(id, payload))
+  yield handler(response, error, CHANGE_FILM_MARK_DONE)
+}
+
+function* watchChangeFilmMark() {
+  yield takeEvery(CHANGE_FILM_MARK, callChangeFilmMark)
+}
+
+// change mark**
+
+export {
+  watchFetchFilms,
+  watchFetchFilm,
+  watchCreateFilm,
+  watchUpdateFilm,
+  watchRemoveFilm,
+  watchChangeFilmMark
+}

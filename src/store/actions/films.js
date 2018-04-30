@@ -1,4 +1,11 @@
-import { CREATE_FILM, FETCH_FILMS, FETCH_FILM, UPDATE_FILM, REMOVE_FILM } from 'constants/actions'
+import {
+  CREATE_FILM,
+  FETCH_FILMS,
+  FETCH_FILM,
+  UPDATE_FILM,
+  REMOVE_FILM,
+  CHANGE_FILM_MARK
+} from 'constants/actions'
 
 const createFilm = data => (dispatch) => {
   dispatch({
@@ -7,10 +14,10 @@ const createFilm = data => (dispatch) => {
   })
 }
 
-const fetchFilms = seasonId => (dispatch) => {
+const fetchFilms = query => (dispatch) => {
   dispatch({
     type: FETCH_FILMS,
-    seasonId
+    query
   })
 }
 
@@ -36,4 +43,13 @@ const removeFilm = id => (dispatch) => {
   })
 }
 
-export { createFilm, fetchFilms, updateFilm, removeFilm, fetchFilm }
+const changeFilmMark = (id, data) => (dispatch) => {
+  // liked, viewed, selected
+  dispatch({
+    type: CHANGE_FILM_MARK,
+    id,
+    payload: data
+  })
+}
+
+export { createFilm, fetchFilms, updateFilm, removeFilm, fetchFilm, changeFilmMark }

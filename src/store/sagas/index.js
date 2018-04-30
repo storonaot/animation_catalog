@@ -47,7 +47,8 @@ import {
   watchFetchFilm,
   watchCreateFilm,
   watchUpdateFilm,
-  watchRemoveFilm
+  watchRemoveFilm,
+  watchChangeFilmMark
 } from './films'
 
 export function* helloSaga() {
@@ -112,6 +113,7 @@ export default function* rootSaga() {
     watchFetchFilm(),
     watchCreateFilm(),
     watchUpdateFilm(),
-    watchRemoveFilm()
+    watchRemoveFilm(),
+    watchChangeFilmMark()
   ])
 }

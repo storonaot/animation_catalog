@@ -92,7 +92,7 @@ export const UPDATE_EPISODE_DONE = Symbol('UPDATE_EPISODE')
 export const REMOVE_EPISODE = Symbol('REMOVE_EPISODE')
 export const REMOVE_EPISODE_DONE = Symbol('REMOVE_EPISODE_DONE')
 
-// episodes
+// films
 export const FETCH_FILM = Symbol('FETCH_FILM')
 export const FETCH_FILM_DONE = Symbol('FETCH_FILM_DONE')
 export const FETCH_FILMS = Symbol('FETCH_FILMS')
@@ -103,6 +103,8 @@ export const UPDATE_FILM = Symbol('UPDATE_FILM')
 export const UPDATE_FILM_DONE = Symbol('UPDATE_FILM_DONE')
 export const REMOVE_FILM = Symbol('REMOVE_FILM')
 export const REMOVE_FILM_DONE = Symbol('REMOVE_FILM_DONE')
+export const CHANGE_FILM_MARK = Symbol('CHANGE_FILM_MARK')
+export const CHANGE_FILM_MARK_DONE = Symbol('CHANGE_FILM_MARK_DONE')
 
 // dvd
 export const FETCH_DVD = Symbol('FETCH_DVD')

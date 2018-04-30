@@ -3,3 +3,5 @@ export const DESCRIPTION_MAX_LENGTH = 5000
 
 export const MILLISECONDS_IN_HOUR = 3.6e6
 export const MILLISECONDS_IN_MINUTE = 60000
+
+export const NUMBER_OF_FILMS_PER_PAGE = 50
