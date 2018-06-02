@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ReactPaginate from 'react-paginate'
 import { AddBtn } from 'components/common'
 
 import { fetchFilms, createFilm, removeFilm, updateFilm, changeFilmMark } from 'store/actions/films'
@@ -57,7 +56,7 @@ class FilmsPage extends Component<Props> {
     const { onFetchFilms } = this.props
     const skip = getSkip(pageNumber, NUMBER_OF_FILMS_PER_PAGE)
     onFetchFilms({ skip, limit: NUMBER_OF_FILMS_PER_PAGE })
-    history.push(`/films?page=${pageNumber}`)
+    history.push(`/films?page=${pageNumber || 0}`)
   }
 
   setCurrentFilm = (filmId) => {
@@ -108,6 +107,7 @@ class FilmsPage extends Component<Props> {
       <div>
         <AddBtn handleClick={this.showForm} />
         <FilmsList
+          basePath="/films"
           episodes={films}
           removeEpisode={(id) => {
             this.showConfirmDialog(id)
@@ -138,30 +138,6 @@ class FilmsPage extends Component<Props> {
     )
   }
 }
-
-// {/* <ReactPaginate
-// previousLabel={<span>hui</span>}
-// nextLabel={<span>pizda</span>}
-// breakLabel={<span>suquaaaaa</span>}
-// pageCount={pagesCount}
-// marginPagesDisplayed={3}
-// pageRangeDisplayed={1}
-// onPageChange={this.onPageChange}
-// initialPage={initialPage}
-// /> */}
-
-// {
-//   /* <ReactPaginate
-// breakClassName="break-me"
-// pageCount={pageCount}
-// containerClassName="pagination"
-// subContainerClassName="pages pagination"
-// activeClassName="active"
-// onPageChange={({ selected: pageNumber }) => {
-//   changeReviewsParam(pageNumber, 'page');
-// }}
-// /> */
-// }
 
 const mapStateToProps = state => ({
   films: state.films.list,

@@ -4,6 +4,7 @@ import media from 'utils/media'
 const Grid = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 100px;
   @media only screen and (min-width: 640px) {
     margin-left: -15px;
   }

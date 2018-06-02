@@ -38,7 +38,7 @@ export default function films(state = defaultState, action) {
     }
     case UPDATE_FILM_DONE: {
       const filmId = action.result._id
-      const newList = state.map((film) => {
+      const newList = state.list.map((film) => {
         if (film._id === filmId) {
           return formatInObjByParameters(action.result, keys, formatters)
         }

@@ -10,6 +10,7 @@ const Serial = moduleUploader('SerialPage')
 const Season = moduleUploader('SeasonPage')
 const Episode = moduleUploader('EpisodePage')
 const Films = moduleUploader('FilmsPage')
+const Film = moduleUploader('FilmPage')
 
 const Addition = moduleUploader('Addition')
 
@@ -21,7 +22,8 @@ const MyRouter = () => (
       <Route path="/serials/:id/show" component={Serial} />
       <Route path="/seasons/:id/show" component={Season} />
       <Route path="/episodes/:id/show" component={Episode} />
-      <Route path="/films" component={Films} />
+      <Route exact path="/films" component={Films} />
+      <Route path="/films/:id/show" component={Film} />
       <Route path="/addition" component={Addition} />
     </Switch>
   </App>
